@@ -6,8 +6,8 @@
         <router-view></router-view>
       </v-container>
     </v-main>  
-    <back-to-top/>
     <foot-bar/>
+    <scroll-to-top/>
   </v-app>
 </template>
 
@@ -16,7 +16,7 @@ export default {
   components: {
     NavBar: () => import('@/components/NavBar'),
     FootBar: () => import('@/components/FootBar'),
-    BackToTop: () => import('@/components/BackToTop')
+    ScrollToTop: () => import('@/components/ScrollToTop')
   }
 }
 </script>
