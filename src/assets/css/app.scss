@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+#app{
+  background: #fff;
+  font-family: 'Quicksand', !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body, html{
+  font-family: 'Quicksand', !important;
+  cursor: default;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a{
+  text-decoration: none;
+}
+
+hr{
+  opacity: 0.3;
+}
+
+#lblcopyright{
+  font-size: 11px;
+}
+
+.defaulttxt-h{
+  font-family: 'Quicksand';
+  font-size: 20px;
+  font-weight: lighter;
+  color: #096597;
+}
+
+.defaulttxt-p{
+  font-family: 'Quicksand';
+  font-size: 12px;
+  font-weight: lighter;
+  color: #333;
+}
+
+.defaulttxt-p2{
+  font-family: 'Quicksand';
+  font-size: 14px;
+  color: #333;
+}
+
+.dgbox .v-toolbar__content{
+  background: #eee;
+}
+
+#defaultcard{
+  background: #EEEEEE;
+}
+
+.navbartoolbar .v-toolbar__content{
+  background: #eee;
+}
+
+.v-navigation-drawer__content{
+  font-size: 14px;
+  background: #eee;
+
+  .v-list .v-list-item a{
+    color: #222;
+  }
+}
