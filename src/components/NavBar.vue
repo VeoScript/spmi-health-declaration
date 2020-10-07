@@ -98,11 +98,11 @@
           link
         >
           <v-list-item-icon>
-            <v-icon>mdi-account-lock</v-icon>
+            <v-icon>mdi-account-box</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Administrator</v-list-item-title>
+            <v-list-item-title>Account</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </router-link>
@@ -112,11 +112,11 @@
           link
         >
           <v-list-item-icon>
-            <v-icon>mdi-account-box</v-icon>
+            <v-icon>mdi-account-lock</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Account</v-list-item-title>
+            <v-list-item-title>Administrator</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </router-link>
