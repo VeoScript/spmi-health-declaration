@@ -1,5 +1,5 @@
 <template>
-  <v-card id="defaultcard" class="mx-1">
+  <v-card id="defaultcard" class="mx-1" flat outlined>
     <v-card-title>Travel History</v-card-title>
     <v-card-subtitle>
       Please check if you have travelled any of the following areas for the past 3 months.
