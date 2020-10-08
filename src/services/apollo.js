@@ -19,7 +19,7 @@ const httpLink = new HttpLink({
 })
 
 const wsLink = new WebSocketLink({
-  uri: "https://humane-condor-49.hasura.app/v1/graphql",
+  uri: "wss://humane-condor-49.hasura.app/v1/graphql",
   options: {
     reconnect: true,
     timeout: 30000,
