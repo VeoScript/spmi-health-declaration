@@ -12,21 +12,21 @@ import { getMainDefinition } from 'apollo-utilities'
 
 
 const httpLink = new HttpLink({
-  uri: "https://on-fawn-52.hasura.app/v1/graphql",
+  uri: "https://humane-condor-49.hasura.app/v1/graphql",
   headers: {
-    'x-hasura-admin-secret': 'zgdyehkokpdzguwzyizymhrwayvxongi'
+    'x-hasura-admin-secret': ''
   }
 })
 
 const wsLink = new WebSocketLink({
-  uri: "wss://on-fawn-52.hasura.app/v1/graphql",
+  uri: "https://humane-condor-49.hasura.app/v1/graphql",
   options: {
     reconnect: true,
     timeout: 30000,
     connectionParams() {
       return {
         headers: {
-          'x-hasura-admin-secret': 'zgdyehkokpdzguwzyizymhrwayvxongi'
+          'x-hasura-admin-secret': ''
         }
       }
     }
