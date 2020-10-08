@@ -5,15 +5,22 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import BackToTop from 'vue-backtotop';
 import VueCompositionAPI from '@vue/composition-api'
+import { auth } from '@/services' 
 
 Vue.use(VueCompositionAPI)
 
 Vue.config.productionTip = false;
 Vue.use(BackToTop);
 
-new Vue({
-  router,
-  store,
-  vuetify,
-  render: h => h(App)
-}).$mount("#app");
+let app = ''
+
+auth.onAuthStateChanged(() => {
+  if (!app) {
+    new Vue({
+      router,
+      store,
+      vuetify,
+      render: h => h(App)
+    }).$mount("#app")
+  }
+})
