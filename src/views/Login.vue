@@ -16,20 +16,20 @@
                 >
                   <v-text-field
                     label="Email"
-                    prepend-inner-icon="mdi-email-outline"
                     type="email"
                     autocomplete="off"
                     filled
                     rounded
+                    v-model="state.form.email"
                     class="font-weight-light rounded-sm"
                   ></v-text-field>
 
                   <v-text-field
                     label="Password"
-                    prepend-inner-icon="mdi-lock-outline"
                     autocomplete="off"
                     filled
                     rounded
+                    v-model="state.form.password"
                     class="font-weight-light rounded-sm"
                   ></v-text-field>
                 </v-form>
@@ -65,8 +65,10 @@
 
       <!-- Registration Dialog -->
       <register 
+        :form="state.form"
         :visible="state.dialog"
         @close="state.dialog = false"
+        @submitForm="onRegister"
       />
 
     </v-main>
@@ -86,10 +88,30 @@
 
     setup () {
       let state = reactive({
-        dialog: false
+        dialog: false,
+        form: {
+          lastname: '',
+          firstname: '',
+          middlename: '',
+          age: '',
+          gender: '',
+          civilStatus: '',
+          contactNumber: '',
+          occupation: '',
+          department: '',
+          company: '',
+          email: '',
+          password: ''
+        }
       })
+
+      function onRegister() {
+        alert(state.form.lastname)
+      }
+
       return {
-        state
+        state,
+        onRegister
       }
     }
 
