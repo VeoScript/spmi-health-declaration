@@ -1,23 +1,28 @@
 <template>
   <div class="dashboard">
-    <!-- <div class="defaulttxt-h text-center mt-5">Covid-19 Health Declaration</div> -->
     <v-container fluid>
       <v-form>
         <v-row no-gutters>
           <v-col sm="12" md="12" cols="12">
             <!-- INFO CARD -->
-            <info-card/>
+            <info-card
+
+            />
           </v-col>
         </v-row>
         <v-row no-gutters>
           <v-col sm="6" md="6" cols="12">
             <!-- SYMPTOMS CARD -->
-            <symptoms-card/>
+            <symptoms-card
+
+            />
           </v-col>
 
           <v-col sm="6" md="6" cols="12">
             <!-- TRAVEL HISTORY CARD -->
-            <travel-history-card/>
+            <travel-history-card
+
+            />
           </v-col>
 
           <v-col sm="12" md="12" cols="12" class="mt-3 text-right">
@@ -30,16 +35,16 @@
       </v-form>
     </v-container>
   </div>
-</template>
+</template> 
 
 <script>
-    export default {
+  export default {
     name: "HealthChecklist",
     components: {
-        SymptomsCard: () => import('./SymptomsCard'),
-        TravelHistoryCard: () => import('./TravelHistoryCard'),
-        InfoCard: () => import('./InfoCard'),
-        CheckListDialog: () => import('./CheckListDialog')
+      SymptomsCard: () => import('./SymptomsCard'),
+      TravelHistoryCard: () => import('./TravelHistoryCard'),
+      InfoCard: () => import('./InfoCard'),
+      CheckListDialog: () => import('./CheckListDialog')
     }
-    }
+  }
 </script>

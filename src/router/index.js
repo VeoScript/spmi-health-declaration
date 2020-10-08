@@ -12,7 +12,7 @@ const routes = [
       {
         path: 'health-checklist',
         name: 'health-checklist',
-        component: () => import('@/components/pages/home-health-check-list')
+        component: () => import('@/components/pages/home-health-check-list/Index')
       }
     ]
   },
