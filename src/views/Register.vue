@@ -109,13 +109,14 @@
               class="rounded-sm"
               v-model="form.department"
             ></v-text-field>
-            <v-text-field
+            <v-select
+              :items="companyList"
               label="Company"
               filled
               rounded
               class="rounded-sm"
               v-model="form.company"
-            ></v-text-field>
+            ></v-select>
             <v-text-field
               label="Email"
               filled
@@ -125,6 +126,7 @@
             ></v-text-field>
             <v-text-field
               label="Password"
+              type="password"
               filled
               rounded
               class="rounded-sm mt-3"
@@ -132,6 +134,7 @@
             ></v-text-field>
             <v-text-field
               label="Re-Enter Password"
+              type="password"
               filled
               rounded
               class="rounded-sm"
@@ -183,7 +186,8 @@
     data () {
       return {
         genderList: ['Male', 'Female'],
-        civilStatusList: ['Single', 'Married', 'Divorced', 'widowed ']
+        civilStatusList: ['Single', 'Married', 'Divorced', 'Widowed'],
+        companyList: ['SPMI', 'VACI', 'GGC', 'SECURITY']
       }
     },
     computed: {
