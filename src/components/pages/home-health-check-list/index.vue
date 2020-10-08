@@ -33,13 +33,13 @@
 </template>
 
 <script>
-export default {
-  name: "HealthChecklist",
-  components: {
-    SymptomsCard: () => import('@/components/Cards/SymptomsCard'),
-    TravelHistoryCard: () => import('@/components/Cards/TravelHistoryCard'),
-    InfoCard: () => import('@/components/Cards/InfoCard'),
-    CheckListDialog: () => import('@/components/Cards/CheckListDialog')
-  }
-};
+    export default {
+    name: "HealthChecklist",
+    components: {
+        SymptomsCard: () => import('./SymptomsCard'),
+        TravelHistoryCard: () => import('./TravelHistoryCard'),
+        InfoCard: () => import('./InfoCard'),
+        CheckListDialog: () => import('./CheckListDialog')
+    }
+    }
 </script>

@@ -8,7 +8,7 @@
 <script>
 export default {
   components: {
-    ScrollToTop: () => import('@/components/ScrollToTop')
+    ScrollToTop: () => import('@/components/mixins/ScrollToTop')
   }
 }
 </script>
