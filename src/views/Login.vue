@@ -2,7 +2,6 @@
   <v-app>
     <v-main>
       <v-container class="fill-height" fluid>
-
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4">
             <v-card flat>
@@ -42,6 +41,7 @@
                   text 
                   color="primary"
                   class="text-capitalize"
+                  @click="state.dialog = true"
                 > 
                   Create Account
                 </v-btn>
@@ -62,12 +62,36 @@
           </v-col>
         </v-row>
       </v-container>
+
+      <!-- Registration Dialog -->
+      <register 
+        :visible="state.dialog"
+        @close="state.dialog = false"
+      />
+
     </v-main>
   </v-app>
 </template>
 
 <script>
+
+  import { reactive } from '@vue/composition-api'
+
   export default {
-    name: 'login'
+    name: 'login',
+
+    components: {
+      Register: () => import('./Register')
+    },
+
+    setup () {
+      let state = reactive({
+        dialog: false
+      })
+      return {
+        state
+      }
+    }
+
   }
 </script>
