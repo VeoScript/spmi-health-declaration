@@ -15,6 +15,24 @@ body, html{
   -moz-osx-font-smoothing: grayscale;
 }
 
+::-webkit-scrollbar {
+  width: 12px; 
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(158, 158, 158);    /* color of the scroll thumb */
+  border-radius: 8px;       /* roundness of the scroll thumb */
+  border: 3px solid #fff;  /* creates padding around scroll thumb */
+}
+
+#nprogress .bar {
+  background: #14C6FF !important;
+}
+
 a{
   text-decoration: none;
 }
@@ -67,3 +85,4 @@ hr{
     color: #222;
   }
 }
+
