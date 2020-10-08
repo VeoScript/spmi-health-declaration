@@ -5,9 +5,16 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/home",
+    path: "/v",
     name: "home",
-    component: () => import('@/views/Home')
+    component: () => import('@/views/Home'),
+    children: [
+      {
+        path: 'health-checklist',
+        name: 'health-checklist',
+        component: () => import('@/components/users/HealthCheckListUser')
+      }
+    ]
   },
   {
     path: "/about",
