@@ -12,7 +12,7 @@
               <v-card-text>
                 <v-form
                   ref="form"
-                  lazy-validation
+                  @submit.prevent="onLogin"
                 >
                   <v-text-field
                     label="Email"
@@ -22,8 +22,8 @@
                     rounded
                     v-model="state.form.email"
                     class="font-weight-light rounded-sm"
+                    :rules="[state.required('Email'), state.emailRules('Email')]"
                   ></v-text-field>
-
                   <v-text-field
                     label="Password"
                     autocomplete="off"
@@ -31,12 +31,11 @@
                     rounded
                     v-model="state.form.password"
                     class="font-weight-light rounded-sm"
+                    :rules="[state.required('Password')]"
                   ></v-text-field>
                 </v-form>
-
               </v-card-text>
               <v-card-actions>
-                
                 <v-btn 
                   text 
                   color="primary"
@@ -45,7 +44,6 @@
                 > 
                   Create Account
                 </v-btn>
-
                 <v-spacer></v-spacer>
                 <v-btn 
                   depressed
@@ -54,6 +52,7 @@
                   tile
                   color="blue"
                   class="text-capitalize"
+                  @click="onLogin"
                 >
                 Login
                 </v-btn>
@@ -69,6 +68,7 @@
         :visible="state.dialog"
         @close="state.dialog = false"
         @submitForm="onRegister"
+        @clearForm="onClear"
       />
 
     </v-main>
@@ -102,16 +102,36 @@
           company: '',
           email: '',
           password: ''
+        },
+        required (propertyType) { 
+          return v => v && v.length > 0 || `${propertyType} is required.`
+        },
+        emailRules (propertyType) {
+          return v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || `${propertyType} address must be valid.`
         }
       })
 
       function onRegister() {
-        alert(state.form.lastname)
+        alert(state.form)
+      }
+
+      function onClear () {
+        this.$refs.form.reset()
+        state.form = {}
+      }
+
+      function onLogin () {
+        let self = this
+        if (self.$refs.form.validate()) {
+          alert('GOOOD')
+        }
       }
 
       return {
         state,
-        onRegister
+        onRegister,
+        onClear,
+        onLogin
       }
     }
 
