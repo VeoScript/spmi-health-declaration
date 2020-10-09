@@ -14,7 +14,7 @@ import { getMainDefinition } from 'apollo-utilities'
 const httpLink = new HttpLink({
   uri: "https://spmi-health-declaration.herokuapp.com/v1/graphql",
   headers: {
-    'x-hasura-admin-secret': ''
+    'x-hasura-admin-secret': 'ilusmdm'
   }
 })
 
@@ -26,7 +26,7 @@ const wsLink = new WebSocketLink({
     connectionParams() {
       return {
         headers: {
-          'x-hasura-admin-secret': ''
+          'x-hasura-admin-secret': 'ilusmdm'
         }
       }
     }
