@@ -1,6 +1,16 @@
 <template>
   <v-app>
     <v-main>
+      <v-alert
+        text
+        prominent
+        type="error"
+        icon="mdi-cloud-alert"
+        dismissible
+        v-show="error"
+      >
+        <b>{{ error }}</b>
+      </v-alert> <!-- ERROR MESSAGE ALERT -->
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4">
@@ -31,6 +41,10 @@
                     v-model="form.password"
                     class="font-weight-light rounded-sm"
                     :rules="[required('Password')]"
+                    :type="showPass ? 'text' : 'password'"
+                    :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
+                    @click:append="showPass = !showPass"
+                    @keyup.enter="onLogin"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
@@ -52,6 +66,7 @@
                   color="blue"
                   class="text-capitalize"
                   @click="onLogin"
+                  :loading="loading"
                 >
                 Login
                 </v-btn>
@@ -95,18 +110,18 @@
         dialog: false,
         loading: false,
         form: {
-          lastname: 'villaruel',
-          firstname: 'jerome joseph',
-          middlename: 'robiato',
-          age: '21',
-          gender: 'male',
-          civilStatus: 'single',
-          contactNumber: '0952231231',
-          occupation: 'IT Coordinator',
-          department: 'Health',
-          company: 'SPMI',
-          email: 'jerome@gmail.com',
-          password: 'Ilusmdm123@'
+          lastname: '',
+          firstname: '',
+          middlename: '',
+          age: '',
+          gender: '',
+          civilStatus: '',
+          contactNumber: '',
+          occupation: '',
+          department: '',
+          company: '',
+          email: '',
+          password: ''
         },
         showPass: false,
         required (propertyType) { 
@@ -183,7 +198,21 @@
       onLogin () {
         let self = this
         if (self.$refs.form.validate()) {
-          alert('GOOOD')
+          this.loading = true
+          const { email, password } = this.form
+          auth
+           .signInWithEmailAndPassword(email, password)
+           .then(() => {
+              this.loading = false
+              this.$refs.form.reset()
+              toastAlertStatus('success', 'Welcome to SPMI Covid19 Health Declaration')
+              this.$router.push('/v/health-checklist')
+           })
+           .catch(error => { 
+              this.errorProvider(error)
+              toastAlertStatus('error', error)
+           })
+
         }
       },
 
