@@ -1,9 +1,6 @@
 <template>
   <div class="user-card">
-    <v-card 
-      flat
-      class="mt-4"
-    >
+    <v-card flat>
       <v-card-title class="e_name">
         {{ `${user.firstname} ${user.middlename} ${user.lastname}` }}
       </v-card-title>
