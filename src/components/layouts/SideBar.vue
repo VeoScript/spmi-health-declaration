@@ -34,7 +34,7 @@
           <v-icon>mdi-account-arrow-right</v-icon>
         </v-list-item-icon>
 
-        <v-list-item-content>
+        <v-list-item-content @click="onSignOut">
           <v-list-item-title>Sign Out</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
@@ -43,7 +43,8 @@
 </template>
 
 <script>
-
+  import { auth } from '@/services'
+  import { toastAlertStatus } from '@/utils'
   export default {
     name: 'side-bar',
     props: ['visible', 'mode'],
@@ -69,5 +70,13 @@
         }
       }
     },
+    methods: {
+      onSignOut () {
+        auth
+         .signOut()
+         .then(() => this.$router.push({ name: 'login' }))
+         .catch(error => toastAlertStatus('error', error) )
+      }
+    }
   }
 </script>
