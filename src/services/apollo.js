@@ -12,14 +12,14 @@ import { getMainDefinition } from 'apollo-utilities'
 
 
 const httpLink = new HttpLink({
-  uri: "https://humane-condor-49.hasura.app/v1/graphql",
+  uri: "https://spmi-health-declaration.herokuapp.com/v1/graphql",
   headers: {
     'x-hasura-admin-secret': ''
   }
 })
 
 const wsLink = new WebSocketLink({
-  uri: "wss://humane-condor-49.hasura.app/v1/graphql",
+  uri: "wss://spmi-health-declaration.herokuapp.com/v1/graphql",
   options: {
     reconnect: true,
     timeout: 30000,
