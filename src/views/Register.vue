@@ -72,7 +72,6 @@
                 rounded
                 class="rounded-sm"
                 v-model="form.middlename"
-                :rules="[required('Middlename')]"
               ></v-text-field>
               <v-row>
                 <v-col cols="12" md="6">
