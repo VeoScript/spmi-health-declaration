@@ -111,16 +111,16 @@
         }
       })
 
-      function onRegister() {
+      onRegister = () => {
         alert(state.form)
       }
 
-      function onClear () {
+      onClear = () => {
         this.$refs.form.reset()
         state.form = {}
       }
 
-      function onLogin () {
+      onLogin = () => {
         let self = this
         if (self.$refs.form.validate()) {
           alert('GOOOD')
