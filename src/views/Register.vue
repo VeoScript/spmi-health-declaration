@@ -34,7 +34,19 @@
             <p>Covid-19 Health Declaration</p>
           </v-col>
         </v-row>
-        <v-form ref="form">
+        <v-alert
+          text
+          prominent
+          type="error"
+          icon="mdi-cloud-alert"
+          v-show="error"
+        >
+          <b>{{ error }}</b>
+        </v-alert>
+        <v-form 
+          ref="form"
+          :disabled="loading"
+        >
           <v-row>
             <v-col cols="12" md="6">
               <v-text-field
@@ -120,14 +132,15 @@
                 v-model="form.department"
                 :rules="[required('Department')]"
               ></v-text-field>
-              <v-text-field
+               <v-select
+                :items="companyList"
                 label="Company"
                 filled
                 rounded
                 class="rounded-sm"
                 v-model="form.company"
                 :rules="[required('Company')]"
-              ></v-text-field>
+              ></v-select>
               <v-text-field
                 label="Email"
                 filled
@@ -153,8 +166,6 @@
                 rounded
                 class="rounded-sm"
                 :type="showPass2 ? 'text' : 'password'"
-                :append-icon="showPass2 ? 'mdi-eye-off' : 'mdi-eye'"
-                @click:append="showPass2 = !showPass2"
                 :rules="[(form.password === confirm_password) || 'Password must match']"
                 v-model="confirm_password"
               ></v-text-field>
@@ -170,6 +181,7 @@
               color="blue"
               class="text-capitalize"
               @click="onRegister"
+              :loading="loading"
             >
             Register
             </v-btn>
@@ -202,6 +214,14 @@
       form: {
         type: Object,
         required: true
+      },
+      error: {
+        type: String,
+        required: false
+      },
+      loading: {
+        type: Boolean,
+        required: false
       }
     },
     data () {
@@ -224,6 +244,7 @@
         ],
         genderList: ['Male', 'Female'],
         civilStatusList: ['Single', 'Married', 'Divorced', 'widowed '],
+        companyList: ['SPMI', 'VACI', 'GGC', 'SECURITY']
       }
     },
     computed: {
