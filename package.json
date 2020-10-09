@@ -20,6 +20,7 @@
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
     "subscriptions-transport-ws": "^0.9.18",
+    "sweetalert2": "^10.3.6",
     "vue": "^2.6.11",
     "vue-apollo": "^3.0.4",
     "vue-backtotop": "^1.6.1",
