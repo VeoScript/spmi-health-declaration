@@ -6,10 +6,18 @@
           <v-col sm="12" md="12" cols="12">
 
             <!-- USER CARD -->
+            <v-skeleton-loader
+              class="mt-4"
+              v-if="$apollo.loading"
+              type="list-item-avatar-two-line"
+            ></v-skeleton-loader> <!--apollo loading when data is fetching -->
+            
             <user-card
+              v-else
               v-for="user in users" 
               :key="user.id" :user="user"
-            ></user-card>
+            >
+            </user-card>
 
           </v-col>
         </v-row>
