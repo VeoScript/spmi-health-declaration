@@ -1,4 +1,4 @@
-import gql from 'graphql'
+import gql from 'graphql-tag'
 
 export const GET_ACCOUNT_TYPE_QUERY = gql`
   query userAccountTypeQuery($firebase_id: String) {
