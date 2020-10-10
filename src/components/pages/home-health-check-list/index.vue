@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard">
+  <div class="HealthChecklist">
     <v-container fluid>
       <v-form>
         <v-row no-gutters>
@@ -26,7 +26,7 @@
 
             <!-- SYMPTOMS CARD -->
             <symptoms-card
-
+              
             />
           </v-col>
 
@@ -38,7 +38,10 @@
           </v-col>
 
           <v-col sm="12" md="12" cols="12" class="mt-3 text-right">
-            <check-list-dialog/>
+            <check-list-dialog
+              v-for="user in users" 
+              :key="user.id" :user="user"
+            />
             <v-btn color="secondary" class="mx-2">
               cancel
             </v-btn>
@@ -71,6 +74,10 @@
               middlename
               company
               occupation
+              age
+              gender
+              civil_status
+              contact_number
             }
           }
         `,
