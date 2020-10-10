@@ -38,7 +38,7 @@
       <v-container fluid>
         <v-row class="justify-center">
           <v-col sm="6" md="6" cols="12">
-            <v-card id="defaultcard">
+            <v-card outlined id="defaultcard">
               <v-card-title>CHECKLIST RESULT</v-card-title>
               <v-card-subtitle><strong>09-13-2020</strong></v-card-subtitle>
               <v-container fluid>
