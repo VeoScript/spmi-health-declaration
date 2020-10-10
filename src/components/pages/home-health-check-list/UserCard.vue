@@ -1,13 +1,25 @@
 <template>
   <div class="user-card">
-    <v-card flat>
-      <v-card-title class="e_name">
-        {{ `${user.firstname} ${user.middlename} ${user.lastname}` }}
-      </v-card-title>
-      <v-card-subtitle class="e_com"><strong>
-        {{ `${user.company}` }}</strong> - {{ `${user.occupation}` }}
-      </v-card-subtitle>
-    </v-card>
+    <v-row>
+      <v-col md="6" cols="12">
+        <v-card flat>
+          <v-card-title class="e_name">
+            {{ `${user.firstname} ${user.middlename} ${user.lastname}` }}
+          </v-card-title>
+          <v-card-subtitle class="e_com"><strong>
+            {{ `${user.company}` }}</strong> - {{ `${user.occupation}` }}
+          </v-card-subtitle>
+        </v-card>
+      </v-col>
+      <v-col md="6" cols="12">
+        <v-card flat class="mt-5">
+          <v-text-field
+            label="Purpose(s)"
+            outlined
+          ></v-text-field>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
