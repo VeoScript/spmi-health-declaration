@@ -5,7 +5,7 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import BackToTop from 'vue-backtotop';
 import VueCompositionAPI from '@vue/composition-api'
-import { auth } from '@/services' 
+import { auth, apolloProvider  } from '@/services' 
 
 Vue.use(VueCompositionAPI)
 
@@ -20,6 +20,7 @@ auth.onAuthStateChanged(() => {
       router,
       store,
       vuetify,
+      apolloProvider,
       render: h => h(App)
     }).$mount("#app")
   }

@@ -1,3 +1,4 @@
+import { apolloProvider } from './apollo'
 import { fb, db, auth, messaging, currentUser } from './firebase'
 
 export {
@@ -5,5 +6,6 @@ export {
     db,
     auth,
     messaging,
-    currentUser
+    currentUser,
+    apolloProvider
 }

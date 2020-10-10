@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home mt-4">
     <nav-bar/>
       <v-main>
         <v-container fluid>

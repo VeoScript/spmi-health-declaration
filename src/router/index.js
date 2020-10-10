@@ -20,6 +20,16 @@ const routes = [
         path: 'health-checklist',
         name: 'health-checklist',
         component: () => import('@/components/pages/home-health-check-list/Index')
+      },
+      {
+        path: 'daily-records',
+        name: 'daily-records',
+        component: () => import('@/components/pages/home-daily-records/Index')
+      },
+      {
+        path: 'account',
+        name: 'account',
+        component: () => import('@/components/pages/home-account/Index')
       }
     ]
   },
