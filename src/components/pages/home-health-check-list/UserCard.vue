@@ -2,7 +2,7 @@
   <div class="user-card">
     <v-card flat>
       <v-card-title class="e_name">
-        {{ `${user.firstname} ${user.middlename} ${user.lastname}` }}
+        {{ `${user.firstname} ${user.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${user.lastname}` }}
       </v-card-title>
       <v-card-subtitle class="e_com"><strong>
         {{ `${user.company}` }}</strong> - {{ `${user.occupation}` }}
