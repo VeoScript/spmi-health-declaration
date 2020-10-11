@@ -22,6 +22,7 @@
               <v-card-text>
                 <v-form
                   ref="form"
+                  :disabled="loading"
                 >
                   <v-text-field
                     label="Email"
