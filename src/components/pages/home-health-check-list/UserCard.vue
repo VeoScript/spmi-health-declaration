@@ -1,13 +1,22 @@
 <template>
   <div class="user-card">
-    <v-card flat>
-      <v-card-title class="e_name">
-        {{ `${user.firstname} ${user.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${user.lastname}` }}
-      </v-card-title>
-      <v-card-subtitle class="e_com"><strong>
-        {{ `${user.company}` }}</strong> - {{ `${user.occupation}` }}
-      </v-card-subtitle>
-    </v-card>
+    <v-row>
+      <v-col md="6" cols="12">
+        <v-card flat>
+          <v-card-title class="e_name">
+            {{ `${user.firstname} ${user.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${user.lastname}` }}
+          </v-card-title>
+          <v-card-subtitle class="e_com"><strong>
+            {{ `${user.company}` }}</strong> - {{ `${user.occupation}` }}
+          </v-card-subtitle>
+        </v-card>
+      </v-col>
+      <v-col md="6" cols="12">
+        <v-card flat class="mt-5">
+          <slot name="purpose"></slot>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
