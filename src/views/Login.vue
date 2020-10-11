@@ -118,6 +118,7 @@
           gender: '',
           civilStatus: '',
           contactNumber: '',
+          nationality: '',
           occupation: '',
           department: '',
           company: '',
@@ -155,7 +156,7 @@
       saveInHasura (firebase) {
         const { lastname, firstname, middlename, age,
           gender, civilStatus, contactNumber, occupation,
-          department, company, email, password } = this.form
+          department, company, email, password, nationality } = this.form
 
         this
          .$apollo
@@ -174,7 +175,8 @@
              department,
              company,
              email,
-             password
+             password,
+             nationality
            }
          })
          .then(() => {
