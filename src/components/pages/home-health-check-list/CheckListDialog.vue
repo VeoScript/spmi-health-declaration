@@ -1,5 +1,6 @@
 <template>
   <v-dialog
+    class="preview-modal"
     v-model="dialog"
     fullscreen
     hide-overlay
@@ -36,124 +37,37 @@
       <!-- Preview checklist selected and the user basic info... -->
       <v-container fluid>
         <v-row class="justify-center">
-          <v-col sm="7" md="7" cols="12">
-            <v-card id="defaultcard">
-              <v-card-title>BASIC INFORMATION</v-card-title>
-              <v-card-subtitle>09/23/2020</v-card-subtitle>
-              <v-container fluid>
-                <v-row>
-                  <v-col sm="12" md="12" cols="12">
-                    <v-text-field
-                      label="Purpose(s)"
-                      outlined
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col sm="4" md="4" cols="12">
-                    <v-text-field
-                      value="Villaruel"
-                      label="Last Name"
-                      outlined
-                      readonly
-                    ></v-text-field>
-                  </v-col>
-                  <v-col sm="4" md="4" cols="12">
-                    <v-text-field
-                      value="Jerome Joseph"
-                      label="First Name"
-                      outlined
-                      readonly
-                    ></v-text-field>
-                  </v-col>
-                  <v-col sm="4" md="4" cols="12">
-                    <v-text-field
-                      value="Robiato"
-                      label="Middle Name"
-                      outlined
-                      readonly
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col sm="3" md="3" cols="12">
-                    <v-text-field
-                      value="22"
-                      label="Age"
-                      outlined
-                      readonly
-                    ></v-text-field>
-                  </v-col>
-                  <v-col sm="3" md="3" cols="12">
-                    <v-text-field
-                      value="Male"
-                      label="Gender"
-                      outlined
-                      readonly
-                    ></v-text-field>
-                  </v-col>
-                  <v-col sm="3" md="3" cols="12">
-                    <v-text-field
-                      value="Single"
-                      label="Civil Status"
-                      outlined
-                      readonly
-                    ></v-text-field>
-                  </v-col>
-                  <v-col sm="3" md="3" cols="12">
-                    <v-text-field
-                      value="Filipino"
-                      label="Nationality"
-                      outlined
-                      readonly
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col sm="6" md="6" cols="12">
-                    <v-text-field
-                      value="09753286466"
-                      label="Contact No."
-                      outlined
-                      readonly
-                    ></v-text-field>
-                  </v-col>
-                  <v-col sm="6" md="6" cols="12">
-                    <v-text-field
-                      value="IT Coordinator"
-                      label="Occupation"
-                      outlined
-                      readonly
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card>
-          </v-col>
-          <v-col sm="5" md="5" cols="12">
+          <v-col sm="6" md="6" cols="12">
             <v-card id="defaultcard">
               <v-card-title>CHECKLIST RESULT</v-card-title>
+              <v-card-subtitle><strong>09-13-2020</strong></v-card-subtitle>
               <v-container fluid>
-                <v-row>
-                  <v-col sm="12" md="12" cols="12">
+                <v-row class="ml-5">
+                  <v-col cols="12">
+                    <span>Purpose(s)</span><br>
+                    <span>- <strong>DUTY</strong></span>
+                  </v-col>
+                </v-row>
+                <v-row class="ml-5">
+                  <v-col cols="12">
                     <span>Symptoms</span><br>
                     <span>- <strong>None of the Above</strong></span>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <v-col sm="12" md="12" cols="12">
+                <v-row class="ml-5">
+                  <v-col cols="12">
                     <span>Travel History</span><br>
                     <span>- <strong>None of the Above</strong></span>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <v-col sm="12" md="12" cols="12">
+                <v-row class="ml-5">
+                  <v-col cols="12">
                     <span>Do you have a family members tested for covid-19 RT-PCR test?</span><br>
                     <span>- <strong>No</strong></span>
                   </v-col>
                 </v-row>
-                <v-row>
-                  <v-col sm="12" md="12" cols="12">
+                <v-row class="ml-5">
+                  <v-col cols="12">
                     <span>Do you have a neighbors tested for covid-19 RT-PCR test?</span><br>
                     <span>- <strong>No</strong></span>
                   </v-col>
@@ -192,6 +106,13 @@
 
 <script>
   export default {
+    name: 'preview-modal',
+    props: {
+      user: {
+        type: Object,
+        required: true
+      }
+    },
     data () {
       return {
         dialog: false,
