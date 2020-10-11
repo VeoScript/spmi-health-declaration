@@ -1,25 +1,16 @@
 <template>
   <v-dialog
     class="preview-modal"
-    v-model="dialog"
     fullscreen
     hide-overlay
     transition="dialog-bottom-transition"
+    v-model="show"
   >
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn
-        color="primary"
-        v-bind="attrs"
-        v-on="on"
-      >
-        Preview
-      </v-btn>
-    </template>
     <v-card style="background: #fff;">
       <v-toolbar class="dgbox">
         <v-btn
           icon
-          @click="dialog = false"
+          @click="show = !show"
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -28,7 +19,6 @@
         <v-toolbar-items>
           <v-btn
             text
-            @click="dialog = false"
           >
             Save
           </v-btn>
@@ -76,7 +66,7 @@
                 <v-row class="justify-center">
                   <v-col sm="12" md="12" cols="12">
                     <div class="defaulttxt-p2 text-center">
-                      I hereby authorize SPMI, to collect and process the data idicated
+                      I hereby authorize SPMI, to collect and process the data indicated
                       herein for the purpose of effecting control of the COVID-19 infection.
                       I understand that my personal information is protected by 
                       RA 10173, Data Privacy Act of 2012,
@@ -108,18 +98,22 @@
   export default {
     name: 'preview-modal',
     props: {
-      user: {
-        type: Object,
+      visible: {
+        type: Boolean,
         required: true
       }
     },
-    data () {
-      return {
-        dialog: false,
-        notifications: false,
-        sound: true,
-        widgets: false,
+    computed: {
+      show: {
+        get () {
+          return this.visible
+        },
+        set (value) {
+          if (!value) {
+            this.$emit('close-dialog')
+          }
+        }
       }
-    },
+    }
   }
 </script>

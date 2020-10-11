@@ -36,10 +36,24 @@
 
             />
           </v-col>
+          
+
+          
+          <check-list-preview-dialog 
+            :visible="dialog"
+            @close-dialog="dialog = false"
+          />
 
           <v-col sm="12" md="12" cols="12" class="mt-3 text-right">
-            <check-list-dialog/>
-            <v-btn color="secondary" class="mx-2">
+            <v-btn
+              color="primary"
+              depressed
+              large
+              @click="dialog = true"
+            >
+              Preview
+            </v-btn>
+            <v-btn color="secondary" class="mx-2" large outlined>
               cancel
             </v-btn>
           </v-col>
@@ -58,7 +72,12 @@
       SymptomsCard: () => import('./SymptomsCard'),
       TravelHistoryCard: () => import('./TravelHistoryCard'),
       UserCard: () => import('./UserCard'),
-      CheckListDialog: () => import('./CheckListDialog')
+      CheckListPreviewDialog: () => import('./CheckListPreviewDialog')
+    },
+    data () {
+      return {
+        dialog: false
+      }
     },
     apollo: {
       users: {
