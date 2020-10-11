@@ -18,6 +18,7 @@ export const GET_USER_BASIC_INFO = gql`
       middlename
       company
       occupation
+      password
     }
   }
 `
