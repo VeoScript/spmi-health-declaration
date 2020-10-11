@@ -22,6 +22,8 @@
         text
         x-large
         class="font-weight-light rounded-sm"
+        @click="onRegister"
+        :loading="loading"
       >
         Save
       </v-btn>
@@ -55,7 +57,7 @@
                 rounded
                 class="rounded-sm"
                 v-model="form.lastname"
-                :rules="[required('Lastname')]"
+                :rules="[required('Last Name')]"
                 ref="lastname"
               ></v-text-field>
               <v-text-field
@@ -64,7 +66,7 @@
                 rounded
                 class="rounded-sm"
                 v-model="form.firstname"
-                :rules="[required('Firstname')]"
+                :rules="[required('First Name')]"
               ></v-text-field>
               <v-text-field
                 label="Middle Name"
@@ -72,6 +74,7 @@
                 rounded
                 class="rounded-sm"
                 v-model="form.middlename"
+                :rules="[required('Middle Name')]"
               ></v-text-field>
               <v-row>
                 <v-col cols="12" md="6">
@@ -123,14 +126,15 @@
                 v-model="form.occupation"
                 :rules="[required('Occupation')]"
               ></v-text-field>
-              <v-text-field
+              <v-select
+                :items="departmentList"
                 label="Department"
                 filled
                 rounded
                 class="rounded-sm"
                 v-model="form.department"
                 :rules="[required('Department')]"
-              ></v-text-field>
+              ></v-select>
                <v-select
                 :items="companyList"
                 label="Company"
@@ -242,8 +246,9 @@
           v => /([!@$%])/.test(v) || 'Must have one special character [!@#$%]'
         ],
         genderList: ['Male', 'Female'],
-        civilStatusList: ['Single', 'Married', 'Divorced', 'widowed '],
-        companyList: ['SPMI', 'VACI', 'GGC', 'SECURITY']
+        civilStatusList: ['Single', 'Married', 'Divorced', 'Widowed'],
+        companyList: ['SPMI', 'VACI', 'GGC', 'SECURITY'],
+        departmentList: ['ADMIN', 'OPM', 'PRODUCTION', 'QUALITY CONTROL', 'TECHNICAL']
       }
     },
     computed: {
