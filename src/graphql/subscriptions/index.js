@@ -1,0 +1,5 @@
+import { GET_USER_BASIC_INFO_SUBSCRIPTION } from './users'
+
+export {
+    GET_USER_BASIC_INFO_SUBSCRIPTION
+}
