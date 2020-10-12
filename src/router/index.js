@@ -30,13 +30,13 @@ const routes = [
         path: 'account',
         name: 'account',
         component: () => import('@/components/pages/home-account/Index')
+      },
+      {
+        path: "about",
+        name: "about",
+        component: () => import('@/views/About')
       }
     ]
-  },
-  {
-    path: "/about",
-    name: "about",
-    component: () => import('@/views/About')
   },
   {
     path: '/login',
