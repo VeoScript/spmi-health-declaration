@@ -198,6 +198,10 @@
       neighborTestedRTPCR: {
         type: String,
         required: false
+      },
+      users: {
+        type: Array,
+        required: true
       }
     },
     computed: {

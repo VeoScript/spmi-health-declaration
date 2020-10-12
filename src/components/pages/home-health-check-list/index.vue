@@ -1,9 +1,20 @@
 <template>
   <div class="dashboard">
+    <v-alert
+      text
+      prominent
+      type="warning"
+      icon="mdi-alert"
+      dismissible
+      outlined
+      v-show="error"
+    >
+      {{ error }}
+    </v-alert>
     <v-container fluid>
       <v-form ref="form">
         <v-row no-gutters>
-          <v-col sm="12" md="12" cols="12">
+          <v-col cols="12">
 
             <!-- USER CARD -->
             <v-skeleton-loader
@@ -18,19 +29,20 @@
             >
               <template #purpose>
                 <v-text-field
-                  label="Purpose(s)"
-                  outlined
+                  label="Please Indicate your purpose (e.g. Visit, Work) "
+                  filled
                   v-model="purpose"
                   :rules="[required('Purpose')]"
+                  style="position: relative; top: 15px;"
+                  class="rounded-sm"
                 ></v-text-field>
               </template>
             </user-card> <!-- USER INFORMATION -->
 
           </v-col>
         </v-row>
-        <v-row no-gutters>
+        <v-row>
           <v-col sm="6" md="6" cols="12">
-
             <!-- SYMPTOMS CARD -->
             <symptoms-card>
               <template #symptoms>
@@ -89,14 +101,14 @@
                     ></v-checkbox>
                   </v-col>
                 </v-row>
-                <hr class="my-4"/>
+                <v-divider class="my-4"></v-divider>
                 <v-row no-gutters>
                   <v-col sm="12" md="12" cols="12" >
                     <span>
                       Do you have a family members tested for
                       covid-19 RT-PCR test?  
                     </span>
-                    <div>
+                    <div class="d-flex">
                       <v-checkbox
                         label="Yes"
                         value="Yes"
@@ -106,6 +118,7 @@
                       <v-checkbox
                         label="No"
                         value="No"
+                        class="ml-3"
                         hide-details
                         v-model="familyMemberTestedRTPCR"
                       ></v-checkbox>
@@ -119,7 +132,7 @@
                       Do you have a neighbors tested for
                       covid-19 RT-PCR test?
                     </span>
-                    <div>
+                    <div class="d-flex">
                       <v-checkbox
                         label="Yes"
                         value="Yes"
@@ -130,6 +143,7 @@
                         label="No"
                         value="No"
                         hide-details
+                        class="ml-3"
                         v-model="neighborTestedRTPCR"
                       ></v-checkbox>
                     </div>
@@ -143,11 +157,11 @@
             <!-- TRAVEL HISTORY CARD -->
             <travel-history-card>
               <template #travel-history>
-                <v-row no-gutters>
+                <v-row no-gutters class="pa-2">
                   <v-col sm="12" md="12" cols="12">
-                    <div class="defaulttxt-p">Outside of the Country</div>
+                    <div class="body-2 font-weight-medium gray--text">Outside of the Country</div>
                   </v-col>
-                  <v-col sm="6" md="6" cols="12">
+                  <v-col sm="6" md="3" cols="12">
                     <v-checkbox
                       label="China"
                       value="China"
@@ -169,6 +183,8 @@
                       v-model="checkList.travelOutsideCountry"
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
+                  </v-col>
+                  <v-col cols="12" md="3">
                     <v-checkbox
                       label="Iran"
                       value="Iran"
@@ -176,8 +192,6 @@
                       v-model="checkList.travelOutsideCountry"
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
-                  </v-col>
-                  <v-col sm="6" md="6" cols="12">
                     <v-checkbox
                       label="USA"
                       value="USA"
@@ -185,13 +199,15 @@
                       v-model="checkList.travelOutsideCountry"
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
-                    <v-checkbox
+                     <v-checkbox
                       label="Paris"
                       value="Paris"
                       hide-details
                       v-model="checkList.travelOutsideCountry"
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
+                  </v-col>
+                  <v-col sm="6" md="3" cols="12">
                     <v-checkbox
                       label="None of the Above"
                       value="None of the Above"
@@ -199,8 +215,6 @@
                       v-model="noTravelOusideCountry"
                       @click="onChangeNoTravelOusideCountry"
                     ></v-checkbox>
-                  </v-col>
-                  <v-col sm="12" md="12" cols="12" class="mt-3">
                     <v-text-field
                       label="Others"
                       clearable
@@ -208,11 +222,12 @@
                     ></v-text-field>
                   </v-col>
                 </v-row>
-                <v-row no-gutters>
+                <v-divider class="mt-5"></v-divider>
+                <v-row no-gutters class="pa-3">
                   <v-col sm="12" md="12" cols="12">
-                    <div class="defaulttxt-p">Local Area</div>
+                    <div class="body-2 font-weight-medium gray--text">Local Area</div>
                   </v-col>
-                  <v-col sm="6" md="6" cols="12">
+                  <v-col sm="6" md="3" cols="12">
                     <v-checkbox
                       label="Metro Manila"
                       value="Metro Manila"
@@ -234,6 +249,8 @@
                       v-model="checkList.travelLocal"
                       @change="onChangeTravelledLocal"
                     ></v-checkbox>
+                  </v-col>
+                  <v-col cols="12" md="3">
                     <v-checkbox
                       label="Dumaguete"
                       value="Dumaguete"
@@ -241,8 +258,6 @@
                       v-model="checkList.travelLocal"
                       @change="onChangeTravelledLocal"
                     ></v-checkbox>
-                  </v-col>
-                  <v-col sm="6" md="6" cols="12">
                     <v-checkbox
                       label="Ormoc City"
                       value="Ormoc City"
@@ -257,6 +272,8 @@
                       hide-details
                       @change="onChangeTravelledLocal"
                     ></v-checkbox>
+                  </v-col>
+                  <v-col sm="6" md="3" cols="12">
                     <v-checkbox
                       label="None of the Above"
                       value="None of the Above"
@@ -264,8 +281,6 @@
                       v-model="noTravelLocal"
                       @click="onChangeNoTravelLocal"
                     ></v-checkbox>
-                  </v-col>
-                  <v-col sm="12" md="12" cols="12" class="mt-3">
                     <v-text-field
                       label="Others"
                       clearable
@@ -277,6 +292,7 @@
             </travel-history-card>
           </v-col>
           
+           <!-- ======== HEALTH CHECK PREVIEW ====== -->
           <check-list-preview-dialog 
             :purpose="purpose"
             :noSymptoms="noSymptoms"
@@ -290,26 +306,27 @@
             :familyMemberTestedRTPCR="familyMemberTestedRTPCR"
             :neighborTestedRTPCR="neighborTestedRTPCR"
             :visible="dialog"
+            :users="users"
             @close-dialog="dialog = false"
-          ></check-list-preview-dialog> <!-- HEALTH CHECK PREVIEW -->
+          ></check-list-preview-dialog>
 
-          <v-col sm="12" md="12" cols="12" class="mt-3 text-right">
+          <!-- ACTION BUTTON  -->
+          <v-col sm="12" md="12" cols="12" class="text-right">
             <v-btn
               color="primary"
-              depressed
-              large
+              x-large
               @click="onPreviewHealthCheckList"
             >
-              Preview
+             <v-icon left>mdi-view-carousel</v-icon> Preview
             </v-btn>
             <v-btn 
-              color="secondary" 
+              color="gray" 
               class="mx-2" 
-              large 
+              x-large 
               outlined
               @click="onClearHealthCheckList"
             >
-              cancel
+              <v-icon left>mdi-backup-restore</v-icon> Clear
             </v-btn>
           </v-col>
         </v-row>
@@ -319,10 +336,10 @@
 </template> 
 
 <script>
-  import gql from 'graphql-tag'
   import { auth } from '@/services'
   import { toastAlertStatus } from '@/utils'
   import { GET_USER_BASIC_INFO } from '@/graphql/queries'
+  import { GET_USER_BASIC_INFO_SUBSCRIPTION } from '@/graphql/subscriptions'
   export default {
     name: "HealthChecklist",
     components: {
@@ -334,6 +351,7 @@
     data () {
       return {
         dialog: false,
+        error: '',
         purpose: '',
         noSymptoms: '',
         noTravelOusideCountry: '',
@@ -348,7 +366,7 @@
         familyMemberTestedRTPCR: '',
         neighborTestedRTPCR: '',
         required (propertyType) { 
-          return v => v && v.length > 0 || `${propertyType} is required.`
+          return v => v && v.length > 0 || `Your ${propertyType} is required.`
         }
       }
     },
@@ -366,6 +384,7 @@
         this.othersTravelledLocal = ''
         this.noTravelLocal = ''
         this.purpose = ''
+        this.error = ''
         this.$refs.form.reset()
       },
       // AUTOMATIC UNCHECK SYMPTOMS WHEN CLICKING "NONE OF THE ABOVE"
@@ -394,18 +413,26 @@
       // ==== FOR PREVIEWING HEATH CHECKLIST
       onPreviewHealthCheckList () {
         let self = this
-        if (self.$refs.form.validate()) {
+        if (!self.$refs.form.validate()) {
+          this.error = 'Please Indicate your purpose (e.g Visit, Work)'
+        } else {
           if (self.checkList.symptoms === [] || self.noSymptoms === '') {
-            return toastAlertStatus('warning', 'Please Check Your Symptoms if any.')
+            this.error = 'Please Check Your Symptoms if any.'
+            toastAlertStatus('warning', 'Please Check Your Symptoms if any.')
           } else if (self.familyMemberTestedRTPCR === '') {
-            return toastAlertStatus('warning', 'Please Select if you have a family members tested for covid-19 RT-PCR test?')
+            this.error = 'Please Select if you have a family members tested for covid-19 RT-PCR test'
+            toastAlertStatus('warning', 'Please Select if you have a family members tested for covid-19 RT-PCR test?')
           } else if (self.neighborTestedRTPCR === '') {
-            return toastAlertStatus('warning', 'Please Select if you have a neighbors tested for covid-19 RT-PCR test?')
+            this.error = 'Please Select if you have a neighbors tested for covid-19 RT-PCR test?'
+            toastAlertStatus('warning', 'Please Select if you have a neighbors tested for covid-19 RT-PCR test?')
           } else if (self.checkList.travelOutsideCountry === [] || self.noTravelOusideCountry === '') {
-            return toastAlertStatus('warning', 'Please Select travel history outside the philippines if any.')
+            this.error = 'Please Select travel history outside the philippines if any.'
+            toastAlertStatus('warning', 'Please Select travel history outside the philippines if any.')
           } else if (self.checkList.travelLocal === [] || self.noTravelLocal === '') {
-            return toastAlertStatus('warning', 'Please Select local travel history if any.')
+            this.error = 'Please Select local travel history if any.'
+            toastAlertStatus('warning', 'Please Select local travel history if any.')
           } else {
+            this.error = ''
             this.dialog = true
           }
         }
@@ -413,10 +440,27 @@
     },
     apollo: {
       users: {
-        query: GET_USER_BASIC_INFO,
+        query: auth ? GET_USER_BASIC_INFO : undefined,
         variables () {
           return {
             firebase_id: auth ? auth.currentUser.uid : undefined
+          }
+        },
+        subscribeToMore: {
+          document: auth ? GET_USER_BASIC_INFO_SUBSCRIPTION : undefined,
+          variables () {
+            return {
+              firebase_id: auth ? auth.currentUser.uid : undefined
+            }
+          },
+          updateQuery(previousResult, { subscriptionData }) {
+            if (previousResult) {
+              return {
+                users: [
+                    ...subscriptionData.data.users
+                ]
+              }
+            }
           }
         }
       }
