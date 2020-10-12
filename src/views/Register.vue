@@ -41,6 +41,7 @@
           prominent
           type="error"
           icon="mdi-cloud-alert"
+          outlined
           v-show="error"
         >
           <b>{{ error }}</b>
