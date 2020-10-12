@@ -13,3 +13,12 @@ export const GET_USER_BASIC_INFO_SUBSCRIPTION = gql`
     }
   }
 `
+
+export const GET_ACCOUNT_TYPE_SUBSCRIPTION = gql`
+  subscription userAccountTypeSubscription($firebase_id: String) {
+    users(where: {firebase_id: {_eq: $firebase_id}}) {
+      id
+      account_type
+    }
+  }
+`
