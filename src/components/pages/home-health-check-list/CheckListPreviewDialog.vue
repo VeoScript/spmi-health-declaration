@@ -35,19 +35,33 @@
                 <v-row class="ml-5">
                   <v-col cols="12">
                     <span>Purpose(s)</span><br>
-                    <span>- <strong>DUTY</strong></span>
+                    <span>- <strong class="text-uppercase">{{ purpose }}</strong></span>
                   </v-col>
                 </v-row>
                 <v-row class="ml-5">
                   <v-col cols="12">
                     <span>Symptoms</span><br>
-                    <span>- <strong>None of the Above</strong></span>
+                    <span>- 
+                      <strong 
+                        v-for="symptom in symptoms" :key="symptom"
+                      >
+                        {{ `${symptom}, ` }}
+                      </strong>
+                      <strong>{{ noSymptoms }}</strong>
+                    </span>
                   </v-col>
                 </v-row>
                 <v-row class="ml-5">
                   <v-col cols="12">
                     <span>Travel History</span><br>
-                    <span>- <strong>None of the Above</strong></span>
+                    <span>- 
+                      <strong 
+                        v-for="symptom in symptoms" :key="symptom"
+                      >
+                        {{ `${symptom}, ` }}
+                      </strong>
+                      <strong>{{ noSymptoms }}</strong>
+                    </span>
                   </v-col>
                 </v-row>
                 <v-row class="ml-5">
@@ -101,6 +115,50 @@
       visible: {
         type: Boolean,
         required: true
+      },
+      purpose: {
+        type: String,
+        required: true,
+      },
+      noSymptoms: {
+        type: String,
+        required: false
+      },
+      noTravelOusideCountry: {
+        type: String,
+        required: false
+      },
+      noTravelLocal: {
+        type: String,
+        required: false
+      },
+      othersTravelledOutsideCoutry: {
+        type: String,
+        required: false
+      },
+      othersTravelledLocal: {
+        type: String,
+        required: false
+      },
+      symptoms: {
+        type: Array,
+        required: false
+      },
+      travelOutsideCountry: {
+        type: Array,
+        required: false
+      },
+      travelLocal: {
+        type: Array,
+        required: false
+      },
+      familyMemberTestedRTPCR: {
+        type: String,
+        required: false
+      },
+      neighborTestedRTPCR: {
+        type: String,
+        required: false
       }
     },
     computed: {

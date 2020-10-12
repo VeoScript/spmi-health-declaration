@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <v-container fluid>
-      <v-form>
+      <v-form ref="form">
         <v-row no-gutters>
           <v-col sm="12" md="12" cols="12">
 
@@ -10,13 +10,20 @@
               class="mt-4"
               v-if="$apollo.loading"
               type="list-item-avatar-two-line"
-            ></v-skeleton-loader> <!--apollo loading when data is fetching -->
-            
+            ></v-skeleton-loader> <!--apollo loading when data is fetching --> 
             <user-card
               v-else
               v-for="user in users" 
               :key="user.id" :user="user"
             >
+              <template #purpose>
+                <v-text-field
+                  label="Purpose(s)"
+                  outlined
+                  v-model="purpose"
+                  :rules="[required('Purpose')]"
+                ></v-text-field>
+              </template>
             </user-card> <!-- USER INFORMATION -->
 
           </v-col>
@@ -271,6 +278,17 @@
           </v-col>
           
           <check-list-preview-dialog 
+            :purpose="purpose"
+            :noSymptoms="noSymptoms"
+            :noTravelLocal="noTravelLocal"
+            :noTravelOusideCountry="noTravelOusideCountry"
+            :othersTravelledOutsideCoutry="othersTravelledOutsideCoutry"
+            :othersTravelledLocal="othersTravelledLocal"
+            :symptoms="checkList.symptoms"
+            :travelLocal="checkList.travelLocal"
+            :travelOutsideCountry="checkList.travelOutsideCountry"
+            :familyMemberTestedRTPCR="familyMemberTestedRTPCR"
+            :neighborTestedRTPCR="neighborTestedRTPCR"
             :visible="dialog"
             @close-dialog="dialog = false"
           ></check-list-preview-dialog> <!-- HEALTH CHECK PREVIEW -->
@@ -280,7 +298,7 @@
               color="primary"
               depressed
               large
-              @click="dialog = true"
+              @click="onPreviewHealthCheckList"
             >
               Preview
             </v-btn>
@@ -303,6 +321,7 @@
 <script>
   import gql from 'graphql-tag'
   import { auth } from '@/services'
+  import { toastAlertStatus } from '@/utils'
   import { GET_USER_BASIC_INFO } from '@/graphql/queries'
   export default {
     name: "HealthChecklist",
@@ -315,6 +334,7 @@
     data () {
       return {
         dialog: false,
+        purpose: '',
         noSymptoms: '',
         noTravelOusideCountry: '',
         noTravelLocal: '',
@@ -326,7 +346,10 @@
           travelLocal: []
         },
         familyMemberTestedRTPCR: '',
-        neighborTestedRTPCR: ''
+        neighborTestedRTPCR: '',
+        required (propertyType) { 
+          return v => v && v.length > 0 || `${propertyType} is required.`
+        }
       }
     },
     methods: {
@@ -336,31 +359,56 @@
         this.neighborTestedRTPCR = ''
         this.noSymptoms = null
         this.checkList.symptoms = []
-         this.noTravelOusideCountry = null
+         this.noTravelOusideCountry = ''
         this.checkList.travelOutsideCountry = []
+        this.checkList.travelLocal = []
+        this.othersTravelledOutsideCoutry = ''
+        this.othersTravelledLocal = ''
+        this.noTravelLocal = ''
+        this.purpose = ''
+        this.$refs.form.reset()
       },
-      // ==== AUTOMATIC UNCHECK SYMPTOMS WHEN CLICKING "NONE OF THE ABOVE"
+      // AUTOMATIC UNCHECK SYMPTOMS WHEN CLICKING "NONE OF THE ABOVE"
       onChangeNoSymptoms () {
         this.checkList.symptoms = []
       },
-      // ==== AUTOMATIC UNCHECK THE "NONE OF THE ABOVE" WHEN CLICKING SYMPTOMS
+      // AUTOMATIC UNCHECK THE "NONE OF THE ABOVE" WHEN CLICKING SYMPTOMS
       onChangeSymptomatic () {
         this.noSymptoms = null
       },
-      // ==== AUTOMATIC UNCHECK TRAVEL OUTSIDE COUNTRY WHEN CLICKING "NONE OF THE ABOVE"
+      // AUTOMATIC UNCHECK TRAVEL OUTSIDE COUNTRY WHEN CLICKING "NONE OF THE ABOVE"
       onChangeNoTravelOusideCountry () {
         this.checkList.travelOutsideCountry = []
       },
-       // ==== AUTOMATIC UNCHECK THE "NONE OF THE ABOVE" WHEN CLICKING TRAVEL OUTSIDE COUNTRY
+       // AUTOMATIC UNCHECK THE "NONE OF THE ABOVE" WHEN CLICKING TRAVEL OUTSIDE COUNTRY
       onChangeTravelledOutsideCountry () {
         this.noTravelOusideCountry = null
       },
-      // ==== AUTOMATIC UNCHECK TRAVEL LOCAL AREA WHEN CLICKING "NONE OF THE ABOVE"
+      // AUTOMATIC UNCHECK TRAVEL LOCAL AREA WHEN CLICKING "NONE OF THE ABOVE"
       onChangeNoTravelLocal () {
         this.checkList.travelLocal = []
       },
       onChangeTravelledLocal () {
-        this.noTravelLocal = ''
+        this.noTravelLocal = null
+      },
+      // ==== FOR PREVIEWING HEATH CHECKLIST
+      onPreviewHealthCheckList () {
+        let self = this
+        if (self.$refs.form.validate()) {
+          if (self.checkList.symptoms === [] || self.noSymptoms === '') {
+            return toastAlertStatus('warning', 'Please Check Your Symptoms if any.')
+          } else if (self.familyMemberTestedRTPCR === '') {
+            return toastAlertStatus('warning', 'Please Select if you have a family members tested for covid-19 RT-PCR test?')
+          } else if (self.neighborTestedRTPCR === '') {
+            return toastAlertStatus('warning', 'Please Select if you have a neighbors tested for covid-19 RT-PCR test?')
+          } else if (self.checkList.travelOutsideCountry === [] || self.noTravelOusideCountry === '') {
+            return toastAlertStatus('warning', 'Please Select travel history outside the philippines if any.')
+          } else if (self.checkList.travelLocal === [] || self.noTravelLocal === '') {
+            return toastAlertStatus('warning', 'Please Select local travel history if any.')
+          } else {
+            this.dialog = true
+          }
+        }
       }
     },
     apollo: {
