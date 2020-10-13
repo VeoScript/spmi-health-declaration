@@ -2,11 +2,30 @@
   <div class="dailyrecords">
     <v-container class="mt-5" fluid>
       <!-- daily records table view -->
-      <daily-records-table
-        :dailyRecords="checkList"
-        :search="search"
-        :headers="headers"
-      >
+      <daily-records-table>
+        <template #data-records>
+          <v-skeleton-loader
+              type="table-tbody"
+              class="mx-auto"
+              tile
+              v-if="$apollo.loading"
+          ></v-skeleton-loader> 
+          <v-data-table
+            v-else
+            :headers="headers"
+            :items="checkList"
+            :search="search"
+          >
+            <!-- Purpose -->
+            <template #item.purpose="{ item }">
+              <span class="text-uppercase">{{ item.purpose }}</span>
+            </template>
+            <!-- Date Format -->
+            <template #item.created_at="{ item }">
+              <date-format :created_at="item.created_at.split('T')[0]"/>
+            </template>
+          </v-data-table>
+        </template>
         <template #search-record>
           <v-text-field
             v-model="search"
@@ -28,7 +47,8 @@
   export default {
     name: 'dailyrecords',
     components: {
-      DailyRecordsTable: () => import('@/components/pages/home-daily-records/DailyRecordsTable')
+      DailyRecordsTable: () => import('@/components/pages/home-daily-records/DailyRecordsTable'),
+      DateFormat: () => import('@/components/mixins/DateFormat')
     },
     data () {
       return {
