@@ -10,12 +10,24 @@
       :headers="headers"
       :items="dailyRecords"
       :search="search"
-    ></v-data-table>
+    >
+      <!-- Purpose -->
+      <template #item.purpose="{ item }">
+        <span class="text-uppercase">{{ item.purpose }}</span>
+      </template>
+      <!-- Date Format -->
+      <template #item.created_at="{ item }">
+        <date-format :created_at="item.created_at.split('T')[0]"/>
+      </template>
+    </v-data-table>
   </v-card>
 </template>
 
 <script>
   export default {
+    components: {
+      DateFormat: () => import('@/components/mixins/DateFormat')
+    },
     props: {
       dailyRecords: {
         type: Array,
