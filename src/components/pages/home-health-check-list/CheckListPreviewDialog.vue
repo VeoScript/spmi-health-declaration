@@ -17,13 +17,19 @@
         <v-toolbar-title>Preview Health Checklist</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn
-            text
-          >
-           <v-icon left>mdi-content-save</v-icon> Save
-          </v-btn>
+          <slot name="btn-save-health"></slot>
         </v-toolbar-items>
       </v-toolbar>
+      <v-alert
+        border="bottom"
+        color="error darken-1"
+        dark
+        dismissible
+        v-show="error"
+        type="error"
+      >
+        {{ error }}
+      </v-alert>
       <!-- Preview checklist selected and the user basic info... -->
       <v-container  class="fill-height" fluid>
         <v-row align="center" justify="center">
@@ -31,87 +37,22 @@
             <v-card flat outlined>
               <v-card-title>CHECKLIST RESULT</v-card-title>
               <v-card-subtitle class="font-italic">
-                <strong>09-13-2020</strong>
+                <strong>
+                  {{ getCurrentDate }}
+                </strong>
               </v-card-subtitle>
               <v-container>
+                <slot name="purpose"></slot>
+                <slot name="symptoms"></slot>
+                <slot name="travel-history"></slot>
                 <v-row class="ml-5">
                   <v-col cols="12">
-                    <span>Purpose(s)</span><br>
-                    <span>- 
-                      <strong class="text-uppercase font-italic red--text">
-                        {{ purpose }}
-                      </strong>
-                    </span>
+                    <slot name="family-tested"></slot>
                   </v-col>
                 </v-row>
                 <v-row class="ml-5">
                   <v-col cols="12">
-                    <!-- SYMPTOMS ARRAYS DATA -->
-                    <span>Symptoms</span><br>
-                    <span>- 
-                      <strong 
-                        class="font-italic red--text"
-                        v-for="symptom in symptoms" :key="symptom"
-                      >
-                        {{ `${symptom}, ` }}
-                      </strong>
-                      <strong class="font-italic red--text">{{ noSymptoms }}</strong>
-                    </span>
-
-                  </v-col>
-                </v-row>
-                <v-row class="ml-5">
-                  <v-col cols="12">
-                     <!-- TRAVEL HISTORY -->
-                    <span>Travel History</span><br>
-                    <div class="ml-2">
-                      <small>Outside Country</small><br>
-                      <span>- 
-                        <strong
-                          class="font-italic red--text" 
-                          v-for="outside in travelOutsideCountry" :key="outside"
-                        >
-                          {{ `${outside}, ` }}
-                        </strong>
-                        <strong class="font-italic red--text" v-show="noTravelOusideCountry">
-                          {{ ` ${noTravelOusideCountry}, ` }}
-                        </strong>
-                        <strong class="font-italic red--text" v-show="othersTravelledOutsideCoutry">
-                          {{ ` ${othersTravelledOutsideCoutry} ` }}
-                        </strong>
-                      </span>
-                    </div>
-                    <div class="ml-2">
-                      <!-- TRAVEL LOCAL COUNTRY -->
-                      <small>Local Area</small><br>
-                      <span>-
-                        <strong 
-                          class="font-italic red--text"
-                          v-for="local in travelLocal" :key="local"
-                        >
-                          {{ `${local}, ` }}
-                        </strong>
-                        <strong class="font-italic red--text" v-show="noTravelLocal">
-                          {{ ` ${noTravelLocal}, ` }}
-                        </strong>
-                        <strong class="font-italic red--text" v-show="othersTravelledLocal">
-                          {{ ` ${othersTravelledLocal} ` }}
-                        </strong>
-                      </span>
-                    </div>
-                    <!-- END TRAVEL HISTORY -->
-                  </v-col>
-                </v-row>
-                <v-row class="ml-5">
-                  <v-col cols="12">
-                    <span>Do you have a family members tested for covid-19 RT-PCR test?</span><br>
-                    <span>- <strong class="font-italic red--text">{{ familyMemberTestedRTPCR }}</strong></span>
-                  </v-col>
-                </v-row>
-                <v-row class="ml-5">
-                  <v-col cols="12">
-                    <span>Do you have a neighbors tested for covid-19 RT-PCR test?</span><br>
-                    <span>- <strong class="font-italic red--text">{{ neighborTestedRTPCR }}</strong></span>
+                    <slot name="neighbor-tested"></slot>
                   </v-col>
                 </v-row>
                 <v-divider class="mx-5"></v-divider>
@@ -123,12 +64,7 @@
                     <v-row class="justify-center">
                       <v-col sm="8" md="8" cols="12">
                         <span class="body-2 font-weight-medium">If you agree type your password to confirm.</span>
-                        <v-text-field
-                          label="Password"
-                          :type="showPass ? 'text' : 'password'"
-                          :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
-                          @click:append="showPass = !showPass"
-                        ></v-text-field>
+                        <slot name="confirm-password"></slot>
                       </v-col>
                     </v-row>
                   </v-col>
@@ -145,63 +81,15 @@
 <script>
   export default {
     name: 'preview-modal',
-    data () {
-      return {
-        showPass: false
-      }
-    },
     props: {
       visible: {
         type: Boolean,
         required: true
       },
-      purpose: {
+      error: {
         type: String,
         required: false,
-      },
-      noSymptoms: {
-        type: String,
-        required: false
-      },
-      noTravelOusideCountry: {
-        type: String,
-        required: false
-      },
-      noTravelLocal: {
-        type: String,
-        required: false
-      },
-      othersTravelledOutsideCoutry: {
-        type: String,
-        required: false
-      },
-      othersTravelledLocal: {
-        type: String,
-        required: false
-      },
-      symptoms: {
-        type: Array,
-        required: false
-      },
-      travelOutsideCountry: {
-        type: Array,
-        required: false
-      },
-      travelLocal: {
-        type: Array,
-        required: false
-      },
-      familyMemberTestedRTPCR: {
-        type: String,
-        required: false
-      },
-      neighborTestedRTPCR: {
-        type: String,
-        required: false
-      },
-      users: {
-        type: Array,
-        required: true
+        default: ''
       }
     },
     computed: {
@@ -214,6 +102,15 @@
             this.$emit('close-dialog')
           }
         }
+      },
+      getCurrentDate () {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+       return today
       }
     }
   }

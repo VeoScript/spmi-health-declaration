@@ -219,6 +219,7 @@
                       label="Others"
                       clearable
                       v-model="othersTravelledOutsideCoutry"
+                      :disabled="noTravelOusideCountry ? true : false"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -285,6 +286,7 @@
                       label="Others"
                       clearable
                       v-model="othersTravelledLocal"
+                      :disabled="noTravelLocal ? true : false"
                     ></v-text-field>
                   </v-col>
                 </v-row>
@@ -294,21 +296,116 @@
           
            <!-- ======== HEALTH CHECK PREVIEW ====== -->
           <check-list-preview-dialog 
-            :purpose="purpose"
-            :noSymptoms="noSymptoms"
-            :noTravelLocal="noTravelLocal"
-            :noTravelOusideCountry="noTravelOusideCountry"
-            :othersTravelledOutsideCoutry="othersTravelledOutsideCoutry"
-            :othersTravelledLocal="othersTravelledLocal"
-            :symptoms="checkList.symptoms"
-            :travelLocal="checkList.travelLocal"
-            :travelOutsideCountry="checkList.travelOutsideCountry"
-            :familyMemberTestedRTPCR="familyMemberTestedRTPCR"
-            :neighborTestedRTPCR="neighborTestedRTPCR"
+            :error="error"
             :visible="dialog"
-            :users="users"
             @close-dialog="dialog = false"
-          ></check-list-preview-dialog>
+            @onConfirmPassword="onConfirmPassword"
+          >
+            <template #purpose>
+              <v-row class="ml-5">
+                  <v-col cols="12">
+                    <span>Purpose(s)</span><br>
+                    <span>- 
+                      <strong class="text-uppercase font-italic red--text">
+                        {{ purpose }}
+                      </strong>
+                    </span>
+                  </v-col>
+                </v-row>
+            </template>
+            <template #symptoms>
+              <v-row class="ml-5">
+                  <v-col cols="12">
+                    <span>Symptoms</span><br>
+                    <span>- 
+                      <strong 
+                        class="font-italic red--text"
+                        v-for="symptom in checkList.symptoms" :key="symptom"
+                      >
+                        {{ `${symptom}, ` }}
+                      </strong>
+                      <strong class="font-italic red--text">{{ noSymptoms }}</strong>
+                    </span>
+                  </v-col>
+                </v-row>
+            </template>
+            <template #travel-history>
+              <v-row class="ml-5">
+                <v-col cols="12">
+                    <!-- TRAVEL HISTORY -->
+                  <span>Travel History</span><br>
+                  <div class="ml-2">
+                    <small>Outside Country</small><br>
+                    <span>- 
+                      <strong
+                        class="font-italic red--text" 
+                        v-for="outside in checkList.travelOutsideCountry" :key="outside"
+                      >
+
+                        {{ `${outside}, ` }}
+                      </strong>
+                      <strong class="font-italic red--text" v-show="noTravelOusideCountry">
+                        {{ ` ${noTravelOusideCountry}, ` }}
+                      </strong>
+                      <strong class="font-italic red--text" v-show="othersTravelledOutsideCoutry">
+                        {{ ` ${othersTravelledOutsideCoutry} ` }}
+                      </strong>
+                    </span>
+                  </div>
+                  <div class="ml-2">
+                    <!-- TRAVEL LOCAL COUNTRY -->
+                    <small>Local Area</small><br>
+                    <span>-
+                      <strong 
+                        class="font-italic red--text"
+                        v-for="local in checkList.travelLocal" :key="local"
+                      >
+                        {{ `${local}, ` }}
+                      </strong>
+                      <strong class="font-italic red--text" v-show="noTravelLocal">
+                        {{ ` ${noTravelLocal}, ` }}
+                      </strong>
+                      <strong class="font-italic red--text" v-show="othersTravelledLocal">
+                        {{ ` ${othersTravelledLocal} ` }}
+                      </strong>
+                    </span>
+                  </div>
+                  <!-- END TRAVEL HISTORY -->
+                </v-col>
+              </v-row>
+            </template>
+            <template #family-tested>
+              <span>Do you have a family members tested for covid-19 RT-PCR test?</span><br>
+              <span>- <strong class="font-italic red--text">{{ familyMemberTestedRTPCR }}</strong></span>
+            </template>
+            <template #neighbor-tested>
+                <span>Do you have a neighbors tested for covid-19 RT-PCR test?</span><br>
+                <span>- <strong class="font-italic red--text">{{ neighborTestedRTPCR }}</strong></span>
+            </template>
+            <template #confirm-password>
+              <v-form ref="form2" @submit.prevent="onConfirmPassword">
+                <v-text-field
+                  label="Password"
+                  :type="showPass ? 'text' : 'password'"
+                  :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
+                  @click:append="showPass = !showPass"
+                  v-model="password"
+                  :rules="[required('Confirmation password')]"
+                  :loading="loading"
+                  clearable
+                ></v-text-field>
+              </v-form>
+            </template>
+            <template #btn-save-health>
+              <v-btn
+                text
+                @click="onConfirmPassword"
+                :loading="loading"
+              >
+              <v-icon left>mdi-content-save</v-icon> Save
+              </v-btn>
+            </template>
+          </check-list-preview-dialog>
 
           <!-- ACTION BUTTON  -->
           <v-col sm="12" md="12" cols="12" class="text-right">
@@ -340,6 +437,7 @@
   import { toastAlertStatus } from '@/utils'
   import { GET_USER_BASIC_INFO } from '@/graphql/queries'
   import { GET_USER_BASIC_INFO_SUBSCRIPTION } from '@/graphql/subscriptions'
+  import { ADD_HEALTH_DECLARATION_MUTATION } from '@/graphql/mutations'
   export default {
     name: "HealthChecklist",
     components: {
@@ -351,6 +449,9 @@
     data () {
       return {
         dialog: false,
+        showPass: false,
+        password: '',
+        loading: false,
         error: '',
         purpose: '',
         noSymptoms: '',
@@ -367,7 +468,8 @@
         neighborTestedRTPCR: '',
         required (propertyType) { 
           return v => v && v.length > 0 || `Your ${propertyType} is required.`
-        }
+        },
+        users: []
       }
     },
     methods: {
@@ -386,6 +488,7 @@
         this.purpose = ''
         this.error = ''
         this.$refs.form.reset()
+        this.$refs.form2.reset()
       },
       // AUTOMATIC UNCHECK SYMPTOMS WHEN CLICKING "NONE OF THE ABOVE"
       onChangeNoSymptoms () {
@@ -397,6 +500,7 @@
       },
       // AUTOMATIC UNCHECK TRAVEL OUTSIDE COUNTRY WHEN CLICKING "NONE OF THE ABOVE"
       onChangeNoTravelOusideCountry () {
+        this.othersTravelledOutsideCoutry = ''
         this.checkList.travelOutsideCountry = []
       },
        // AUTOMATIC UNCHECK THE "NONE OF THE ABOVE" WHEN CLICKING TRAVEL OUTSIDE COUNTRY
@@ -405,6 +509,7 @@
       },
       // AUTOMATIC UNCHECK TRAVEL LOCAL AREA WHEN CLICKING "NONE OF THE ABOVE"
       onChangeNoTravelLocal () {
+        this.othersTravelledLocal = ''
         this.checkList.travelLocal = []
       },
       onChangeTravelledLocal () {
@@ -436,6 +541,73 @@
             this.dialog = true
           }
         }
+      },
+      onConfirmPassword () {
+        if (this.$refs.form.validate()) {
+          this.loading = true
+          for (let [user_key, user_value] of Object.entries(this.users)) {
+            if (this.password === user_value.password) {
+
+              let symptomString = ''
+              let travelOutsideCountryString = ''
+              let travelLocalString = ''
+
+              // Symptoms array works just fine
+              this.checkList.symptoms.forEach((symptom) => {
+                return `${symptomString += symptom + ' '}`
+              }, `${symptomString += this.noSymptoms ? this.noSymptoms : ''}`)
+
+
+              // Travel Outside Country Works just fine
+              this.checkList.travelOutsideCountry.forEach((outside) => {
+                return `${ travelOutsideCountryString += outside + ' ' }`
+              }, `${ travelOutsideCountryString += 
+                this.noTravelOusideCountry ? this.noTravelOusideCountry : '' + ' ' +
+                this.othersTravelledOutsideCoutry ? this.othersTravelledOutsideCoutry + ' ' : '' }`)
+
+              // Travel Local Area works just fine
+              this.checkList.travelLocal.forEach((inside) => {
+                return `${travelLocalString += inside + ' ' }`
+              }, `${
+                  travelLocalString +=
+                  this.noTravelLocal ? this.noTravelLocal : '' + ' ' +
+                  this.othersTravelledLocal ? this.othersTravelledLocal + ' ' : ''
+                }`)
+
+              this.$apollo.mutate({
+                mutation: ADD_HEALTH_DECLARATION_MUTATION,
+                  variables: {
+                    user_id: user_value.id,
+                    purpose: this.purpose,
+                    symptoms: symptomString,
+                    travel_outside_country: travelOutsideCountryString,
+                    travel_local_country: travelLocalString,
+                    familyTested: this.familyMemberTestedRTPCR,
+                    neighborTested: this.neighborTestedRTPCR
+                  }
+                })
+                .then(() => {
+                  this.onClearHealthCheckList()
+                  symptomString = ''
+                  travelOutsideCountryString = ''
+                  travelLocalString = ''
+                  toastAlertStatus('success', 'Health Declaration Confirmed!')
+                  this.loading = false
+                  this.dialog = !this.dialog
+                  this.error = ''
+                })
+                .catch(error => {
+                  this.loading = false
+                  this.error = ''
+                  toastAlertStatus('error', error)
+                })
+            } else {
+              this.error = 'Your password and confirmation password do not match'
+              this.loading = false
+              toastAlertStatus('error', 'Password do not match')
+            }
+          }
+        }
       }
     },
     apollo: {
@@ -462,6 +634,9 @@
               }
             }
           }
+        },
+        result ({ data }) {
+          this.users = data.users
         }
       }
     }
