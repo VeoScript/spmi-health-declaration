@@ -1,7 +1,11 @@
 <template>
-  <v-navigation-drawer app v-model="show">
-    <v-list-item>
-      <v-list-item-content>
+  <v-navigation-drawer 
+   v-model="show"
+   clipped
+   app
+  >
+    <v-list-item two-line class="hidden-lg-and-up">
+      <v-list-item-content >
         <v-list-item-title class="title">
           <v-img src='@/assets/spmi_official.png' max-width="120"/>
         </v-list-item-title>
@@ -11,9 +15,7 @@
       </v-list-item-content>
     </v-list-item>
 
-    <v-divider></v-divider>
-
-    <v-list dense nav>
+    <v-list nav>
 
       <!-- PUBLIC NAVIGATION -->
       <v-list-item
@@ -22,13 +24,12 @@
         :to="link.to"
       >
         <v-list-item-icon>
-          <v-icon :class="$route.path === link.to ? 'darkBlueShade--text' : ''">{{ $route.path === link.to  ? link.icon : link.icon + '-outline'  }}</v-icon>
+          <v-icon :class="$route.path === link.to ? 'orange--text' : ''">{{ $route.path === link.to  ? link.icon : link.icon + '-outline'  }}</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title :class="$route.path === link.to ? 'darkBlueShade--text' : ''">{{ link.text }}</v-list-item-title>
+          <v-list-item-title :class="$route.path === link.to ? 'darkBlueShade--text font-weight-medium' : ''">{{ link.text }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-
 
       <!-- ==== ADMINISTRATOR SHOW ONLY IF ACCOUNT TYPE IS ADMIN ===== -->
       <v-list-item 
@@ -44,7 +45,6 @@
         </v-list-item-content>
       </v-list-item>
 
-
       <!-- ==== SIGN OUT NAV ==== -->
       <v-list-item link>
         <v-list-item-icon>
@@ -55,6 +55,7 @@
           <v-list-item-title>Sign Out</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -63,6 +64,7 @@
   import { auth } from '@/services'
   import { toastAlertStatus } from '@/utils'
   import { GET_ACCOUNT_TYPE_QUERY } from '@/graphql/queries'
+  import { GET_ACCOUNT_TYPE_SUBSCRIPTION } from '@/graphql/subscriptions'
   export default {
     name: 'side-bar',
     props: ['visible', 'mode'],
@@ -72,7 +74,7 @@
         links: [
           { text: 'Health CheckList', icon: 'mdi-checkbox-multiple-marked', to: '/v/health-checklist' },
           { text: 'Daily Records', icon: 'mdi-calendar-text', to: '/v/daily-records' },
-          { text: 'Account', icon: 'mdi-account-box', to: '/v/account' }
+          { text: 'Account', icon: 'mdi-account-check', to: '/v/account' }
         ]
       }
     },
@@ -98,10 +100,27 @@
     },
     apollo: {
       users: {
-        query: GET_ACCOUNT_TYPE_QUERY,
+        query: auth ? GET_ACCOUNT_TYPE_QUERY : undefined,
         variables () {
           return {
             firebase_id: auth ? auth.currentUser.uid : undefined
+          }
+        },
+        subscribeToMore: {
+          document: auth ? GET_ACCOUNT_TYPE_SUBSCRIPTION : undefined,
+          variables () {
+            return {
+              firebase_id: auth ? auth.currentUser.uid : undefined
+            }
+          },
+          updateQuery(previousResult, { subscriptionData }) {
+            if (previousResult) {
+              return {
+                users: [
+                    ...subscriptionData.data.users
+                ]
+              }
+            }
           }
         },
         result ({ data }) {
