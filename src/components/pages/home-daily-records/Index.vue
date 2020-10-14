@@ -1,6 +1,6 @@
 <template>
-  <div class="dailyrecords">
-    <v-container class="mt-5" fluid>
+  <div class="dailyrecords mb-5">
+    <v-container fluid>
       <!-- daily records table view -->
       <daily-records-table>
         <template #data-records>
