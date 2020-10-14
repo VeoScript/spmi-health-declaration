@@ -266,7 +266,7 @@
                     ></v-checkbox>
                     <v-checkbox
                       label="Tacloban City"
-                      value="Paris"
+                      value="Tacloban City"
                       v-model="checkList.travelLocal"
                       hide-details
                       @change="onChangeTravelledLocal"
