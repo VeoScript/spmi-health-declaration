@@ -18,7 +18,6 @@
 
             <!-- USER CARD -->
             <v-skeleton-loader
-              class="mt-4"
               v-if="$apollo.loading"
               type="list-item-avatar-two-line"
             ></v-skeleton-loader> <!--apollo loading when data is fetching --> 
