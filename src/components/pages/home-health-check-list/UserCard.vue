@@ -1,20 +1,16 @@
 <template>
   <div class="user-card">
     <v-row>
-      <v-col md="6" cols="12">
-        <v-card flat>
-          <v-card-title class="e_name">
-            {{ `${user.firstname} ${user.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${user.lastname}` }}
-          </v-card-title>
-          <v-card-subtitle class="e_com"><strong>
-            {{ `${user.company}` }}</strong> - {{ `${user.occupation}` }}
-          </v-card-subtitle>
-        </v-card>
+      <v-col cols="12" md="6">
+        <v-card-title>
+          {{ `${user.firstname} ${user.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${user.lastname}` }}
+        </v-card-title>
+        <v-card-subtitle>
+          <strong>{{ `${user.company}` }}</strong> - {{ `${user.occupation}` }}
+        </v-card-subtitle>
       </v-col>
-      <v-col md="6" cols="12">
-        <v-card flat class="mt-5">
-          <slot name="purpose"></slot>
-        </v-card>
+      <v-col cols="12" md="6">
+        <slot name="purpose"></slot>
       </v-col>
     </v-row>
   </div>
@@ -31,17 +27,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .user-card{
-    .e_name{
-      font-size: 25px;
-      font-weight: bolder;
-      font-variant-caps: all-petite-caps;
-    }
-    .e_com{
-      font-size: 18px;
-      font-variant-caps: all-petite-caps;
-    }
-  }
-</style>
