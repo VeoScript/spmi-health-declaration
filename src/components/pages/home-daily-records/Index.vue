@@ -22,7 +22,7 @@
             </template>
             <!-- Date Format -->
             <template #item.created_at="{ item }">
-              <date-format :created_at="item.created_at.split('T')[0]"/>
+              <date-format :created_at="item.created_at"/>
             </template>
           </v-data-table>
         </template>
@@ -56,7 +56,7 @@
           checkList: [],
           headers: [
             {
-              text: 'DATE',
+              text: 'DATE & TIME',
               align: 'start',
               sortable: false,
               value: 'created_at',
