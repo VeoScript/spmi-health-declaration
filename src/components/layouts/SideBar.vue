@@ -22,10 +22,10 @@
         :to="link.to"
       >
         <v-list-item-icon>
-          <v-icon>{{ link.icon }}</v-icon>
+          <v-icon :class="$route.path === link.to ? 'darkBlueShade--text' : ''">{{ $route.path === link.to  ? link.icon : link.icon + '-outline'  }}</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>{{ link.text }}</v-list-item-title>
+          <v-list-item-title :class="$route.path === link.to ? 'darkBlueShade--text' : ''">{{ link.text }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -37,7 +37,7 @@
         v-show="user.account_type === 'admin'"
       >
         <v-list-item-icon>
-          <v-icon>mdi-account-lock</v-icon>
+          <v-icon>mdi-shield-outline</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title>Administrator</v-list-item-title>
@@ -48,7 +48,7 @@
       <!-- ==== SIGN OUT NAV ==== -->
       <v-list-item link>
         <v-list-item-icon>
-          <v-icon>mdi-account-arrow-right</v-icon>
+          <v-icon>mdi-logout</v-icon>
         </v-list-item-icon>
 
         <v-list-item-content @click="onSignOut">
@@ -70,8 +70,8 @@
       return {
         users: [],
         links: [
-          { text: 'Health CheckList', icon: 'mdi-comment-check', to: '/v/health-checklist' },
-          { text: 'Daily Records', icon: 'mdi-file', to: '/v/daily-records' },
+          { text: 'Health CheckList', icon: 'mdi-checkbox-multiple-marked', to: '/v/health-checklist' },
+          { text: 'Daily Records', icon: 'mdi-calendar-text', to: '/v/daily-records' },
           { text: 'Account', icon: 'mdi-account-box', to: '/v/account' }
         ]
       }

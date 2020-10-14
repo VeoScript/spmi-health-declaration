@@ -1,5 +1,6 @@
-import { GET_ACCOUNT_TYPE_QUERY } from './users'
+import { GET_ACCOUNT_TYPE_QUERY, GET_USER_BASIC_INFO } from './users'
 
 export {
-    GET_ACCOUNT_TYPE_QUERY
+    GET_ACCOUNT_TYPE_QUERY,
+    GET_USER_BASIC_INFO
 }
