@@ -16,7 +16,7 @@
         v-for="company in companies" :key="company"
       >
         <v-card flat>
-          <slot :name="`${company}-company`"></slot>
+          <slot :name="`${company}-company`" :company="company"></slot>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
