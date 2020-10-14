@@ -33,15 +33,15 @@
 
       <!-- ==== ADMINISTRATOR SHOW ONLY IF ACCOUNT TYPE IS ADMIN ===== -->
       <v-list-item 
-        link to="/v/administrator"
+        link to="/v/admin"
         v-for="user in users" :key="user.id"
         v-show="user.account_type === 'admin'"
       >
         <v-list-item-icon>
-          <v-icon>mdi-shield-outline</v-icon>
+          <v-icon :class="$route.path === '/v/admin' ? 'orange--text' : ''">{{ $route.path === '/v/admin' ? 'mdi-shield' : 'mdi-shield-outline' }}</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>Administrator</v-list-item-title>
+          <v-list-item-title :class="$route.path === '/v/admin' ? 'darkBlueShade--text font-weight-medium' : ''">Administrator</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
