@@ -41,6 +41,7 @@
           prominent
           type="error"
           icon="mdi-cloud-alert"
+          outlined
           v-show="error"
         >
           <b>{{ error }}</b>
@@ -74,7 +75,6 @@
                 rounded
                 class="rounded-sm"
                 v-model="form.middlename"
-                :rules="[required('Middle Name')]"
               ></v-text-field>
               <v-text-field
                 label="Age"
@@ -123,15 +123,14 @@
                 v-model="form.nationality"
                 :rules="[required('Nationality')]"
               ></v-select>
-               <v-select
-                :items="companyList"
-                label="Company"
+              <v-text-field
+                label="Occupation"
                 filled
                 rounded
                 class="rounded-sm"
-                v-model="form.company"
-                :rules="[required('Company')]"
-              ></v-select>
+                v-model="form.occupation"
+                :rules="[required('Occupation')]"
+              ></v-text-field>
               <v-select
                 :items="departmentList"
                 label="Department"
@@ -141,14 +140,15 @@
                 v-model="form.department"
                 :rules="[required('Department')]"
               ></v-select>
-              <v-text-field
-                label="Occupation"
+               <v-select
+                :items="companyList"
+                label="Company"
                 filled
                 rounded
                 class="rounded-sm"
-                v-model="form.occupation"
-                :rules="[required('Occupation')]"
-              ></v-text-field>
+                v-model="form.company"
+                :rules="[required('Company')]"
+              ></v-select>
               <v-text-field
                 label="Email"
                 filled
