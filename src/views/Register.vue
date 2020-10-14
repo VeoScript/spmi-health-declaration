@@ -76,29 +76,25 @@
                 v-model="form.middlename"
                 :rules="[required('Middle Name')]"
               ></v-text-field>
-              <v-row>
-                <v-col cols="12" md="6">
-                  <v-text-field
-                    label="Age"
-                    filled
-                    rounded
-                    class="rounded-sm"
-                    v-model="form.age"
-                    :rules="[required('Age')]"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="6">
-                  <v-select
-                    :items="genderList"
-                    label="Gender"
-                    filled
-                    rounded
-                    class="rounded-sm"
-                    v-model="form.gender"
-                    :rules="[required('Gender')]"
-                  ></v-select>
-                </v-col>
-              </v-row>
+              <v-text-field
+                label="Age"
+                filled
+                single-line
+                type="number"
+                rounded
+                class="rounded-sm"
+                v-model="form.age"
+                :rules="[required('Age'), minAge('Age'), maxAge('Age')]"
+              ></v-text-field>
+              <v-select
+                :items="genderList"
+                label="Gender"
+                filled
+                rounded
+                class="rounded-sm"
+                v-model="form.gender"
+                :rules="[required('Gender')]"
+              ></v-select>
               <v-select
                 :items="civilStatusList"
                 label="Civil Status"
@@ -118,6 +114,15 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
+              <v-select
+                :items="countries"
+                label="Nationality"
+                filled
+                rounded
+                class="rounded-sm"
+                v-model="form.nationality"
+                :rules="[required('Nationality')]"
+              ></v-select>
               <v-text-field
                 label="Occupation"
                 filled
@@ -148,7 +153,7 @@
                 label="Email"
                 filled
                 rounded
-                class="rounded-sm mt-3"
+                class="rounded-sm"
                 v-model="form.email"
                 :rules="[required('Email'), emailRules('Email')]"
               ></v-text-field>
@@ -156,7 +161,7 @@
                 label="Password"
                 filled
                 rounded
-                class="rounded-sm mt-3"
+                class="rounded-sm"
                 v-model="form.password"
                 :rules="passwordRules"
                 :type="showPass ? 'text' : 'password'"
@@ -207,6 +212,7 @@
 </template>
 
 <script>
+  import countries from '@/static/countries.json'
   export default {
     name: 'register',
     props: {
@@ -232,6 +238,12 @@
         showPass: false,
         showPass2: false,
         confirm_password: '',
+        minAge(propertyType) {
+          return v => v && this.form.age >= 12 || `${propertyType} must be at least 12 years old.`
+        },
+        maxAge(propertyType) {
+          return v => v && this.form.age < 100 || `${propertyType} must be less than 100 years old.`
+        },
         required (propertyType) { 
           return v => v && v.length > 0 || `${propertyType} is required.`
         },
@@ -248,7 +260,8 @@
         genderList: ['Male', 'Female'],
         civilStatusList: ['Single', 'Married', 'Divorced', 'Widowed'],
         companyList: ['SPMI', 'VACI', 'GGC', 'SECURITY'],
-        departmentList: ['ADMIN', 'OPM', 'PRODUCTION', 'QUALITY CONTROL', 'TECHNICAL']
+        departmentList: ['ADMIN', 'OPM', 'PRODUCTION', 'QUALITY CONTROL', 'TECHNICAL'],
+        countries: []
       }
     },
     computed: {
@@ -274,7 +287,15 @@
         let self = this
         self.$refs.form.reset()
         this.$emit('clearForm')
+      },
+      nationalityData () {
+        countries.forEach((element) => {
+          this.countries.push(element.nationality)
+        })
       }
+    },
+    created () {
+      this.nationalityData()
     }
   }
 </script>

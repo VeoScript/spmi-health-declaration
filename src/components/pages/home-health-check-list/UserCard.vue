@@ -4,7 +4,7 @@
       <v-col md="6" cols="12">
         <v-card flat>
           <v-card-title class="e_name">
-            {{ `${user.firstname} ${user.middlename} ${user.lastname}` }}
+            {{ `${user.firstname} ${user.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${user.lastname}` }}
           </v-card-title>
           <v-card-subtitle class="e_com"><strong>
             {{ `${user.company}` }}</strong> - {{ `${user.occupation}` }}
@@ -13,10 +13,7 @@
       </v-col>
       <v-col md="6" cols="12">
         <v-card flat class="mt-5">
-          <v-text-field
-            label="Purpose(s)"
-            outlined
-          ></v-text-field>
+          <slot name="purpose"></slot>
         </v-card>
       </v-col>
     </v-row>

@@ -2,7 +2,7 @@
   <div class="dailyrecords">
     <v-container class="mt-5" fluid>
       <!-- daily records table view -->
-      <daily-records-table/>
+      <daily-records-table />
     </v-container>
   </div>
 </template>
