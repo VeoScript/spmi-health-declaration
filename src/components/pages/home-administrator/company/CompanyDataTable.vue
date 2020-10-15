@@ -48,17 +48,21 @@
       </template>
       <!-- EMAIL -->
       <template v-slot:[`item.email`]="{ item }">
-        <span>
-          <v-icon left>mdi-email-outline</v-icon>
-          {{ item.email }}
-        </span>
+        <td class="non-clickable" @click.stop>
+          <span>
+            <v-icon left>mdi-email-outline</v-icon>
+            {{ item.email }}
+          </span>
+        </td>
       </template>
       <!-- CONTACT -->
       <template v-slot:[`item.contact_number`]="{ item }">
-        <span>
-          <v-icon left>mdi-phone-outline</v-icon>
-          {{ item.contact_number }}
-        </span>
+        <td class="non-clickable" @click.stop>
+          <span>
+            <v-icon left>mdi-phone-outline</v-icon>
+            {{ item.contact_number }}
+          </span>
+        </td>
       </template>
       <!-- OCCUPATION -->
       <template v-slot:[`item.occupation`]="{ item }">
@@ -105,7 +109,7 @@
         return `${item.firstname} ${item.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${item.lastname}`
       },
       gotoUser (item) {
-        this.$router.push(`/v/admin/company/user/${item.id}`)
+        this.$router.push(`/v/admin/company/user/${item.firebase_id}`)
       }
     },
     apollo: {
