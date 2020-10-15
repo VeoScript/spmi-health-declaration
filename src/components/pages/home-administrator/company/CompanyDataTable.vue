@@ -1,9 +1,8 @@
 <template>
   <div>
     <v-card-title class="font-weight-light">
-      Company of {{ upperCaseCompany }}
+      All users of <span class="font-weight-medium mx-2 orange--text">{{ `${upperCaseCompany}` }}</span> Company
     </v-card-title>
-    <v-card-subtitle class="font-weight-medium">All Users of {{ `${upperCaseCompany}` }}</v-card-subtitle>
     <v-text-field
       v-model="search"
       append-icon="mdi-magnify"
@@ -106,7 +105,7 @@
         return `${item.firstname} ${item.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${item.lastname}`
       },
       gotoUser (item) {
-        this.$router.push(`/v/admin/user/${item.id}`)
+        this.$router.push(`/v/admin/company/user/${item.id}`)
       }
     },
     apollo: {
