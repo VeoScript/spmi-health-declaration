@@ -2,7 +2,7 @@
 node_modules
 /dist
 
-debug.log
+debug.log*
 
 # local env files
 .env.local
