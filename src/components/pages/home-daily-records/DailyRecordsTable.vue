@@ -1,5 +1,5 @@
 <template>
-  <v-card flat outlined>
+  <v-card flat outlined style="min-height: 100vh;">
     <v-card-title>
       Health Declaration
       <v-spacer></v-spacer>
