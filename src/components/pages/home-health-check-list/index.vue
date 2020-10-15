@@ -487,8 +487,6 @@
         this.noTravelLocal = ''
         this.purpose = ''
         this.error = ''
-        this.$refs.form.reset()
-        this.$refs.form2.reset()
       },
       // AUTOMATIC UNCHECK SYMPTOMS WHEN CLICKING "NONE OF THE ABOVE"
       onChangeNoSymptoms () {
@@ -595,6 +593,8 @@
                   this.loading = false
                   this.dialog = !this.dialog
                   this.error = ''
+                  this.$refs.form.reset()
+                  this.$refs.form2.reset()
                 })
                 .catch(error => {
                   this.loading = false
