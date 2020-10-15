@@ -28,6 +28,7 @@ export const GET_USER_BY_COMPANY_SUBSCRIPTION = gql`
   subscription userCompanySubscription($company: String!) {
     users(where: {company: {_eq: $company}}) {
       id
+      firebase_id
       firstname
       middlename
       lastname

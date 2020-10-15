@@ -27,6 +27,7 @@ export const GET_USER_BY_COMPANY_QUERY = gql`
   query userCompanyQuery($company: String!) {
     users(where: {company: {_eq: $company}}) {
       id
+      firebase_id
       firstname
       middlename
       lastname
