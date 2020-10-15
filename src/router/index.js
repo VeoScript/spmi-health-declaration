@@ -39,7 +39,14 @@ const routes = [
       {
         path: 'admin',
         name: 'admin',
-        component: () => import('@/components/pages/home-administrator/Index')
+        component: () => import('@/components/pages/home-administrator/Index'),
+        children: [
+          {
+            path: 'company',
+            name: 'company',
+            component: () => import('@/components/pages/home-administrator/company/Index')
+          }
+        ]
       }
     ]
   },
