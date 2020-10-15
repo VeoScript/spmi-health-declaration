@@ -22,3 +22,19 @@ export const GET_USER_BASIC_INFO = gql`
     }
   }
 `
+
+export const GET_USER_BY_COMPANY_QUERY = gql`
+  query userCompanyQuery($company: String!) {
+    users(where: {company: {_eq: $company}}) {
+      id
+      firstname
+      middlename
+      lastname
+      gender
+      age
+      email
+      contact_number
+      occupation
+    }
+  }
+`
