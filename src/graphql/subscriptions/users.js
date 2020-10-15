@@ -22,3 +22,20 @@ export const GET_ACCOUNT_TYPE_SUBSCRIPTION = gql`
     }
   }
 `
+
+
+export const GET_USER_BY_COMPANY_SUBSCRIPTION = gql`
+  subscription userCompanySubscription($company: String!) {
+    users(where: {company: {_eq: $company}}) {
+      id
+      firstname
+      middlename
+      lastname
+      gender
+      age
+      email
+      contact_number
+      occupation
+    }
+  }
+`
