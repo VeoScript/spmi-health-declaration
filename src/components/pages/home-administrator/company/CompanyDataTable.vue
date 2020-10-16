@@ -25,7 +25,7 @@
       @click:row="gotoUser"
     >
       <!-- FULLNAME -->
-      <template v-slot:[`item.firstname`]="{ item }">
+      <template v-slot:[`item.fullname`]="{ item }">
         <span>
           <v-icon left>mdi-account-outline</v-icon>
           {{ getFullName(item) }}
@@ -40,11 +40,9 @@
       </template>
       <!-- GENDER -->
       <template v-slot:[`item.gender`]="{ item }">
-        <td @click.stop class="non-clickable">
-          <v-icon left v-show="item.gender === 'Female'">mdi-gender-female</v-icon> 
-          <v-icon left v-show="item.gender === 'Male'">mdi-gender-male</v-icon> 
-          {{ item.gender === 'Male' ? 'Male' : 'Female' }}
-        </td>
+        <v-icon left v-show="item.gender === 'Female'">mdi-gender-female</v-icon> 
+        <v-icon left v-show="item.gender === 'Male'">mdi-gender-male</v-icon> 
+        {{ item.gender === 'Male' ? 'Male' : 'Female' }}
       </template>
       <!-- EMAIL -->
       <template v-slot:[`item.email`]="{ item }">
@@ -84,7 +82,7 @@
         search: '',
         items: [],
         headers: [
-          { text: 'NAME', value: 'firstname', },
+          { text: 'NAME', value: 'fullname', },
           { text: 'AGE', value: 'age' },
           { text: 'GENDER', value: 'gender' },
           { text: 'EMAIL', value: 'email', sortable: false },
