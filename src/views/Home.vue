@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
+  <div class="home mt-4" style="margin-bottom: 50px;">
     <nav-bar /> <!-- NAVIGATION LINKS --> 
-    <v-main class="main">
+    <v-main>
       <v-container fluid>
         <router-view
         ></router-view> <!-- DYNAMIC CONTENT -->
@@ -19,9 +19,3 @@
     }
   }
 </script>
-
-<style scoped>
-.main {
-  background: #F6F7FB !important;
-}
-</style>
