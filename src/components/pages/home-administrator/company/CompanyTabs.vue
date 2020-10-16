@@ -7,6 +7,7 @@
     >
       <v-tab
         v-for="company in companies" :key="company"
+        class="tab-custom"
       >
         {{ company }}
       </v-tab>
@@ -38,3 +39,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .tab-custom {
+    border-bottom: 1px solid lightgray;
+  }
+</style>
