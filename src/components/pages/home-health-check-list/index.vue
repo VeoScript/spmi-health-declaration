@@ -411,7 +411,7 @@
           <v-col sm="12" md="12" cols="12" class="text-right">
             <v-btn
               color="primary"
-              x-large
+              medium
               @click="onPreviewHealthCheckList"
             >
              <v-icon left>mdi-view-carousel</v-icon> Preview
@@ -419,7 +419,7 @@
             <v-btn 
               color="gray" 
               class="mx-2" 
-              x-large 
+              medium
               outlined
               @click="onClearHealthCheckList"
             >
