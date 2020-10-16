@@ -30,7 +30,6 @@
               <template #purpose>
                 <v-text-field
                   label="Please Indicate your purpose (e.g. Visit, Work) "
-                  filled
                   v-model="purpose"
                   :rules="[required('Purpose')]"
                   style="position: relative; top: 15px;"
