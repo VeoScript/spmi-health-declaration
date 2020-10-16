@@ -123,23 +123,6 @@
                 v-model="form.nationality"
                 :rules="[required('Nationality')]"
               ></v-select>
-              <v-text-field
-                label="Occupation"
-                filled
-                rounded
-                class="rounded-sm"
-                v-model="form.occupation"
-                :rules="[required('Occupation')]"
-              ></v-text-field>
-              <v-select
-                :items="departmentList"
-                label="Department"
-                filled
-                rounded
-                class="rounded-sm"
-                v-model="form.department"
-                :rules="[required('Department')]"
-              ></v-select>
                <v-select
                 :items="companyList"
                 label="Company"
@@ -149,6 +132,23 @@
                 v-model="form.company"
                 :rules="[required('Company')]"
               ></v-select>
+              <v-select
+                :items="departmentList"
+                label="Department"
+                filled
+                rounded
+                class="rounded-sm"
+                v-model="form.department"
+                :rules="[required('Department')]"
+              ></v-select>
+              <v-text-field
+                label="Occupation"
+                filled
+                rounded
+                class="rounded-sm"
+                v-model="form.occupation"
+                :rules="[required('Occupation')]"
+              ></v-text-field>
               <v-text-field
                 label="Email"
                 filled
