@@ -1,64 +1,73 @@
 <template>
-  <v-card flat style="min-height: 80vh;">
-    <v-row justify="center">
+  <v-card flat>
+    <v-row justify="center" align="center" class="mx-3">
       <v-avatar
-        size="120"
+        size="100"
         class="custom-avatar"
       >
-        <v-img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRF9EPMJydmM1ovfcplqvXM0zzDjr7XoPFeQg&usqp=CAU"></v-img>
+        <v-img :src="getDefaultUserProfile"></v-img>
       </v-avatar>
-      <div class="mt-3">
-        <v-card-title class="text-uppercase font-weight-bold">
-          Joshua A. Galit
-        </v-card-title>
-        <v-card-subtitle>
-          SPMI - Web/Developer
-        </v-card-subtitle>
-      </div>
+      <v-row align="center" justify="center">
+        <v-card flat class="ml-4 justify-center">
+          <v-card-title class="text-uppercase font-weight-bold justify-center">
+            {{ getFulname }}
+          </v-card-title>
+          <v-card-subtitle>
+            <span class="text-uppercase justify-center">{{ user.company }}</span> - {{ user.occupation }}
+          </v-card-subtitle>
+        </v-card>
+      </v-row>
     </v-row>
-    <v-divider class="mt-5 mx-4"></v-divider>
     <v-card flat>
       <v-card-title class="subtitle-2">
-        Age: <span class="ml-2 primary--text font-weight-bold">21</span>
+        Age: <span class="ml-2 primary--text font-weight-bold">{{ user.age }}</span>
       </v-card-title>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="subtitle-2">
-      Gender: <span class="ml-2 primary--text font-weight-bold">Male</span>
-    </v-card-title>
-    <v-divider class="mx-4"></v-divider>
-    <v-card-title class="subtitle-2">
-      Civil Status: <span class="ml-2 primary--text font-weight-bold">Single</span>
-    </v-card-title>
-    <v-divider class="mx-4"></v-divider>
-    <v-card-title class="subtitle-2">
-      Email: <span class="ml-2 primary--text font-weight-bold">joshuimalay@gmial.com</span>
-    </v-card-title>
-    <v-divider class="mx-4"></v-divider>
-    <v-card-title class="subtitle-2">
-      Company: <span class="ml-2 primary--text font-weight-bold">SPMI</span>
-    </v-card-title>
-    <v-divider class="mx-4"></v-divider>
-    <v-card-title class="subtitle-2">
-      Department: <span class="ml-2 primary--text font-weight-bold">OPM</span>
-    </v-card-title>
-    <v-divider class="mx-4"></v-divider>
-    <v-card-title class="subtitle-2">
-      Nationality: <span class="ml-2 primary--text font-weight-bold">Philippine, Filipino</span>
-    </v-card-title>
-    <v-divider class="mx-4"></v-divider>
-    <v-card-title class="subtitle-2">
-      Occupation: <span class="ml-2 primary--text font-weight-bold">Web developer/Video Editor</span>
-    </v-card-title>
-    <v-divider class="mx-4"></v-divider>
+      Gender: <span class="ml-2 primary--text font-weight-bold">{{ user.gender }}</span>
+      </v-card-title>
+      <v-divider class="mx-4"></v-divider>
+      <v-card-title class="subtitle-2">
+        Civil Status: <span class="ml-2 primary--text font-weight-bold">{{ user.civil_status }}</span>
+      </v-card-title>
+      <v-divider class="mx-4"></v-divider>
+      <v-card-title class="subtitle-2">
+        Email: <span class="ml-2 primary--text font-weight-bold">{{ user.email }}</span>
+      </v-card-title>
+      <v-divider class="mx-4"></v-divider>
+      <v-card-title class="subtitle-2">
+        Company: <span class="ml-2 primary--text font-weight-bold text-uppercase">{{ user.company }}</span>
+      </v-card-title>
+      <v-divider class="mx-4"></v-divider>
+      <v-card-title class="subtitle-2">
+        Department: <span class="ml-2 primary--text font-weight-bold">{{ user.department }}</span>
+      </v-card-title>
+      <v-divider class="mx-4"></v-divider>
+      <v-card-title class="subtitle-2">
+        Nationality: <span class="ml-2 primary--text font-weight-bold">{{ user.nationality }}</span>
+      </v-card-title>
+      <v-divider class="mx-4"></v-divider>
+      <v-card-title class="subtitle-2">
+        Occupation: <span class="ml-2 primary--text font-weight-bold">{{ user.occupation }}</span>
+      </v-card-title>
     </v-card>
   </v-card>
 </template>
 
 <script>
   export default {
-    data () {
-      return {
-        
+    props: {
+      user: {
+        type: Object,
+        required: true
+      }
+    },
+    computed: {
+      getFulname () {
+        return `${this.user.firstname} ${this.user.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${this.user.lastname}`
+      },
+      getDefaultUserProfile () {
+        return this.user.gender === 'Male' ? require('@/assets/imgs/male.jpg') : require('@/assets/imgs/female.jpg')
       }
     }
   }
