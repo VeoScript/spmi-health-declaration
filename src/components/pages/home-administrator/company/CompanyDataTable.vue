@@ -107,7 +107,7 @@
         return `${item.firstname} ${item.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${item.lastname}`
       },
       gotoUser (item) {
-        this.$router.push(`/v/admin/company/user/${item.firebase_id}`)
+        this.$router.push(`/v/admin/company/user/${item.id}`)
       }
     },
     apollo: {

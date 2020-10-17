@@ -47,7 +47,7 @@ const routes = [
             component: () => import('@/components/pages/home-administrator/company/Index')
           },
           {
-            path: 'company/user/:uid',
+            path: 'company/user/:id',
             name: 'user-info',
             component: () => import('@/components/pages/home-administrator/user/Index')
           }
