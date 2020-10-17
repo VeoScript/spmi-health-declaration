@@ -56,9 +56,10 @@
 </template>
 
 <script>
-  import { auth } from '@/services'
-  import gql from 'graphql-tag'
   import moment from 'moment'
+  import { auth } from '@/services'
+  import { USER_HEALTH_RESULT_QUERY_BY_ID } from '@/graphql/queries'
+  import { USER_HEALTH_RESULT_SUBSCRIPTION_BY_ID } from '@/graphql/subscriptions'
   export default {
     components: {
       UserProfile: () => import('./UserProfile'),
@@ -91,73 +92,14 @@
     },
     apollo: {
       users: {
-        query: gql`
-          query getUserById($id: uuid!){
-            users(where: {id: {_eq: $id}}) {
-              id
-              age
-              lastname
-              middlename
-              nationality
-              occupation
-              gender
-              firstname
-              email
-              department
-              created_at
-              contact_number
-              civil_status
-              company
-              health_result(order_by: {created_at: desc}) {
-                id
-                familyTested
-                created_at
-                neighborTested
-                purpose
-                symptoms
-                travel_local_country
-                travel_outside_country
-                created_at
-              }
-            }
-          }
-        `,
+        query: USER_HEALTH_RESULT_QUERY_BY_ID,
         variables () {
           return {
             id: auth ? this.user_id : undefined
           }
         },
         subscribeToMore: {
-          document: gql`
-            subscription getUserById($id: uuid!){
-              users(where: {id: {_eq: $id}}) {
-                id
-                age
-                lastname
-                middlename
-                nationality
-                occupation
-                gender
-                firstname
-                email
-                department
-                created_at
-                contact_number
-                civil_status
-                company
-                health_result(order_by: {created_at: desc}) {
-                  id
-                  familyTested
-                  created_at
-                  neighborTested
-                  purpose
-                  symptoms
-                  travel_local_country
-                  travel_outside_country
-                }
-              }
-            }
-          `,
+          document: USER_HEALTH_RESULT_SUBSCRIPTION_BY_ID,
           variables () {
             return {
               id: auth ? this.user_id : undefined
