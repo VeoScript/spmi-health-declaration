@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" style="margin-bottom: 50px;">
     <nav-bar /> <!-- NAVIGATION LINKS --> 
     <v-main>
       <v-container fluid>
