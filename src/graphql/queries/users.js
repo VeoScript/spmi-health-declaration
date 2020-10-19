@@ -17,7 +17,14 @@ export const GET_USER_BASIC_INFO = gql`
       firstname
       middlename
       company
+      department
       occupation
+      age
+      gender
+      nationality
+      civil_status
+      contact_number
+      email
       password
     }
   }
