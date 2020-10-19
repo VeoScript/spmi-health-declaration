@@ -159,7 +159,7 @@
                   <v-col sm="12" md="12" cols="12">
                     <div class="body-2 font-weight-medium gray--text">Outside of the Country</div>
                   </v-col>
-                  <v-col sm="6" md="3" cols="12">
+                  <v-col sm="6" md="6" cols="12">
                     <v-checkbox
                       label="China"
                       value="China"
@@ -182,7 +182,7 @@
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
                   </v-col>
-                  <v-col cols="12" md="3">
+                  <v-col sm="6" md="6" cols="12">
                     <v-checkbox
                       label="Iran"
                       value="Iran"
@@ -205,7 +205,7 @@
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
                   </v-col>
-                  <v-col sm="6" md="3" cols="12">
+                  <v-col sm="12" md="12" cols="12">
                     <v-checkbox
                       label="None of the Above"
                       value="None of the Above"
@@ -226,7 +226,7 @@
                   <v-col sm="12" md="12" cols="12">
                     <div class="body-2 font-weight-medium gray--text">Local Area</div>
                   </v-col>
-                  <v-col sm="6" md="3" cols="12">
+                  <v-col sm="6" md="6" cols="12">
                     <v-checkbox
                       label="Metro Manila"
                       value="Metro Manila"
@@ -249,7 +249,7 @@
                       @change="onChangeTravelledLocal"
                     ></v-checkbox>
                   </v-col>
-                  <v-col cols="12" md="3">
+                  <v-col sm="6" md="6" cols="12">
                     <v-checkbox
                       label="Dumaguete"
                       value="Dumaguete"
@@ -272,7 +272,7 @@
                       @change="onChangeTravelledLocal"
                     ></v-checkbox>
                   </v-col>
-                  <v-col sm="6" md="3" cols="12">
+                  <v-col sm="12" md="12" cols="12">
                     <v-checkbox
                       label="None of the Above"
                       value="None of the Above"
