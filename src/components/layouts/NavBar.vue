@@ -11,7 +11,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       
       <v-toolbar-title>
-        <router-link to="/"><v-img :src='assets/spmi_official.png' max-width="120"/></router-link>
+        <router-link to="/"><v-img :src='require(`@/assets/spmi_official.png`)' max-width="120"/></router-link>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
