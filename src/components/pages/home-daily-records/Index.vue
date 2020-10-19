@@ -1,5 +1,5 @@
 <template>
-  <div class="dailyrecords mb-5">
+  <div class="dailyrecords">
     <v-container fluid>
       <!-- daily records table view -->
       <daily-records-table>
@@ -17,12 +17,12 @@
             :search="search"
           >
             <!-- Purpose -->
-            <template #item.purpose="{ item }">
+            <template v-slot:[`item.purpose`]="{ item }">
               <span class="text-uppercase">{{ item.purpose }}</span>
             </template>
             <!-- Date Format -->
-            <template #item.created_at="{ item }">
-              <date-format :created_at="item.created_at.split('T')[0]"/>
+            <template v-slot:[`item.created_at`]="{ item }">
+              <date-format :created_at="item.created_at"/>
             </template>
           </v-data-table>
         </template>
@@ -56,7 +56,7 @@
           checkList: [],
           headers: [
             {
-              text: 'DATE',
+              text: 'DATE & TIME',
               align: 'start',
               sortable: false,
               value: 'created_at',

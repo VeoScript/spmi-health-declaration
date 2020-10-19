@@ -22,3 +22,52 @@ export const GET_ACCOUNT_TYPE_SUBSCRIPTION = gql`
     }
   }
 `
+
+
+export const GET_USER_BY_COMPANY_SUBSCRIPTION = gql`
+  subscription userCompanySubscription($company: String!) {
+    users(where: {company: {_eq: $company}}) {
+      id
+      firebase_id
+      firstname
+      middlename
+      lastname
+      gender
+      age
+      email
+      contact_number
+      occupation
+    }
+  }
+`
+
+export const USER_HEALTH_RESULT_SUBSCRIPTION_BY_ID = gql`
+  subscription getUserById($id: uuid!){
+    users(where: {id: {_eq: $id}}) {
+      id
+      age
+      lastname
+      middlename
+      nationality
+      occupation
+      gender
+      firstname
+      email
+      department
+      created_at
+      contact_number
+      civil_status
+      company
+      health_result(order_by: {created_at: desc}) {
+        id
+        familyTested
+        created_at
+        neighborTested
+        purpose
+        symptoms
+        travel_local_country
+        travel_outside_country
+      }
+    }
+  }
+`

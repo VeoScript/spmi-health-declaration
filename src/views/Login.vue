@@ -8,6 +8,7 @@
         icon="mdi-cloud-alert"
         dismissible
         v-show="error"
+        outlined
       >
         <b>{{ error }}</b>
       </v-alert> <!-- ERROR MESSAGE ALERT -->

@@ -28,7 +28,7 @@
             >
               <template #purpose>
                 <v-text-field
-                  label="Please indicate your purpose (e.g. Visit, Work)"
+                  label="Please Indicate your purpose (e.g. Visit, Work) "
                   v-model="purpose"
                   :rules="[required('Purpose')]"
                   style="position: relative; top: 15px;"
@@ -159,7 +159,7 @@
                   <v-col sm="12" md="12" cols="12">
                     <div class="body-2 font-weight-medium gray--text">Outside of the Country</div>
                   </v-col>
-                  <v-col md="6" cols="12">
+                  <v-col sm="6" md="3" cols="12">
                     <v-checkbox
                       label="China"
                       value="China"
@@ -182,7 +182,7 @@
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
                   </v-col>
-                  <v-col md="6" cols="12">
+                  <v-col cols="12" md="3">
                     <v-checkbox
                       label="Iran"
                       value="Iran"
@@ -205,7 +205,7 @@
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
                   </v-col>
-                  <v-col md="12" cols="12">
+                  <v-col sm="6" md="3" cols="12">
                     <v-checkbox
                       label="None of the Above"
                       value="None of the Above"
@@ -226,7 +226,7 @@
                   <v-col sm="12" md="12" cols="12">
                     <div class="body-2 font-weight-medium gray--text">Local Area</div>
                   </v-col>
-                  <v-col md="6" cols="12">
+                  <v-col sm="6" md="3" cols="12">
                     <v-checkbox
                       label="Metro Manila"
                       value="Metro Manila"
@@ -249,7 +249,7 @@
                       @change="onChangeTravelledLocal"
                     ></v-checkbox>
                   </v-col>
-                  <v-col  md="6" cols="12">
+                  <v-col cols="12" md="3">
                     <v-checkbox
                       label="Dumaguete"
                       value="Dumaguete"
@@ -272,7 +272,7 @@
                       @change="onChangeTravelledLocal"
                     ></v-checkbox>
                   </v-col>
-                  <v-col md="12" cols="12">
+                  <v-col sm="6" md="3" cols="12">
                     <v-checkbox
                       label="None of the Above"
                       value="None of the Above"
@@ -485,8 +485,6 @@
         this.noTravelLocal = ''
         this.purpose = ''
         this.error = ''
-        this.$refs.form.reset()
-        this.$refs.form2.reset()
       },
       // AUTOMATIC UNCHECK SYMPTOMS WHEN CLICKING "NONE OF THE ABOVE"
       onChangeNoSymptoms () {
@@ -545,13 +543,17 @@
           this.loading = true
           for (let [user_key, user_value] of Object.entries(this.users)) {
             if (this.password === user_value.password) {
+
               let symptomString = ''
               let travelOutsideCountryString = ''
               let travelLocalString = ''
+
               // Symptoms array works just fine
               this.checkList.symptoms.forEach((symptom) => {
                 return `${symptomString += symptom + ' '}`
               }, `${symptomString += this.noSymptoms ? this.noSymptoms : ''}`)
+
+
               // Travel Outside Country Works just fine
               this.checkList.travelOutsideCountry.forEach((outside) => {
                 return `${ travelOutsideCountryString += outside + ' ' }`
@@ -587,6 +589,8 @@
                   this.loading = false
                   this.dialog = !this.dialog
                   this.error = ''
+                  this.$refs.form.reset()
+                  this.$refs.form2.reset()
                 })
                 .catch(error => {
                   this.loading = false

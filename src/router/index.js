@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import { auth } from '@/services'
+import './../../node_modules/nprogress/nprogress.css';
 
 Vue.use(VueRouter);
 
@@ -30,13 +31,30 @@ const routes = [
         path: 'account',
         name: 'account',
         component: () => import('@/components/pages/home-account/Index')
+      },
+      {
+        path: "about",
+        name: "about",
+        component: () => import('@/views/About')
+      },
+      {
+        path: 'admin',
+        name: 'admin',
+        component: () => import('@/components/pages/home-administrator/Index'),
+        children: [
+          {
+            path: 'company',
+            name: 'company',
+            component: () => import('@/components/pages/home-administrator/company/Index')
+          },
+          {
+            path: 'company/user/:id',
+            name: 'user-info',
+            component: () => import('@/components/pages/home-administrator/user/Index')
+          }
+        ]
       }
     ]
-  },
-  {
-    path: "/about",
-    name: "about",
-    component: () => import('@/views/About')
   },
   {
     path: '/login',
@@ -61,6 +79,22 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+})
+
+
+router.beforeResolve((to, from, next) => {
+  // If this isn't an initial page load.
+  NProgress.configure({ easing: 'ease', speed: 2000, showSpinner: false })
+  if (to.name) {
+    NProgress.start()
+  }
+  next()
+})
+
+router.afterEach((to, from) => {
+  // Complete the animation of the route progress bar.
+  NProgress.done()
+  window.scrollTo(0, 0)
 })
 
 export default router

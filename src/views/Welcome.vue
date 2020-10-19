@@ -6,7 +6,7 @@
           <v-card-text class="text-right">
             <v-img src='@/assets/spmi_official.png' max-width="450"/>
             <p>BRGY. HILAPNITAN, BAYBAY CITY, LEYTE</p>
-            <h2>COVID-19 HEALTH DECLARATION</h2>
+            <h2>Covid-19 Health Declaration</h2>
           </v-card-text>
           <v-card-actions>
             <v-btn 
