@@ -181,8 +181,6 @@
                       v-model="checkList.travelOutsideCountry"
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
-                  </v-col>
-                  <v-col sm="6" md="6" cols="12">
                     <v-checkbox
                       label="Iran"
                       value="Iran"
@@ -190,6 +188,8 @@
                       v-model="checkList.travelOutsideCountry"
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
+                  </v-col>
+                  <v-col sm="6" md="6" cols="12">
                     <v-checkbox
                       label="USA"
                       value="USA"
@@ -204,8 +204,6 @@
                       v-model="checkList.travelOutsideCountry"
                       @change="onChangeTravelledOutsideCountry"
                     ></v-checkbox>
-                  </v-col>
-                  <v-col sm="12" md="12" cols="12">
                     <v-checkbox
                       label="None of the Above"
                       value="None of the Above"
@@ -213,6 +211,8 @@
                       v-model="noTravelOusideCountry"
                       @click="onChangeNoTravelOusideCountry"
                     ></v-checkbox>
+                  </v-col>
+                  <v-col sm="12" md="12" cols="12">
                     <v-text-field
                       label="Others"
                       clearable
@@ -248,8 +248,6 @@
                       v-model="checkList.travelLocal"
                       @change="onChangeTravelledLocal"
                     ></v-checkbox>
-                  </v-col>
-                  <v-col sm="6" md="6" cols="12">
                     <v-checkbox
                       label="Dumaguete"
                       value="Dumaguete"
@@ -257,6 +255,8 @@
                       v-model="checkList.travelLocal"
                       @change="onChangeTravelledLocal"
                     ></v-checkbox>
+                  </v-col>
+                  <v-col sm="6" md="6" cols="12">
                     <v-checkbox
                       label="Ormoc City"
                       value="Ormoc City"
@@ -271,8 +271,6 @@
                       hide-details
                       @change="onChangeTravelledLocal"
                     ></v-checkbox>
-                  </v-col>
-                  <v-col sm="12" md="12" cols="12">
                     <v-checkbox
                       label="None of the Above"
                       value="None of the Above"
@@ -280,6 +278,8 @@
                       v-model="noTravelLocal"
                       @click="onChangeNoTravelLocal"
                     ></v-checkbox>
+                  </v-col>
+                  <v-col sm="12" md="12" cols="12">
                     <v-text-field
                       label="Others"
                       clearable
