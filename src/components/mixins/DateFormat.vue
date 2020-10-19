@@ -15,7 +15,7 @@
     },
     methods: {
       format_date(value) {
-        return moment(String(value)).format('LL')
+        return moment(String(value)).format('MM/D/YYYY - h:mm A')
       }
     }
   }
