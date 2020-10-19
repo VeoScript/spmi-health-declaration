@@ -27,6 +27,10 @@ body, html {
   border: 3px solid #fff;  /* creates padding around scroll thumb */
 }
 
+::selection {
+  background: #FF9800;
+}
+
 #nprogress .bar {
   background: #14C6FF !important;
 }
