@@ -180,6 +180,7 @@
             </v-col>   
           </v-row>
           <v-card-actions>
+            <small>Be responsible for your correct information.</small>
             <v-spacer></v-spacer>
             <v-btn 
               depressed
