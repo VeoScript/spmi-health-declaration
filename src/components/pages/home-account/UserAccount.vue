@@ -30,8 +30,8 @@
               <div class="body-2 text-uppercase font-weight-bold">{{ `${user.department}` }}</div>
             </v-card>
           </v-col>
-          <v-col sm="12" md="12" cols="12" class="text-right">
-            <v-btn outlined tile small color="success"><v-icon>mdi-pencil</v-icon> Edit</v-btn>
+          <v-col sm="12" md="12" cols="12">
+            <edit-main-information class="mr-1"/>
           </v-col>
         </v-row>
       </v-card>
@@ -90,6 +90,9 @@
 <script>
   export default {
     name: 'user-account',
+    components: {
+      EditMainInformation: () => import('./EditMainInformation.vue')
+    },
     props: {
       user: {
         type: Object,
