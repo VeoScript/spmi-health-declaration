@@ -63,7 +63,9 @@
             },
             { text: 'SYMPTOMS', value: 'symptoms' },
             { text: 'TRAVEL OUTSIDE COUNTRY', value: 'travel_outside_country' },
-            { text: 'TRAVEL LOCAL AREA', value: 'travel_local_country' },
+            { text: 'TRAVEL LOCAL AREA', value: 'travel_local_country' },,
+            { text: 'FAMILY TESTED', value: 'familyTested' },
+            { text: 'NEIGHBOR TESTED', value: 'neighborTested' },
             { text: 'PURPOSE(S)', value: 'purpose' },
           ]
       }
