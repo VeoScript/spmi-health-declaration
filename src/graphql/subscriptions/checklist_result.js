@@ -8,6 +8,8 @@ export const CHECKLIST_RESULT_SUBSCRIPTION = gql`
       travel_outside_country
       travel_local_country
       purpose
+      familyTested
+      neighborTested
       created_at
     }
   }
