@@ -50,6 +50,10 @@
       <v-card-title class="subtitle-2">
         Occupation: <span class="ml-2 primary--text font-weight-bold">{{ user.occupation }}</span>
       </v-card-title>
+      <v-divider class="mx-4"></v-divider>
+      <v-card-title class="subtitle-2">
+        Current Address: <span class="ml-2 primary--text font-weight-bold">{{ user.address }}</span>
+      </v-card-title>
     </v-card>
   </v-card>
 </template>
