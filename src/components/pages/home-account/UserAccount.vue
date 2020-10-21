@@ -72,10 +72,16 @@
               <div class="body-2 text-uppercase font-weight-bold">{{ `${user.contact_number}` }}</div>
             </v-card>
           </v-col>
-          <v-col sm="12" md="12" cols="12">
+          <v-col sm="6" md="6" cols="12">
             <v-card outlined color="gray lighten-3" class="px-2 py-2">
               <div class="caption">Email</div>
               <div class="body-2 font-weight-bold">{{ `${user.email}` }}</div>
+            </v-card>
+          </v-col>
+          <v-col sm="6" md="6" cols="12">
+            <v-card outlined color="gray lighten-3" class="px-2 py-2">
+              <div class="caption">Address</div>
+              <div class="body-2 font-weight-bold">{{ `${user.address}` }}</div>
             </v-card>
           </v-col>
           <v-col sm="12" md="12" cols="12" class="text-right">
