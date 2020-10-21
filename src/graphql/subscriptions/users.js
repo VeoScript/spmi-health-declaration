@@ -9,6 +9,7 @@ export const GET_USER_BASIC_INFO_SUBSCRIPTION = gql`
       middlename
       company
       occupation
+      address
       password
     }
   }
@@ -37,6 +38,7 @@ export const GET_USER_BY_COMPANY_SUBSCRIPTION = gql`
       email
       contact_number
       occupation
+      address
     }
   }
 `
@@ -49,6 +51,7 @@ export const USER_HEALTH_RESULT_SUBSCRIPTION_BY_ID = gql`
       lastname
       middlename
       nationality
+      address
       occupation
       gender
       firstname
