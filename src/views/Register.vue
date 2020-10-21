@@ -112,6 +112,14 @@
                 v-model="form.contactNumber"
                 :rules="[required('Contact Number')]"
               ></v-text-field>
+              <v-text-field
+                label="Current Address"
+                filled
+                rounded
+                class="rounded-sm"
+                v-model="form.address"
+                :rules="[required('Current Address')]"
+              ></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
               <v-select
@@ -261,7 +269,7 @@
         genderList: ['Male', 'Female'],
         civilStatusList: ['Single', 'Married', 'Divorced', 'Widowed'],
         companyList: ['SPMI', 'VACI', 'GGC', 'SECURITY'],
-        departmentList: ['ADMIN', 'OPM', 'PRODUCTION', 'QUALITY CONTROL', 'TECHNICAL'],
+        departmentList: ['ADMIN', 'OPM', 'PRODUCTION', 'QUALITY CONTROL', 'TECHNICAL', 'SECURITY'],
         countries: []
       }
     },
