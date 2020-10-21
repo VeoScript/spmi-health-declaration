@@ -1,24 +1,7 @@
-# health-declaration-webapp
+# SPMI Health Declaration System
 
-## Project setup
-```
-npm install
-```
+Please do not create an account or login in this website if you fork or clone this project. 
+This is a legal web application of SPMI. Reading or copying data herein the system are strictly prohibited.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+There is a log of records for users who visit in this website. Any kind of illegal matters in this website are considered as a crime - Cybercrime Prevention Act
+RA 10175
