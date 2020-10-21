@@ -22,6 +22,7 @@ export const GET_USER_BASIC_INFO = gql`
       age
       gender
       nationality
+      address
       civil_status
       contact_number
       email
@@ -43,6 +44,7 @@ export const GET_USER_BY_COMPANY_QUERY = gql`
       email
       contact_number
       occupation
+      address
     }
   }
 `
@@ -55,6 +57,7 @@ export const USER_HEALTH_RESULT_QUERY_BY_ID = gql`
       lastname
       middlename
       nationality
+      address
       occupation
       gender
       firstname
