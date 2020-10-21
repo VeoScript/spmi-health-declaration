@@ -8,3 +8,6 @@ There is a log of records for users who visit in this website. Any kind of illeg
 
 If you want to contribute and cloning this project go for the legal process.
 just send me an email - jeromevillaruel1998@gmail.com / 09753286466
+
+Developed by VEOSCRIPT & ACATZK
+Thank you for the support...
