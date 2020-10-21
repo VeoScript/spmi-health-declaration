@@ -6,7 +6,7 @@
     <template #vaci-company="{ company }">
       <company-data-table :company="company"/> <!-- SPMI DATA TABLE -->
     </template>
-    <template #gcc-company="{ company }">
+    <template #ggc-company="{ company }">
       <company-data-table :company="company"/> <!-- GCC DATA TABLE -->
     </template>
     <template #security-company="{ company }">
@@ -19,7 +19,7 @@
   export default {
     data () {
       return {
-        companyList: ['spmi', 'vaci', 'gcc', 'security']
+        companyList: ['spmi', 'vaci', 'ggc', 'security']
       }
     },
     components: {
