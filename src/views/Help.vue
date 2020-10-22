@@ -30,7 +30,7 @@
                   Step 7 - Check your records at Daily Records page.
                 </v-timeline-item>
                 <v-timeline-item>
-                  Step 8 - If you are users you can monitor the employees information and their corresponding checklist records.
+                  Step 8 - If you are administrator you can monitor the employees informations and their corresponding checklist records in the Administrator Menu.
                 </v-timeline-item>
               </v-timeline>
             </v-card>
