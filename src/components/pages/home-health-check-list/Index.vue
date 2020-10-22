@@ -584,7 +584,6 @@
                   }
                 })
                 .then(() => {
-                  this.onClearHealthCheckList()
                   this.alertMessage()
                   symptomString = ''
                   travelOutsideCountryString = ''
@@ -594,6 +593,7 @@
                   this.error = ''
                   this.$refs.form.reset()
                   this.$refs.form2.reset()
+                  this.onClearHealthCheckList()
                 })
                 .catch(error => {
                   this.loading = false
