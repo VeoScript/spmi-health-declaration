@@ -38,6 +38,11 @@ const routes = [
         component: () => import('@/views/About')
       },
       {
+        path: "help",
+        name: "help",
+        component: () => import('@/views/Help')
+      },
+      {
         path: "terms-condition",
         name: "terms-condition",
         component: () => import('@/views/TermsAndCondition')
