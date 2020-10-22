@@ -19,7 +19,7 @@ export const GET_USER_BASIC_INFO = gql`
       company
       department
       occupation
-      age
+      birthday
       gender
       nationality
       address
@@ -40,7 +40,7 @@ export const GET_USER_BY_COMPANY_QUERY = gql`
       middlename
       lastname
       gender
-      age
+      birthday
       email
       contact_number
       occupation
@@ -53,7 +53,7 @@ export const USER_HEALTH_RESULT_QUERY_BY_ID = gql`
   query getUserById($id: uuid!){
     users(where: {id: {_eq: $id}}) {
       id
-      age
+      birthday
       lastname
       middlename
       nationality

@@ -34,7 +34,7 @@ export const GET_USER_BY_COMPANY_SUBSCRIPTION = gql`
       middlename
       lastname
       gender
-      age
+      birthday
       email
       contact_number
       occupation
@@ -47,7 +47,7 @@ export const USER_HEALTH_RESULT_SUBSCRIPTION_BY_ID = gql`
   subscription getUserById($id: uuid!){
     users(where: {id: {_eq: $id}}) {
       id
-      age
+      birthday
       lastname
       middlename
       nationality
