@@ -431,6 +431,8 @@
 </template> 
 
 <script>
+  import moment from 'moment'
+  import Swal from 'sweetalert2'
   import { auth } from '@/services'
   import { toastAlertStatus } from '@/utils'
   import { GET_USER_BASIC_INFO } from '@/graphql/queries'
@@ -446,6 +448,7 @@
     },
     data () {
       return {
+        today: moment().format('MMMM DD,YYYY'),
         dialog: false,
         showPass: false,
         password: '',
@@ -582,10 +585,10 @@
                 })
                 .then(() => {
                   this.onClearHealthCheckList()
+                  this.alertMessage()
                   symptomString = ''
                   travelOutsideCountryString = ''
                   travelLocalString = ''
-                  toastAlertStatus('success', 'Health Declaration Confirmed!')
                   this.loading = false
                   this.dialog = !this.dialog
                   this.error = ''
@@ -604,6 +607,28 @@
             }
           }
         }
+      },
+      alertMessage () {
+        Swal.fire({
+          title: `<strong style="color: #4CAF50;">YOU ARE ALLOWED TO ENTER SPMI PLANT BUILDING</strong>`,
+          icon: 'success',
+          width: 900,
+          html:
+            'Wear face mask always and keep Social Distance.</b> ' +
+            `Today is <b>${this.today}</b>`,
+          focusConfirm: false,
+          confirmButtonText: 'Good Day!'
+        })
+        // Swal.fire({
+        //   title: `<strong style="color: #FF5252;">YOU ARE NOT ALLOWED TO ENTER SPMI PLANT BUILDING</strong>`,
+        //   icon: 'error',
+        //   width: 900,
+        //   html:
+        //     'We need to follow the health protocols of the company.</b> ' +
+        //     `Today is <b>${this.today}</b>`,
+        //   focusConfirm: false,
+        //   confirmButtonText: 'Be Safe!'
+        // })
       }
     },
     apollo: {
