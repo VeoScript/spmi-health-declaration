@@ -29,6 +29,9 @@
                 <v-timeline-item>
                   Step 7 - Check your records at Daily Records page.
                 </v-timeline-item>
+                <v-timeline-item>
+                  Step 8 - If you are users you can monitor the employees information and their corresponding checklist records.
+                </v-timeline-item>
               </v-timeline>
             </v-card>
           </v-col>
