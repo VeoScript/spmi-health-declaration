@@ -12,21 +12,21 @@ import { getMainDefinition } from 'apollo-utilities'
 
 
 const httpLink = new HttpLink({
-  uri: "https://spmi-health-declaration.herokuapp.com/v1/graphql",
+  uri: `https://${process.env.VUE_APP_HASURA_LINK}`,
   headers: {
-    'x-hasura-admin-secret': 'ilusmdm'
+    'x-hasura-admin-secret': process.env.VUE_APP_HASURA_ADMIN_SECRET
   }
 })
 
 const wsLink = new WebSocketLink({
-  uri: "wss://spmi-health-declaration.herokuapp.com/v1/graphql",
+  uri: `wss://${process.env.VUE_APP_HASURA_LINK}`,
   options: {
     reconnect: true,
     timeout: 30000,
     connectionParams() {
       return {
         headers: {
-          'x-hasura-admin-secret': 'ilusmdm'
+          'x-hasura-admin-secret': process.env.VUE_APP_HASURA_ADMIN_SECRET
         }
       }
     }
