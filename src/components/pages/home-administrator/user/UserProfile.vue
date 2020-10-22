@@ -73,10 +73,12 @@
     },
     computed: {
       getFulname () {
-        return `${this.user.firstname} ${this.user.middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${this.user.lastname}`
+        let { firstname, middlename, lastname } = this.user
+        return `${firstname} ${middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${lastname}`
       },
       getDefaultUserProfile () {
-        return this.user.gender === 'Male' ? require('@/assets/imgs/male.jpg') : require('@/assets/imgs/female.jpg')
+        let { gender } = this.user
+        return gender === 'Male' ? require('@/assets/imgs/male.jpg') : require('@/assets/imgs/female.jpg')
       },
       getUserAge () {
         let { birthday } = this.user
