@@ -115,6 +115,7 @@
           lastname: '',
           firstname: '',
           middlename: '',
+          birthday: '',
           age: '',
           gender: '',
           civilStatus: '',
@@ -156,7 +157,7 @@
 
       // ====== SAVE INFORMATION IN HASURA ====
       saveInHasura (firebase) {
-        const { lastname, firstname, middlename, age,
+        const { lastname, firstname, middlename, birthday,
           gender, civilStatus, contactNumber, occupation,
           department, company, email, password, nationality, address } = this.form
 
@@ -169,7 +170,7 @@
              lastname,
              firstname,
              middlename,
-             age,
+             birthday,
              gender,
              civil_status: civilStatus,
              contact_number: contactNumber,
