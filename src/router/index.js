@@ -38,6 +38,11 @@ const routes = [
         component: () => import('@/views/About')
       },
       {
+        path: "terms-condition",
+        name: "terms-condition",
+        component: () => import('@/views/TermsAndCondition')
+      },
+      {
         path: 'admin',
         name: 'admin',
         component: () => import('@/components/pages/home-administrator/Index'),
