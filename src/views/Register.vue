@@ -189,18 +189,18 @@
                 filled
                 rounded
                 class="rounded-sm"
+                type="password"
                 v-model="form.password"
                 :rules="passwordRules"
-                :type="showPass ? 'text' : 'password'"
-                :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
-                @click:append="showPass = !showPass"
               ></v-text-field>
               <v-text-field
                 label="Re-Enter Password"
                 filled
                 rounded
                 class="rounded-sm"
-                :type="showPass2 ? 'text' : 'password'"
+                :type="showPass ? 'text' : 'password'"
+                :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
+                @click:append="showPass = !showPass"
                 :rules="[(form.password === confirm_password) || 'Password must match']"
                 v-model="confirm_password"
               ></v-text-field>
