@@ -76,16 +76,35 @@
                 class="rounded-sm"
                 v-model="form.middlename"
               ></v-text-field>
-              <v-text-field
-                label="Age"
-                filled
-                single-line
-                type="number"
-                rounded
-                class="rounded-sm"
-                v-model="form.age"
-                :rules="[required('Age'), minAge('Age'), maxAge('Age')]"
-              ></v-text-field>
+              <v-menu
+                ref="menu"
+                v-model="menu"
+                :close-on-content-click="false"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="form.birthday"
+                    label="Birth Date"
+                    readonly
+                    filled
+                    rounded
+                    class="rounded-sm"
+                    v-bind="attrs"
+                    v-on="on"
+                    :rules="[required('Birthday')]"
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  ref="picker"
+                  v-model="form.birthday"
+                  :max="new Date().toISOString().substr(0, 10)"
+                  min="1950-01-01"
+                  @change="dateSave"
+                ></v-date-picker>
+              </v-menu>
               <v-select
                 :items="genderList"
                 label="Gender"
@@ -131,7 +150,7 @@
                 v-model="form.nationality"
                 :rules="[required('Nationality')]"
               ></v-select>
-               <v-select
+              <v-select
                 :items="companyList"
                 label="Company"
                 filled
@@ -185,36 +204,34 @@
                 :rules="[(form.password === confirm_password) || 'Password must match']"
                 v-model="confirm_password"
               ></v-text-field>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn 
+                  depressed
+                  dark
+                  large
+                  color="blue"
+                  class="text-capitalize rounded-sm"
+                  @click="onRegister"
+                  :loading="loading"
+                >
+                Register
+                </v-btn>
+                <v-btn 
+                  depressed
+                  dark
+                  large
+                  color="grey"
+                  class="text-capitalize rounded-sm"
+                  @click="onClear"
+                >
+                  Cancel
+                </v-btn>
+              </v-card-actions>
             </v-col>   
           </v-row>
-          <v-card-actions>
-            <small>Be responsible for your correct information.</small>
-            <v-spacer></v-spacer>
-            <v-btn 
-              depressed
-              dark
-              large
-              tile
-              color="blue"
-              class="text-capitalize"
-              @click="onRegister"
-              :loading="loading"
-            >
-            Register
-            </v-btn>
-            <v-btn 
-              depressed
-              dark
-              large
-              tile
-              color="grey"
-              class="text-capitalize"
-              @click="onClear"
-            >
-              Cancel
-            </v-btn>
-          </v-card-actions>
         </v-form>
+        <small class="gray--text">Be responsible for your correct information.</small>
       </v-container>
     </v-card>
   </v-dialog>
@@ -247,6 +264,7 @@
         showPass: false,
         showPass2: false,
         confirm_password: '',
+        menu: false,
         minAge(propertyType) {
           return v => v && this.form.age >= 12 || `${propertyType} must be at least 12 years old.`
         },
@@ -286,6 +304,9 @@
       }
     },
     methods: {
+      dateSave (date) {
+        this.$refs.menu.save(date)
+      },
       onRegister () {
         let self = this
         if (self.$refs.form.validate()) {
