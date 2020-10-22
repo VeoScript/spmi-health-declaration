@@ -20,15 +20,19 @@
     </v-row>
     <v-card flat>
       <v-card-title class="subtitle-2">
-        Age: <span class="ml-2 primary--text font-weight-bold">{{ user.age }}</span>
+        Age: <span class="ml-2 primary--text font-weight-bold">{{ getUserAge }}</span>
       </v-card-title>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="subtitle-2">
-      Gender: <span class="ml-2 primary--text font-weight-bold">{{ user.gender }}</span>
+        Gender: <span class="ml-2 primary--text font-weight-bold">{{ user.gender }}</span>
       </v-card-title>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="subtitle-2">
         Civil Status: <span class="ml-2 primary--text font-weight-bold">{{ user.civil_status }}</span>
+      </v-card-title>
+      <v-divider class="mx-4"></v-divider>
+      <v-card-title class="subtitle-2">
+        Birthday: <span class="ml-2 primary--text font-weight-bold">{{ getUserFormattedBirthDate }}</span>
       </v-card-title>
       <v-divider class="mx-4"></v-divider>
       <v-card-title class="subtitle-2">
@@ -59,6 +63,7 @@
 </template>
 
 <script>
+  import moment from 'moment'
   export default {
     props: {
       user: {
@@ -72,6 +77,21 @@
       },
       getDefaultUserProfile () {
         return this.user.gender === 'Male' ? require('@/assets/imgs/male.jpg') : require('@/assets/imgs/female.jpg')
+      },
+      getUserAge () {
+        let { birthday } = this.user
+        let today = new Date()
+        let birthDate = new Date(birthday)
+        var age = today.getFullYear() - birthDate.getFullYear()
+        let m = today.getMonth() - birthDate.getMonth()
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age
+      },
+      getUserFormattedBirthDate () {
+        let { birthday } = this.user
+        return moment(String(birthday)).format('MMMM DD, YYYY')
       }
     }
   }

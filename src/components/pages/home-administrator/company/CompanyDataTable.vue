@@ -35,7 +35,7 @@
       <template v-slot:[`item.age`] ="{ item }">
         <span>
           <v-icon left>mdi-timer-sand</v-icon>
-          {{ item.age }} yrs old
+          {{ getStudentAge(item) }} yrs old
         </span>
       </template>
       <!-- GENDER -->
@@ -108,6 +108,16 @@
       },
       gotoUser (item) {
         this.$router.push(`/v/admin/company/user/${item.id}`)
+      },
+      getStudentAge (item) {
+        let today = new Date()
+        let birthDate = new Date(item.birthday)
+        var age = today.getFullYear() - birthDate.getFullYear()
+        let m = today.getMonth() - birthDate.getMonth()
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age
       }
     },
     apollo: {
