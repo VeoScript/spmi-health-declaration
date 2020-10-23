@@ -101,6 +101,9 @@
     apollo: {
       users: {
         query: auth ? GET_ACCOUNT_TYPE_QUERY : undefined,
+        error (error) {
+          toastAlertStatus('error', error)
+        },
         variables () {
           return {
             firebase_id: auth ? auth.currentUser.uid : undefined

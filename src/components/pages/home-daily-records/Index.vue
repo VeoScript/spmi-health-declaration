@@ -42,6 +42,7 @@
 
 <script>
   import { auth } from '@/services'
+  import { toastAlertStatus } from '@/utils'
   import { CHECKLIST_RESULT_QUERY } from '@/graphql/queries'
   import { CHECKLIST_RESULT_SUBSCRIPTION } from '@/graphql/subscriptions'
   export default {
@@ -73,6 +74,9 @@
     apollo: {
       checklist_result: {
         query: CHECKLIST_RESULT_QUERY,
+        error (error) {
+          toastAlertStatus('error', error)
+        },
         variables () {
           return {
             firebase_id: auth ? auth.currentUser.uid : undefined

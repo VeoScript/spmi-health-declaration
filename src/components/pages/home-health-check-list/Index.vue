@@ -634,6 +634,9 @@
     apollo: {
       users: {
         query: auth ? GET_USER_BASIC_INFO : undefined,
+        error (error) {
+          toastAlertStatus('error', error)
+        },
         variables () {
           return {
             firebase_id: auth ? auth.currentUser.uid : undefined

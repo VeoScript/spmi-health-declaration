@@ -74,6 +74,7 @@
 </template>
 
 <script>
+  import { toastAlertStatus } from '@/utils'
   import { GET_USER_BY_COMPANY_QUERY } from '@/graphql/queries'
   import { GET_USER_BY_COMPANY_SUBSCRIPTION } from '@/graphql/subscriptions' 
   export default {
@@ -123,6 +124,9 @@
     apollo: {
       users: {
         query: GET_USER_BY_COMPANY_QUERY,
+        error (error) {
+          toastAlertStatus('error', error)
+        },
         variables () {
           return {
             company: `${this.upperCaseCompany}`

@@ -17,16 +17,15 @@
   import { auth } from '@/services'
   import { GET_USER_BASIC_INFO } from '@/graphql/queries'
   import { GET_USER_BASIC_INFO_SUBSCRIPTION } from '@/graphql/subscriptions'
-
-export default {
-  components: {
-    UserAccount: () => import('./UserAccount')
-  },
-  data () {
-    return {
-      users: [],
-    }
-  },
+  export default {
+    components: {
+      UserAccount: () => import('./UserAccount')
+    },
+    data () {
+      return {
+        users: [],
+      }
+    },
     apollo: {
       users: {
         query: auth ? GET_USER_BASIC_INFO : undefined,
@@ -57,5 +56,5 @@ export default {
         }
       }
     }
-}
+  }
 </script>

@@ -58,6 +58,7 @@
 <script>
   import moment from 'moment'
   import { auth } from '@/services'
+  import { toastAlertStatus } from '@/utils'
   import { USER_HEALTH_RESULT_QUERY_BY_ID } from '@/graphql/queries'
   import { USER_HEALTH_RESULT_SUBSCRIPTION_BY_ID } from '@/graphql/subscriptions'
   export default {
@@ -95,6 +96,9 @@
     apollo: {
       users: {
         query: USER_HEALTH_RESULT_QUERY_BY_ID,
+        error (error) {
+          toastAlertStatus('error', error)
+        },
         variables () {
           return {
             id: auth ? this.user_id : undefined
