@@ -67,7 +67,12 @@
   import { GET_ACCOUNT_TYPE_SUBSCRIPTION } from '@/graphql/subscriptions'
   export default {
     name: 'side-bar',
-    props: ['visible', 'mode'],
+    props: {
+      visible: {
+        type: Boolean,
+        required: true
+      }
+    },
     data () {
       return {
         users: [],
