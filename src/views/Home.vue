@@ -1,13 +1,13 @@
 <template>
-  <div class="home" style="margin-bottom: 50px;">
+  <div class="home">
     <nav-bar /> <!-- NAVIGATION LINKS --> 
     <v-main>
       <v-container fluid>
-        <router-view
-        ></router-view> <!-- DYNAMIC CONTENT -->
+        <router-view></router-view> <!-- DYNAMIC CONTENT -->
       </v-container>
+      <v-divider class="mx-5"></v-divider>
+      <foot-bar /> <!-- FOOTER BAR INFO -->
     </v-main> <!-- MAIN CONTENT -->  
-    <foot-bar /> <!-- FOOTER BAR INFO -->
   </div>
 </template>
 
