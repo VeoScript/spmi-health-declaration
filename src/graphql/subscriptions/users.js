@@ -8,8 +8,15 @@ export const GET_USER_BASIC_INFO_SUBSCRIPTION = gql`
       firstname
       middlename
       company
+      department
       occupation
+      birthday
+      gender
+      nationality
       address
+      civil_status
+      contact_number
+      email
       password
     }
   }
