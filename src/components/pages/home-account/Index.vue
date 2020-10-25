@@ -7,13 +7,26 @@
 <template>
   <div class="account">
     
-    <user-auth-profile
-      v-for="(user, index) in users" 
-      :key="index"
-      :user="user"
-    ></user-auth-profile> <!-- USER AUTHENTICATION WITH PROFILE -->
+    <v-flex class="mb-3 container"
+           v-if="$apollo.loading"
+          >
+      <v-skeleton-loader type="list-item-avatar-two-line">
+      </v-skeleton-loader>
+    </v-flex>
+    <user-auth-profile v-else
+                       v-for="(user, index) in users" 
+                       :key="index"
+                       :user="user">
+    </user-auth-profile> <!-- USER AUTHENTICATION WITH PROFILE -->
   
-    <v-row align="center" justify="center">
+     <v-flex class="container" v-if="$apollo.loading">
+       <v-skeleton-loader type="table">
+        </v-skeleton-loader>
+     </v-flex>
+
+    <v-row v-else
+           align="center" 
+           justify="center">
       <v-col cols="12">
         
         <user-details :users="users">
@@ -30,6 +43,7 @@
                   outlined
                   class="rounded-sm"
                   v-model="user.firstname"
+                  text
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="3">
@@ -166,6 +180,15 @@
             </v-row>
           </template>
         </user-details>
+        
+        <v-row align="center" justify="center" class="mb-3">
+          <v-btn class="primary text-capitalize mr-2" depressed>
+            <v-icon left>mdi-content-save</v-icon> Save Changes
+          </v-btn>
+          <v-btn class="text-capitalize gray--text" outlined>
+            <v-icon left>mdi-close</v-icon> Clear Fields
+          </v-btn>
+        </v-row>
         
       </v-col>
     </v-row>
