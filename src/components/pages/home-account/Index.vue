@@ -8,25 +8,28 @@
   <div class="account">
     
     <user-auth-profile
+      v-for="(user, index) in users" 
+      :key="index"
+      :user="user"
     ></user-auth-profile> <!-- USER AUTHENTICATION WITH PROFILE -->
   
     <v-row align="center" justify="center">
       <v-col cols="12">
         
-        <user-details>
+        <user-details :users="users">
           <template #user-title>
             <div class="gray--text text-uppercase font-weight-bold">
               Personal Details
             </div>
           </template>
-          <template #user-text-fields>
+          <template #user-text-fields="{ user }">
             <v-row align="center" justify="center" class="mb-3">
               <v-col cols="12" md="3">
                 <v-text-field
                   label="Firstname"
                   outlined
                   class="rounded-sm"
-                  value="Joshua"
+                  v-model="user.firstname"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="3">
@@ -34,7 +37,7 @@
                   label="Middlename"
                   outlined
                   class="rounded-sm"
-                  value="Adoro"
+                  v-model="user.middlename"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="3">
@@ -42,7 +45,7 @@
                   label="Lastname"
                   outlined
                   class="rounded-sm"
-                  value="Galit"
+                  v-model="user.lastname"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -52,32 +55,36 @@
                   :items="['Male', 'Female']"
                   label="Gender"
                   outlined
-                  value="Male"
+                  v-model="user.gender"
                   class="rounded-sm"
                 ></v-select>
               </v-col>
               <v-col cols="12" md="3">
                 <v-menu
                   ref="menu"
+                  v-model="menu"
+                  :close-on-content-click="false"
                   transition="scale-transition"
                   offset-y
                   min-width="290px"
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
+                      v-model="user.birthday"
                       label="Birth Date"
                       readonly
                       outlined
                       class="rounded-sm"
                       v-bind="attrs"
                       v-on="on"
-                      value="March 20, 1999"
                     ></v-text-field>
                   </template>
                   <v-date-picker
                     ref="picker"
+                    v-model="user.birthday"
                     :max="new Date().toISOString().substr(0, 10)"
                     min="1950-01-01"
+                    @change="dateSave"
                   ></v-date-picker>
                 </v-menu>
               </v-col>
@@ -95,20 +102,20 @@
         </user-details> <!-- USER PERSONAL DETAILS INFO -->
 
 
-        <user-details>
+        <user-details :users="users">
           <template #user-title>
             <div class="gray--text text-uppercase font-weight-bold">
               Contact Details
             </div>
           </template>
-          <template #user-text-fields>
+          <template #user-text-fields="{ user }">
             <v-row align="center" justify="center">
               <v-col cols="12" md="3">
                 <v-text-field
                   label="Contact Number"
                   outlined
                   class="rounded-sm"
-                  value="09657268947"
+                  v-model="user.contact_number"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="3">
@@ -116,7 +123,7 @@
                   label="Occupation"
                   outlined
                   class="rounded-sm"
-                  value="Web Developer/Video Editor"
+                  v-model="user.occupation"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="3">
@@ -125,7 +132,7 @@
                   label="Department"
                   outlined
                   class="rounded-sm"
-                  value="ADMIN"
+                  v-model="user.department"
                 ></v-select>
               </v-col>
             </v-row>
@@ -136,7 +143,7 @@
                   label="Company"
                   outlined
                   class="rounded-sm"
-                  value="SPMI"
+                  v-model="user.company"
                 ></v-select>
               </v-col>
               <v-col cols="12" md="3">
@@ -145,14 +152,14 @@
                   label="Nationality"
                   outlined
                   class="rounded-sm"
-                  value="Philippine, Filipino"
+                  v-model="user.nationality"
                 ></v-select>
               </v-col>
               <v-col cols="12" md="3">
                 <v-text-field
                   label="Address"
                   class="rounded-sm"
-                  value="Brgy. Anahawan Bato, Leyte"
+                  v-model="user.address"
                   outlined
                 ></v-text-field>
               </v-col>
@@ -166,7 +173,11 @@
 </template>
 
 <script>
+  import { auth } from '@/services'
+  import { toastAlertStatus } from '@/utils'
   import countries from '@/static/countries.json'
+  import { GET_USER_BASIC_INFO } from '@/graphql/queries'
+  import { GET_USER_BASIC_INFO_SUBSCRIPTION } from '@/graphql/subscriptions'
   export default {
     components: {
       UserDetails: () => import('./UserDetails'),
@@ -174,6 +185,8 @@
     },
     data () {
       return {
+        menu: false,
+        users: [],
         countries: []
       }
     },
@@ -182,10 +195,46 @@
         countries.forEach((element) => {
           this.countries.push(element.nationality)
         })
+      },
+      dateSave (date) {
+        this.$refs.menu.save(date)
       }
     },
     created () {
       this.nationalityData()
+    },
+    apollo: {
+      users: {
+        query: auth ? GET_USER_BASIC_INFO : undefined,
+        error (error) {
+          toastAlertStatus('error', error)
+        },
+        variables () {
+          return {
+            firebase_id: auth ? auth.currentUser.uid : undefined
+          }
+        },
+        subscribeToMore: {
+          document: auth ? GET_USER_BASIC_INFO_SUBSCRIPTION : undefined,
+          variables () {
+            return {
+              firebase_id: auth ? auth.currentUser.uid : undefined
+            }
+          },
+          updateQuery(previousResult, { subscriptionData }) {
+            if (previousResult) {
+              return {
+                users: [
+                  ...subscriptionData.data.users
+                ]
+              }
+            }
+          }
+        },
+        result ({ data }) {
+          this.users = data.users
+        }
+      }
     }
   }
 </script>

@@ -4,11 +4,11 @@
       size="100"
       style="border: 2px solid #eee;"
     >
-      <v-img src="@/assets/imgs/male.jpg"></v-img>
+      <v-img :src="getDefaultUserProfile"></v-img>
     </v-avatar>
     <v-card flat class="ml-2 justify-center">
       <v-card-title class="text-uppercase font-weight-bold justify-left">
-        Joshua A. Galit
+        {{ getFullname }}
       </v-card-title>
       <v-card-subtitle>
         <v-btn depressed small class="text-capitalize" text outlined>
@@ -18,3 +18,24 @@
     </v-card>
   </v-row>
 </template>
+
+<script>
+  export default {
+    props: {
+      user: {
+        type: Object,
+        required: true
+      }
+    },
+    computed: {
+      getFullname () {
+        let { firstname, middlename, lastname } = this.user
+        return `${firstname} ${middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${lastname}`
+      },
+      getDefaultUserProfile () {
+        let { gender } = this.user
+        return gender === 'Male' ? require('@/assets/imgs/male.jpg') : require('@/assets/imgs/female.jpg')
+      }
+    }
+  }
+</script>
