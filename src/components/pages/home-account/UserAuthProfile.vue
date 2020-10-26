@@ -15,7 +15,7 @@
                text 
                outlined
                @click="dialog = true">
-          <v-icon left small>mdi-pencil-outline</v-icon> Edit Auth
+          <v-icon left small>mdi-pencil-outline</v-icon> Edit Email & Password
         </v-btn>
       </v-card-subtitle>
     </v-card>
