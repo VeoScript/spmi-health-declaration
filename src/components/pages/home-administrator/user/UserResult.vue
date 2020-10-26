@@ -3,15 +3,12 @@
     <v-card-actions>
       <v-icon left>mdi-calendar-plus</v-icon> Health Records
       <v-spacer></v-spacer>
-      <v-btn 
-        depressed 
-        class="text-capitalize" 
-        outlined 
-        text 
-
-        color="success"
-        @click="$router.push('/v/admin/company')"
-      >
+      <v-btn depressed 
+             class="text-capitalize" 
+             outlined 
+             text 
+             color="success"
+             @click="$router.push('/v/admin/company')">
         <v-icon left>mdi-arrow-left</v-icon> Return</v-btn>
     </v-card-actions>
     <!-- <v-row justify="center">

@@ -1,14 +1,12 @@
 <template>
   <div class="dashboard">
-    <v-alert
-      text
-      prominent
-      type="warning"
-      icon="mdi-alert"
-      dismissible
-      outlined
-      v-show="error"
-    >
+    <v-alert  text
+              prominent
+              type="warning"
+              icon="mdi-alert"
+              dismissible
+              outlined
+              v-show="error">
       {{ error }}
     </v-alert>
     <v-container fluid>
@@ -17,23 +15,19 @@
           <v-col cols="12">
 
             <!-- USER CARD -->
-            <v-skeleton-loader
-              v-if="$apollo.loading"
-              type="list-item-avatar-two-line"
-            ></v-skeleton-loader> <!--apollo loading when data is fetching --> 
+            <v-skeleton-loader v-if="$apollo.loading" type="list-item-avatar-two-line"></v-skeleton-loader> <!--apollo loading when data is fetching --> 
             <user-card
               v-else
               v-for="user in users" 
               :key="user.id" :user="user"
             >
               <template #purpose>
-                <v-text-field
-                  label="Please Indicate your purpose (e.g. Visit, Work) "
-                  v-model="purpose"
-                  :rules="[required('Purpose')]"
-                  style="position: relative; top: 15px;"
-                  class="rounded-sm"
-                ></v-text-field>
+                <v-text-field label="Please Indicate your purpose (e.g. Visit, Work) "
+                              v-model="purpose"
+                              :rules="[required('Purpose')]"
+                              style="position: relative; top: 15px;"
+                              class="rounded-sm">
+                </v-text-field>
               </template>
             </user-card> <!-- USER INFORMATION -->
 
@@ -46,57 +40,50 @@
               <template #symptoms>
                 <v-row no-gutters>
                   <v-col sm="6" md="6" cols="12">
-                    <v-checkbox
-                      label="Fever"
-                      hide-details
-                      value="Fever"
-                      v-model="checkList.symptoms"
-                      @change="onChangeSymptomatic"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="Headache"
-                      value="Headache"
-                      hide-details
-                      v-model="checkList.symptoms"
-                      @change="onChangeSymptomatic"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="Sore Throat"
-                      value="Sore Throat"
-                      hide-details
-                      v-model="checkList.symptoms"
-                      @change="onChangeSymptomatic"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="Body Weakness/Pain"
-                      value="Body Weakness/Pain"
-                      v-model="checkList.symptoms"
-                      @change="onChangeSymptomatic"
-                      hide-details
-                    ></v-checkbox>
+                    <v-checkbox label="Fever"
+                                hide-details
+                                value="Fever"
+                                v-model="checkList.symptoms"
+                                @change="onChangeSymptomatic">
+                    </v-checkbox>
+                    <v-checkbox label="Headache"
+                                value="Headache"
+                                hide-details
+                                v-model="checkList.symptoms"
+                                @change="onChangeSymptomatic">
+                    </v-checkbox>
+                    <v-checkbox label="Sore Throat"
+                                value="Sore Throat"
+                                hide-details
+                                v-model="checkList.symptoms"
+                                @change="onChangeSymptomatic">
+                    </v-checkbox>
+                    <v-checkbox label="Body Weakness/Pain"
+                                value="Body Weakness/Pain"
+                                v-model="checkList.symptoms"
+                                @change="onChangeSymptomatic"
+                                hide-details>
+                    </v-checkbox>
                   </v-col>
                   <v-col sm="6" md="6" cols="12">
-                    <v-checkbox
-                      label="Cough"
-                      value="Cough"
-                      hide-details
-                      v-model="checkList.symptoms"
-                      @change="onChangeSymptomatic"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="Difficulty in Breathing"
-                      value="Difficulty in Breathing"
-                      hide-details
-                      v-model="checkList.symptoms"
-                      @change="onChangeSymptomatic"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="None of the Above"
-                      value="None of the Above"
-                      hide-details
-                      v-model="noSymptoms"
-                      @click="onChangeNoSymptoms"
-                    ></v-checkbox>
+                    <v-checkbox label="Cough"
+                                value="Cough"
+                                hide-details
+                                v-model="checkList.symptoms"
+                                @change="onChangeSymptomatic">
+                    </v-checkbox>
+                    <v-checkbox label="Difficulty in Breathing"
+                                value="Difficulty in Breathing"
+                                hide-details
+                                v-model="checkList.symptoms"
+                                @change="onChangeSymptomatic">
+                    </v-checkbox>
+                    <v-checkbox label="None of the Above"
+                                value="None of the Above"
+                                hide-details
+                                v-model="noSymptoms"
+                                @click="onChangeNoSymptoms">
+                    </v-checkbox>
                   </v-col>
                 </v-row>
                 <v-divider class="my-4"></v-divider>
@@ -107,19 +94,17 @@
                       covid-19 RT-PCR test?  
                     </span>
                     <div class="d-flex">
-                      <v-checkbox
-                        label="Yes"
-                        value="Yes"
-                        hide-details
-                        v-model="familyMemberTestedRTPCR"
-                      ></v-checkbox>
-                      <v-checkbox
-                        label="No"
-                        value="No"
-                        class="ml-3"
-                        hide-details
-                        v-model="familyMemberTestedRTPCR"
-                      ></v-checkbox>
+                      <v-checkbox label="Yes"
+                                  value="Yes"
+                                  hide-details
+                                  v-model="familyMemberTestedRTPCR">
+                      </v-checkbox>
+                      <v-checkbox label="No"
+                                  value="No"
+                                  class="ml-3"
+                                  hide-details
+                                  v-model="familyMemberTestedRTPCR">
+                      </v-checkbox>
                     </div>
                   </v-col>
                 </v-row>
@@ -131,19 +116,17 @@
                       covid-19 RT-PCR test?
                     </span>
                     <div class="d-flex">
-                      <v-checkbox
-                        label="Yes"
-                        value="Yes"
-                        hide-details
-                        v-model="neighborTestedRTPCR"
-                      ></v-checkbox>
-                      <v-checkbox
-                        label="No"
-                        value="No"
-                        hide-details
-                        class="ml-3"
-                        v-model="neighborTestedRTPCR"
-                      ></v-checkbox>
+                      <v-checkbox label="Yes"
+                                  value="Yes"
+                                  hide-details
+                                  v-model="neighborTestedRTPCR">
+                      </v-checkbox>
+                      <v-checkbox label="No"
+                                  value="No"
+                                  hide-details
+                                  class="ml-3"
+                                  v-model="neighborTestedRTPCR">
+                      </v-checkbox>
                     </div>
                   </v-col>
                 </v-row>
@@ -160,65 +143,57 @@
                     <div class="body-2 font-weight-medium gray--text">Outside of the Country</div>
                   </v-col>
                   <v-col sm="6" md="6" cols="12">
-                    <v-checkbox
-                      label="China"
-                      value="China"
-                      hide-details
-                      v-model="checkList.travelOutsideCountry"
-                      @change="onChangeTravelledOutsideCountry"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="Japan"
-                      value="Japan"
-                      hide-details
-                      v-model="checkList.travelOutsideCountry"
-                      @change="onChangeTravelledOutsideCountry"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="South Korea"
-                      value="South Korea"
-                      hide-details
-                      v-model="checkList.travelOutsideCountry"
-                      @change="onChangeTravelledOutsideCountry"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="Iran"
-                      value="Iran"
-                      hide-details
-                      v-model="checkList.travelOutsideCountry"
-                      @change="onChangeTravelledOutsideCountry"
-                    ></v-checkbox>
+                    <v-checkbox label="China"
+                                value="China"
+                                hide-details
+                                v-model="checkList.travelOutsideCountry"
+                                @change="onChangeTravelledOutsideCountry">
+                    </v-checkbox>
+                    <v-checkbox label="Japan"
+                                value="Japan"
+                                hide-details
+                                v-model="checkList.travelOutsideCountry"
+                                @change="onChangeTravelledOutsideCountry">
+                    </v-checkbox>
+                    <v-checkbox label="South Korea"
+                                value="South Korea"
+                                hide-details
+                                v-model="checkList.travelOutsideCountry"
+                                @change="onChangeTravelledOutsideCountry">
+                    </v-checkbox>
+                    <v-checkbox label="Iran"
+                                value="Iran"
+                                hide-details
+                                v-model="checkList.travelOutsideCountry"
+                                @change="onChangeTravelledOutsideCountry">
+                    </v-checkbox>
                   </v-col>
                   <v-col sm="6" md="6" cols="12">
-                    <v-checkbox
-                      label="USA"
-                      value="USA"
-                      hide-details
-                      v-model="checkList.travelOutsideCountry"
-                      @change="onChangeTravelledOutsideCountry"
-                    ></v-checkbox>
-                     <v-checkbox
-                      label="Paris"
-                      value="Paris"
-                      hide-details
-                      v-model="checkList.travelOutsideCountry"
-                      @change="onChangeTravelledOutsideCountry"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="None of the Above"
-                      value="None of the Above"
-                      hide-details
-                      v-model="noTravelOusideCountry"
-                      @click="onChangeNoTravelOusideCountry"
-                    ></v-checkbox>
+                     <v-checkbox label="USA"
+                                value="USA"
+                                hide-details
+                                v-model="checkList.travelOutsideCountry"
+                                @change="onChangeTravelledOutsideCountry">
+                     </v-checkbox>
+                     <v-checkbox  label="Paris"
+                                  value="Paris"
+                                  hide-details
+                                  v-model="checkList.travelOutsideCountry"
+                                  @change="onChangeTravelledOutsideCountry">
+                      </v-checkbox>
+                    <v-checkbox label="None of the Above"
+                                value="None of the Above"
+                                hide-details
+                                v-model="noTravelOusideCountry"
+                                @click="onChangeNoTravelOusideCountry">
+                    </v-checkbox>
                   </v-col>
                   <v-col sm="12" md="12" cols="12">
-                    <v-text-field
-                      label="Others"
-                      clearable
-                      v-model="othersTravelledOutsideCoutry"
-                      :disabled="noTravelOusideCountry ? true : false"
-                    ></v-text-field>
+                    <v-text-field label="Others"
+                                  clearable
+                                  v-model="othersTravelledOutsideCoutry"
+                                  :disabled="noTravelOusideCountry ? true : false">
+                    </v-text-field>
                   </v-col>
                 </v-row>
                 <v-divider class="mt-5"></v-divider>
@@ -227,65 +202,57 @@
                     <div class="body-2 font-weight-medium gray--text">Local Area</div>
                   </v-col>
                   <v-col sm="6" md="6" cols="12">
-                    <v-checkbox
-                      label="Metro Manila"
-                      value="Metro Manila"
-                      hide-details
-                      v-model="checkList.travelLocal"
-                      @change="onChangeTravelledLocal"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="Cebu City"
-                      value="Cebu City"
-                      hide-details
-                      v-model="checkList.travelLocal"
-                      @change="onChangeTravelledLocal"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="Quezon City"
-                      value="Quezon City"
-                      hide-details
-                      v-model="checkList.travelLocal"
-                      @change="onChangeTravelledLocal"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="Dumaguete"
-                      value="Dumaguete"
-                      hide-details
-                      v-model="checkList.travelLocal"
-                      @change="onChangeTravelledLocal"
-                    ></v-checkbox>
+                    <v-checkbox label="Metro Manila"
+                                value="Metro Manila"
+                                hide-details
+                                v-model="checkList.travelLocal"
+                                @change="onChangeTravelledLocal">
+                    </v-checkbox>
+                    <v-checkbox label="Cebu City"
+                                value="Cebu City"
+                                hide-details
+                                v-model="checkList.travelLocal"
+                                @change="onChangeTravelledLocal">
+                    </v-checkbox>
+                    <v-checkbox label="Quezon City"
+                                value="Quezon City"
+                                hide-details
+                                v-model="checkList.travelLocal"
+                                @change="onChangeTravelledLocal">
+                    </v-checkbox>
+                    <v-checkbox label="Dumaguete"
+                                value="Dumaguete"
+                                hide-details
+                                v-model="checkList.travelLocal"
+                                @change="onChangeTravelledLocal">
+                    </v-checkbox>
                   </v-col>
                   <v-col sm="6" md="6" cols="12">
-                    <v-checkbox
-                      label="Ormoc City"
-                      value="Ormoc City"
-                      v-model="checkList.travelLocal"
-                      hide-details
-                      @change="onChangeTravelledLocal"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="Tacloban City"
-                      value="Tacloban City"
-                      v-model="checkList.travelLocal"
-                      hide-details
-                      @change="onChangeTravelledLocal"
-                    ></v-checkbox>
-                    <v-checkbox
-                      label="None of the Above"
-                      value="None of the Above"
-                      hide-details
-                      v-model="noTravelLocal"
-                      @click="onChangeNoTravelLocal"
-                    ></v-checkbox>
+                    <v-checkbox label="Ormoc City"
+                                value="Ormoc City"
+                                v-model="checkList.travelLocal"
+                                hide-details
+                                @change="onChangeTravelledLocal">
+                    </v-checkbox>
+                    <v-checkbox label="Tacloban City"
+                                value="Tacloban City"
+                                v-model="checkList.travelLocal"
+                                hide-details
+                                @change="onChangeTravelledLocal">
+                    </v-checkbox>
+                    <v-checkbox label="None of the Above"
+                                value="None of the Above"
+                                hide-details
+                                v-model="noTravelLocal"
+                                @click="onChangeNoTravelLocal">
+                    </v-checkbox>
                   </v-col>
                   <v-col sm="12" md="12" cols="12">
-                    <v-text-field
-                      label="Others"
-                      clearable
-                      v-model="othersTravelledLocal"
-                      :disabled="noTravelLocal ? true : false"
-                    ></v-text-field>
+                    <v-text-field label="Others"
+                                  clearable
+                                  v-model="othersTravelledLocal"
+                                  :disabled="noTravelLocal ? true : false">
+                    </v-text-field>
                   </v-col>
                 </v-row>
               </template>
@@ -293,12 +260,10 @@
           </v-col>
           
            <!-- ======== HEALTH CHECK PREVIEW ====== -->
-          <check-list-preview-dialog 
-            :error="error"
-            :visible="dialog"
-            @close-dialog="dialog = false"
-            @onConfirmPassword="onConfirmPassword"
-          >
+          <check-list-preview-dialog  :error="error"
+                                      :visible="dialog"
+                                      @close-dialog="dialog = false"
+                                      @onConfirmPassword="onConfirmPassword" >
             <template #purpose>
               <v-row class="ml-5">
                   <v-col cols="12">
@@ -382,24 +347,21 @@
             </template>
             <template #confirm-password>
               <v-form ref="form2" @submit.prevent="onConfirmPassword">
-                <v-text-field
-                  label="Password"
-                  :type="showPass ? 'text' : 'password'"
-                  :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
-                  @click:append="showPass = !showPass"
-                  v-model="password"
-                  :rules="[required('Confirmation password')]"
-                  :loading="loading"
-                  clearable
-                ></v-text-field>
+                <v-text-field label="Password"
+                              :type="showPass ? 'text' : 'password'"
+                              :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
+                              @click:append="showPass = !showPass"
+                              v-model="password"
+                              :rules="[required('Confirmation password')]"
+                              :loading="loading"
+                              clearable>
+                </v-text-field>
               </v-form>
             </template>
             <template #btn-save-health>
-              <v-btn
-                text
-                @click="onConfirmPassword"
-                :loading="loading"
-              >
+              <v-btn text
+                     @click="onConfirmPassword"
+                     :loading="loading">
               <v-icon left>mdi-content-save</v-icon> Save
               </v-btn>
             </template>
@@ -407,20 +369,16 @@
 
           <!-- ACTION BUTTON  -->
           <v-col sm="12" md="12" cols="12" class="text-right">
-            <v-btn
-              color="primary"
-              medium
-              @click="onPreviewHealthCheckList"
-            >
+            <v-btn color="primary"
+                   medium
+                   @click="onPreviewHealthCheckList">
              <v-icon left>mdi-view-carousel</v-icon> Preview
             </v-btn>
-            <v-btn 
-              color="gray" 
-              class="mx-2" 
-              medium
-              outlined
-              @click="onClearHealthCheckList"
-            >
+            <v-btn color="gray" 
+                   class="mx-2" 
+                   medium
+                   outlined
+                   @click="onClearHealthCheckList">
               <v-icon left>mdi-backup-restore</v-icon> Clear
             </v-btn>
           </v-col>

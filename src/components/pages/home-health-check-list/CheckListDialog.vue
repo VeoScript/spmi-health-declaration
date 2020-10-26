@@ -1,11 +1,9 @@
 <template>
-  <v-dialog
-    class="preview-modal"
-    fullscreen
-    hide-overlay
-    transition="dialog-bottom-transition"
-    v-model="show"
-  >
+  <v-dialog class="preview-modal"
+            fullscreen
+            hide-overlay
+            transition="dialog-bottom-transition"
+            v-model="show">
     <v-card class="gray">
       <v-toolbar class="dgbox">
         <v-btn
@@ -20,14 +18,12 @@
           <slot name="btn-save-health"></slot>
         </v-toolbar-items>
       </v-toolbar>
-      <v-alert
-        border="bottom"
-        color="error darken-1"
-        dark
-        dismissible
-        v-show="error"
-        type="error"
-      >
+      <v-alert border="bottom"
+               color="error darken-1"
+               dark
+               dismissible
+               v-show="error"
+               type="error">
         {{ error }}
       </v-alert>
       <!-- Preview checklist selected and the user basic info... -->

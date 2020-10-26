@@ -4,18 +4,15 @@
       <!-- daily records table view -->
       <daily-records-table>
         <template #data-records>
-          <v-skeleton-loader
-              type="table-tbody"
-              class="mx-auto"
-              tile
-              v-if="$apollo.loading"
-          ></v-skeleton-loader> 
-          <v-data-table
-            v-else
-            :headers="headers"
-            :items="checkList"
-            :search="search"
-          >
+          <v-skeleton-loader type="table-tbody"
+                             class="mx-auto"
+                             tile
+                             v-if="$apollo.loading">
+          </v-skeleton-loader> 
+          <v-data-table v-else
+                        :headers="headers"
+                        :items="checkList"
+                        :search="search">
             <!-- Purpose -->
             <template v-slot:[`item.purpose`]="{ item }">
               <span class="text-uppercase">{{ item.purpose }}</span>
@@ -27,13 +24,12 @@
           </v-data-table>
         </template>
         <template #search-record>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            single-line
-            hide-details
-          ></v-text-field>
+          <v-text-field v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Search"
+                        single-line
+                        hide-details>
+          </v-text-field>
         </template>
       </daily-records-table>
     </v-container>

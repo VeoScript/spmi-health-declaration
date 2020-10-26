@@ -9,14 +9,12 @@
             <h2>Covid-19 Health Declaration</h2>
           </v-card-text>
           <v-card-actions>
-            <v-btn 
-              x-large 
-              block 
-              color="blue darken-2" 
-              dark to="/login"
-              tile
-              depressed
-            >
+            <v-btn x-large 
+                  block 
+                  color="blue darken-2" 
+                  dark to="/login"
+                  tile
+                  depressed>
               Login Here!
             </v-btn>
           </v-card-actions>
