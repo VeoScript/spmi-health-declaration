@@ -196,6 +196,9 @@
                   <v-icon left>mdi-content-save</v-icon> Save Changes
                 </v-btn>
               </v-row>
+              <v-row align="center" justify="center" class="mt-5">
+                <small class="gray--text">Be responsible for your correct information.</small>
+              </v-row>
             </template>
           </user-details> <!-- USER CONTACT DETAILS -->
         </v-form>
