@@ -1,9 +1,7 @@
 <template>
   <v-row align="center" justify="center">
-    <v-avatar
-      size="100"
-      style="border: 2px solid #eee;"
-    >
+    <v-avatar size="100"
+              style="border: 2px solid #eee;">
       <v-img :src="getDefaultUserProfile"></v-img>
     </v-avatar>
     <v-card flat class="ml-2 justify-center">
@@ -11,16 +9,32 @@
         {{ getFullname }}
       </v-card-title>
       <v-card-subtitle>
-        <v-btn depressed small class="text-capitalize" text outlined>
-          Edit Auth
+        <v-btn depressed 
+               small 
+               class="text-capitalize" 
+               text 
+               outlined
+               @click="dialog = true">
+          <v-icon left small>mdi-pencil-outline</v-icon> Edit Auth
         </v-btn>
       </v-card-subtitle>
     </v-card>
+    <user-auth-dialog :visible="dialog"
+                      @close="dialog = false"
+                      :user="user"/>
   </v-row>
 </template>
 
 <script>
   export default {
+    components: {
+      UserAuthDialog: () => import('./UserAuthDialog')
+    },
+    data () {
+      return {
+        dialog: false
+      }
+    },
     props: {
       user: {
         type: Object,
