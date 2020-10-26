@@ -3,27 +3,23 @@
     <v-card-title class="font-weight-light">
       All users of <span class="font-weight-medium mx-2 orange--text">{{ `${upperCaseCompany}` }}</span> Company
     </v-card-title>
-    <v-text-field
-      v-model="search"
-      append-icon="mdi-magnify"
-      label="Search"
-      single-line
-      hide-details
-      class="mx-5"
-    ></v-text-field>
-    <v-skeleton-loader
-        type="table-tbody"
-        class="mx-auto"
-        tile
-        v-if="$apollo.loading"
-    ></v-skeleton-loader> 
-    <v-data-table
-      v-else
-      :headers="headers"
-      :items="items"
-      :search="search"
-      @click:row="gotoUser"
-    >
+    <v-text-field v-model="search"
+                  append-icon="mdi-magnify"
+                  label="Search"
+                  single-line
+                  hide-details
+                  class="mx-5">
+    </v-text-field>
+    <v-skeleton-loader type="table-tbody"
+                       class="mx-auto"
+                       tile
+                       v-if="$apollo.loading">
+    </v-skeleton-loader> 
+    <v-data-table v-else
+                  :headers="headers"
+                  :items="items"
+                  :search="search"
+                  @click:row="gotoUser">
       <!-- FULLNAME -->
       <template v-slot:[`item.fullname`]="{ item }">
         <span>
