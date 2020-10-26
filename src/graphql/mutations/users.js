@@ -13,3 +13,17 @@ export const ADD_USERS_MUTATION = gql`
     }
   }
 `
+
+export const UPDATE_USERS_MUTATION = gql`
+  mutation updateUserMutation($firebase_id: String, $firstname: String, $lastname: String, $middlename: String, $nationality: String, $occupation: String, $gender: String, $department: String, $company: String, $civil_status: String, $birthday: String, $address: String, $contact_number: String) {
+    update_users(where: {firebase_id: {_eq: $firebase_id}}, _set: {firstname: $firstname, lastname: $lastname, middlename: $middlename, nationality: $nationality, occupation: $occupation, gender: $gender, department: $department, company: $company, civil_status: $civil_status, birthday: $birthday, address: $address, contact_number: $contact_number}) {
+      affected_rows
+      returning {
+        id
+        lastname
+        middlename
+        firstname
+      }
+    }
+  }
+`
