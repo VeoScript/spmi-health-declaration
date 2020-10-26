@@ -1,15 +1,13 @@
 <template>
   <v-app>
     <v-main>
-      <v-alert
-        text
-        prominent
-        type="error"
-        icon="mdi-cloud-alert"
-        dismissible
-        v-show="error"
-        outlined
-      >
+      <v-alert text
+               prominent
+               type="error"
+               icon="mdi-cloud-alert"
+               dismissible
+               v-show="error"
+               outlined>
         <b>{{ error }}</b>
       </v-alert> <!-- ERROR MESSAGE ALERT -->
       <v-container class="fill-height" fluid>
@@ -21,56 +19,48 @@
                 <p>Covid-19 Health Declaration</p>
               </v-card-text>
               <v-card-text>
-                <v-form
-                  ref="form"
-                  :disabled="loading"
-                >
-                  <v-text-field
-                    label="Email"
-                    type="email"
-                    autocomplete="off"
-                    filled
-                    rounded
-                    v-model="form.email"
-                    class="font-weight-light rounded-sm"
-                    :rules="[required('Email'), emailRules('Email')]"
-                  ></v-text-field>
-                  <v-text-field
-                    label="Password"
-                    autocomplete="off"
-                    filled
-                    rounded
-                    v-model="form.password"
-                    class="font-weight-light rounded-sm"
-                    :rules="[required('Password')]"
-                    :type="showPass ? 'text' : 'password'"
-                    :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
-                    @click:append="showPass = !showPass"
-                    @keyup.enter="onLogin"
-                  ></v-text-field>
+                <v-form ref="form"
+                        :disabled="loading">
+                  <v-text-field label="Email"
+                                type="email"
+                                autocomplete="off"
+                                filled
+                                rounded
+                                v-model="form.email"
+                                class="font-weight-light rounded-sm"
+                                :rules="[required('Email'), emailRules('Email')]">
+                  </v-text-field>
+                  <v-text-field label="Password"
+                                autocomplete="off"
+                                filled
+                                rounded
+                                v-model="form.password"
+                                class="font-weight-light rounded-sm"
+                                :rules="[required('Password')]"
+                                :type="showPass ? 'text' : 'password'"
+                                :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
+                                @click:append="showPass = !showPass"
+                                @keyup.enter="onLogin">
+                  </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
-                <v-btn 
-                  text 
-                  color="primary"
-                  class="text-capitalize"
-                  @click="dialog = true"
-                > 
+                <v-btn text 
+                       color="primary"
+                       class="text-capitalize"
+                       @click="dialog = true"> 
                   Create Account
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn 
-                  depressed
-                  dark
-                  large
-                  tile
-                  color="blue"
-                  class="text-capitalize"
-                  @click="onLogin"
-                  :loading="loading"
-                >
-                Login
+                <v-btn depressed
+                       dark
+                       large
+                       tile
+                       color="blue"
+                       class="text-capitalize"
+                       @click="onLogin"
+                       :loading="loading">
+                  Login
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -79,15 +69,14 @@
       </v-container>
 
       <!-- Registration Dialog -->
-      <register 
-        :form="form"
-        :visible="dialog"
-        :error="error"
-        :loading="loading"
-        @close="dialog = false"
-        @submitForm="onRegister"
-        @clearForm="onClear"
-      ></register>
+      <register :form="form"
+                :visible="dialog"
+                :error="error"
+                :loading="loading"
+                @close="dialog = false"
+                @submitForm="onRegister"
+                @clearForm="onClear">
+      </register>
 
     </v-main>
   </v-app>
@@ -98,7 +87,6 @@
   import { auth } from '@/services'
   import { toastAlertStatus } from '@/utils'
   import { ADD_USERS_MUTATION } from '@/graphql/mutations'
-
   export default {
     name: 'login',
 
