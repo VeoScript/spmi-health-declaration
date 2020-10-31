@@ -249,7 +249,7 @@
           v => (v && v.length >= 5) || 'Password must have 5+ characters',
           v => /(?=.*[A-Z])/.test(v) || 'Must have one uppercase character',
           v => /(?=.*\d)/.test(v) || 'Must have one number',
-          v => /([!@$%])/.test(v) || 'Must have one special character [!@#$%]'
+          v => /([!@#$%])/.test(v) || 'Must have one special character [!@#$%]'
         ],
         genderList: ['Male', 'Female'],
         civilStatusList: ['Single', 'Married', 'Divorced', 'Widowed'],
