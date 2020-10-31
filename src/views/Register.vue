@@ -159,14 +159,17 @@
                             filled
                             rounded
                             class="rounded-sm"
-                            type="password"
                             v-model="form.password"
+                            :type="showPass ? 'text' : 'password'"
+                            :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
+                            @click:append="showPass = !showPass"
                             :rules="passwordRules">
               </v-text-field>
               <v-text-field label="Re-Enter Password"
                             filled
                             rounded
                             class="rounded-sm"
+                            v-model="confirm_password"
                             :type="showPass ? 'text' : 'password'"
                             :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
                             @click:append="showPass = !showPass"
@@ -246,7 +249,7 @@
           v => (v && v.length >= 5) || 'Password must have 5+ characters',
           v => /(?=.*[A-Z])/.test(v) || 'Must have one uppercase character',
           v => /(?=.*\d)/.test(v) || 'Must have one number',
-          v => /([!@$%])/.test(v) || 'Must have one special character [!@#$%]'
+          v => /([!@#$%])/.test(v) || 'Must have one special character [!@#$%]'
         ],
         genderList: ['Male', 'Female'],
         civilStatusList: ['Single', 'Married', 'Divorced', 'Widowed'],
