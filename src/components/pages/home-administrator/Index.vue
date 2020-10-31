@@ -23,7 +23,7 @@
 <script>
   export default {
     components: {
-      StatisticDialog: () => import('./StatisticDialog')
+      StatisticDialog: () => import('./general-results/StatisticDialog')
     },
     data () {
       return {
