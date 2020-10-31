@@ -572,8 +572,8 @@
           icon: 'success',
           width: 900,
           html:
-            'Wear face mask always and keep Social Distance.</b> ' +
-            `Today is <b>${this.today}</b>`,
+            `On <b>${this.today}.</b>` +
+            '&nbsp; Wear face mask always and keep Social Distance.</b> ',
           focusConfirm: false,
           confirmButtonText: 'Good Day!'
         })
