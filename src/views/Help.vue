@@ -24,13 +24,13 @@
                   Step 5 - Type your password to agree the system policy and get the confirmation message.
                 </v-timeline-item>
                 <v-timeline-item>
-                  Step 6 - Screenshot your Confirmation Message and show it to the Security Guard to confirmed if you are allow to get inside in the SPMI Plant.
+                  Step 6 - Screenshot your Confirmation Message and show it to the Security Guard to allow you to enter the premises of New Jubillee Agro-Industrial Economic Zone.
                 </v-timeline-item>
                 <v-timeline-item>
                   Step 7 - Check your records at Daily Records page.
                 </v-timeline-item>
                 <v-timeline-item>
-                  Step 8 - If you are administrator you can monitor the employees informations and their corresponding checklist records in the Administrator Page.
+                  Step 8 - If you are the administrator you can monitor the employees informations and their corresponding checklist records in the Administrator Page.
                 </v-timeline-item>
               </v-timeline>
             </v-card>
