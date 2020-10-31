@@ -1,29 +1,24 @@
 <template>
   <v-container fluid>
-    <v-divider></v-divider>
     <v-row>
       <v-col cols="12" md="8">
         <user-result>
           <template #user-data-table>
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="Search"
-              single-line
-              hide-details
-            ></v-text-field>
-            <v-skeleton-loader
-              class="mt-4"
-              v-if="$apollo.loading"
-              type="table"
-            ></v-skeleton-loader>
-            <v-data-table
-              v-else
-              v-for="(user, index) in users" :key="index"
-              :headers="headers"
-              :items="user.health_result"
-              :search="search"
-            >
+            <v-text-field v-model="search"
+                          append-icon="mdi-magnify"
+                          label="Search"
+                          single-line
+                          hide-details>
+            </v-text-field>
+            <v-skeleton-loader class="mt-4"
+                               v-if="$apollo.loading"
+                               type="table">
+            </v-skeleton-loader>
+            <v-data-table v-else
+                          v-for="(user, index) in users" :key="index"
+                          :headers="headers"
+                          :items="user.health_result"
+                          :search="search">
               <!-- Purpose -->
               <template v-slot:[`item.purpose`]="{ item }">
                 <span class="text-uppercase">{{ item.purpose }}</span>
@@ -38,17 +33,15 @@
       </v-col>
       <v-divider vertical inset></v-divider>
       <v-col cols="12" md="3">
-        <v-skeleton-loader
-          class="mt-4"
-          v-if="$apollo.loading"
-          type="list-item-avatar-two-line, list-item, list-item, list-item, list-item, list-item, list-item-three-line"
-        ></v-skeleton-loader>
-        <user-profile 
-          v-else
-          v-for="(user, index) in users" 
-          :key="index"
-          :user="user"
-        ></user-profile>
+        <v-skeleton-loader class="mt-4"
+                           v-if="$apollo.loading"
+                           type="list-item-avatar-two-line, list-item, list-item, list-item, list-item, list-item, list-item-three-line">
+        </v-skeleton-loader>
+        <user-profile v-else
+                      v-for="(user, index) in users" 
+                      :key="index"
+                      :user="user">
+        </user-profile>
       </v-col>
     </v-row>
   </v-container>
