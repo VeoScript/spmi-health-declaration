@@ -159,14 +159,17 @@
                             filled
                             rounded
                             class="rounded-sm"
-                            type="password"
                             v-model="form.password"
+                            :type="showPass ? 'text' : 'password'"
+                            :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
+                            @click:append="showPass = !showPass"
                             :rules="passwordRules">
               </v-text-field>
               <v-text-field label="Re-Enter Password"
                             filled
                             rounded
                             class="rounded-sm"
+                            v-model="confirm_password"
                             :type="showPass ? 'text' : 'password'"
                             :append-icon="showPass ? 'mdi-eye-off' : 'mdi-eye'"
                             @click:append="showPass = !showPass"
