@@ -55,7 +55,7 @@
                 <v-row class="justify-center">
                   <v-col sm="12" md="12" cols="12">
                     <div class="text-justify mx-5 gray--text font-weight-light subtitle-2 font-italic">
-                      I hereby authorize SPMI, to collect and process the data indicated herein for the purpose of effecting control of the COVID-19 infection. I understand that my personal information is protected by RA 10173, Data Privacy Act of 2012, and that I am required by RA 11469, Bayanihan to Heal as One Act, to provide truthful information. <br> 
+                      I hereby authorize SPMI, to collect and process the data indicated herein for the purpose of effective control of the COVID-19 infection. I understand that my personal information is protected by RA 10173, Data Privacy Act of 2012, and that I am required by RA 11469, Bayanihan to Heal as One Act, to provide truthful information. <br> 
                     </div>
                     <v-row class="justify-center">
                       <v-col sm="8" md="8" cols="12">
