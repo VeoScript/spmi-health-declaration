@@ -90,7 +90,7 @@
                 <v-row no-gutters>
                   <v-col sm="12" md="12" cols="12" >
                     <span>
-                      Do you have a family members tested for
+                      Do you have a family member tested for
                       covid-19 RT-PCR test?  
                     </span>
                     <div class="d-flex">
@@ -112,7 +112,7 @@
                 <v-row no-gutters>
                   <v-col sm="12" md="12" cols="12" >
                     <span>
-                      Do you have a neighbors tested for
+                      Do you have a neighbor tested for
                       covid-19 RT-PCR test?
                     </span>
                     <div class="d-flex">
@@ -568,12 +568,12 @@
       },
       alertMessage () {
         Swal.fire({
-          title: `<strong style="color: #4CAF50;">YOU ARE ALLOWED TO ENTER SPMI PLANT BUILDING</strong>`,
+          title: `<strong style="color: #4CAF50;">YOU ARE ALLOWED TO ENTER NEW JUBILEE AGRO-INDUSTRIAL ECONOMIC ZONE</strong>`,
           icon: 'success',
           width: 900,
           html:
             `On <b>${this.today}.</b>` +
-            '&nbsp; Wear face mask always and keep Social Distance.</b> ',
+            '&nbsp; Wear face mask always and observe Social Distance.</b> ',
           focusConfirm: false,
           confirmButtonText: 'Good Day!'
         })
