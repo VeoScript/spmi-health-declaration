@@ -11,6 +11,7 @@ export const CHECKLIST_RESULT_QUERY = gql`
       familyTested
       neighborTested
       created_at
+      isAccepted
     }
   }
 `

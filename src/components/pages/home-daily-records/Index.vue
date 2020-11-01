@@ -21,6 +21,19 @@
             <template v-slot:[`item.created_at`]="{ item }">
               <date-format :created_at="item.created_at"/>
             </template>
+            <!-- STATUS -->
+            <template v-slot:[`item.isAccepted`]="{ item }">
+              <span v-if="item.isAccepted">
+                <v-icon color="success">
+                  mdi-check
+                </v-icon>
+              </span>
+              <span v-else>
+                <v-icon color="error">
+                  mdi-close
+                </v-icon>
+              </span>
+            </template>
           </v-data-table>
         </template>
         <template #search-record>
@@ -64,6 +77,7 @@
             { text: 'FAMILY TESTED', value: 'familyTested' },
             { text: 'NEIGHBOR TESTED', value: 'neighborTested' },
             { text: 'PURPOSE(S)', value: 'purpose' },
+            { text: 'STATUS', value: 'isAccepted' }
           ]
       }
     },
