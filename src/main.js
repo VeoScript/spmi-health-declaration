@@ -11,6 +11,8 @@ import { auth, apolloProvider  } from '@/services'
 Vue.use(VueCompositionAPI)
 
 Vue.config.productionTip = false;
+Vue.config.silent = true;
+
 Vue.use(BackToTop);
 
 let app = ''
