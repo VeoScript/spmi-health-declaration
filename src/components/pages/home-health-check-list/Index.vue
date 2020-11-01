@@ -567,31 +567,32 @@
         }
       },
       alertMessage () {
-        this.checkList.symptoms.forEach((symptom) => {
-          if (symptom === 'Fever') {
-            Swal.fire({
-              title: `<strong style="color: #FF5252;">YOU ARE NOT ALLOWED TO ENTER SPMI PLANT BUILDING</strong>`,
-              icon: 'error',
-              width: 900,
-              html:
-                'We need to follow the health protocols of the company.</b> ' +
-                `Today is <b>${this.today}</b>`,
-              focusConfirm: false,
-              confirmButtonText: 'Be Safe!'
-            })
-          } else {
-            Swal.fire({
-              title: `<strong style="color: #4CAF50;">YOU ARE ALLOWED TO ENTER SPMI PLANT BUILDING</strong>`,
-              icon: 'success',
-              width: 900,
-              html:
-                'Wear face mask always and keep Social Distance.</b> ' +
-                `Today is <b>${this.today}</b>`,
-              focusConfirm: false,
-              confirmButtonText: 'Good Day!'
-            })
-          }
+        Swal.fire({
+          title: `<strong style="color: #FF5252;">YOU ARE NOT ALLOWED TO ENTER SPMI PLANT BUILDING</strong>`,
+          icon: 'error',
+          width: 900,
+          html:
+            'We need to follow the health protocols of the company.</b> ' +
+            `Today is <b>${this.today}</b>`,
+          focusConfirm: false,
+          confirmButtonText: 'Be Safe!'
         })
+        // this.checkList.symptoms.forEach((symptom) => {
+        //   if (symptom === 'Fever') {
+            
+        //   } else {
+        //     Swal.fire({
+        //       title: `<strong style="color: #4CAF50;">YOU ARE ALLOWED TO ENTER SPMI PLANT BUILDING</strong>`,
+        //       icon: 'success',
+        //       width: 900,
+        //       html:
+        //         'Wear face mask always and keep Social Distance.</b> ' +
+        //         `Today is <b>${this.today}</b>`,
+        //       focusConfirm: false,
+        //       confirmButtonText: 'Good Day!'
+        //     })
+        //   }
+        // })
       }
     },
     apollo: {
