@@ -7,7 +7,7 @@
     <v-list-item two-line class="hidden-lg-and-up">
       <v-list-item-content >
         <v-list-item-title class="title">
-          <v-img src='@/assets/spmi_official.png' max-width="120"/>
+          <img src='@/assets/spmi_official.png' max-width="120"/>
         </v-list-item-title>
         <v-list-item-subtitle>
           COVID-19 HEALTH DECLARATION
