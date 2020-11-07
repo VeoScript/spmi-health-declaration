@@ -29,8 +29,11 @@
                 <v-timeline-item>
                   Step 7 - Check your records at Daily Records page.
                 </v-timeline-item>
-                <v-timeline-item>
+                <v-timeline-item color="blue darken-3">
                   Step 8 - If you are the administrator you can monitor the employees informations and their corresponding checklist records in the Administrator Page.
+                </v-timeline-item>
+                <v-timeline-item color="orange">
+                  Note : You must fill-up the checklist health declaration before the day of your duty.
                 </v-timeline-item>
               </v-timeline>
             </v-card>
