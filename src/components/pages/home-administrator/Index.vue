@@ -1,6 +1,6 @@
 <template>
   <v-card flat style="min-height: 100vh;">
-    <v-toolbar dark flat color="blue darken-1">
+    <v-toolbar dark flat color="light-blue darken-4">
       <v-toolbar-title>
         <v-icon left>mdi-server-security</v-icon> Administrator View
       </v-toolbar-title>
