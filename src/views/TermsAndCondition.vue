@@ -6,7 +6,7 @@
         <v-row>
           <v-col sm="12" md="12" cols="12">
             <v-card flat>
-              <div class="mt-5 font-weight-medium subtitle-1">
+              <div class="mt-5 font-weight-medium">
                 I hereby authorize SPMI, to collect and process
                 the data indicated herein for the purpose of effective control
                 of the COVID-19 infection. I understand that my personal information is protected by RA 10173,
@@ -16,7 +16,7 @@
                 Any kinds of false information registered herein the program can cause a crime under the cyber law.
               </div>
               <!-- <small>Designed and Developed by Team veoscript & acatzk.</small> -->
-              <div class="mt-5 font-weight-light subtitle-2">
+              <div class="mt-5 font-weight-light">
                 ©{{ new Date().getFullYear() }} Covid-19 Health Declaration, Specialty Pulp Manufacturing Inc. All rights reserved.
               </div>
             </v-card>
