@@ -406,7 +406,8 @@
     },
     data () {
       return {
-        today: moment().format('MMMM DD,YYYY - h:mm A'),
+        today: moment().format('MMMM DD, YYYY - h:mm A'),
+        tommorow: moment().add(1, 'days').format('MMMM DD, YYYY'),
         dialog: false,
         showPass: false,
         password: '',
@@ -561,19 +562,19 @@
             } else {
               this.error = 'Your password and confirmation password do not match'
               this.loading = false
-              toastAlertStatus('error', 'Password do not match')
+              toastAlertStatus('error', 'The Password you entered is incorrect. Please try again.')
             }
           }
         }
       },
       alertMessage () {
         Swal.fire({
-          title: `<strong style="color: #4CAF50;">YOU ARE ALLOWED TO ENTER SPMI PLANT BUILDING</strong>`,
+          title: `<strong style="color: #4CAF50;">YOU ARE ALLOWED TO ENTER NEW JUBILEE AGRO-INDUSTRIAL ECONOMIC ZONE.</strong>`,
           icon: 'success',
           width: 900,
           html:
-            'Wear face mask always and keep Social Distance.</b> ' +
-            `Today is <b>${this.today}</b>`,
+            'Wear face mask always and keep Social Distance.</b> <br/>' +
+            `This pass is valid for <b>${this.tommorow}</b> only.`,
           focusConfirm: false,
           confirmButtonText: 'Good Day!'
         })
