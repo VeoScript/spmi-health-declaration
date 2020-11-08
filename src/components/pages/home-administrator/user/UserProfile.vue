@@ -10,7 +10,7 @@
       <v-row align="center" justify="center">
         <v-card flat class="ml-4 justify-center">
           <v-card-title class="text-uppercase font-weight-bold justify-center">
-            {{ getFulname }}
+            {{ getFullname }}
           </v-card-title>
           <v-card-subtitle>
             <span class="text-uppercase justify-center">{{ user.company }}</span> - {{ user.occupation }}
@@ -72,9 +72,11 @@
       }
     },
     computed: {
-      getFulname () {
+      getFullname () {
         let { firstname, middlename, lastname } = this.user
-        return `${firstname} ${middlename.split(' ').map(x => x[0].toUpperCase()).join('')}. ${lastname}`
+        return `${firstname.charAt(0).toUpperCase() + firstname.slice(1)} 
+                ${middlename ? middlename.split(' ').map(x => x[0].toUpperCase()).join('') + '.' : ''} 
+                ${lastname.charAt(0).toUpperCase() + firstname.slice(1)}`
       },
       getDefaultUserProfile () {
         let { gender } = this.user
