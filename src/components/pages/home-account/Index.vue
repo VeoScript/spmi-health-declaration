@@ -52,8 +52,7 @@
                                 outlined
                                 :disabled="loading"
                                 class="rounded-sm"
-                                v-model="user.middlename"
-                                :rules="[required('Middlename')]">
+                                v-model="user.middlename">
                   </v-text-field>
                 </v-col>
                 <v-col cols="12" md="3">
