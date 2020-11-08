@@ -34,7 +34,7 @@ export const GET_ACCOUNT_TYPE_SUBSCRIPTION = gql`
 
 export const GET_USER_BY_COMPANY_SUBSCRIPTION = gql`
   subscription userCompanySubscription($company: String!) {
-    users(where: {company: {_eq: $company}}) {
+    users(where: {company: {_eq: $company}}, order_by: {created_at: desc}) {
       id
       firebase_id
       firstname

@@ -33,7 +33,7 @@ export const GET_USER_BASIC_INFO = gql`
 
 export const GET_USER_BY_COMPANY_QUERY = gql`
   query userCompanyQuery($company: String!) {
-    users(where: {company: {_eq: $company}}) {
+    users(where: {company: {_eq: $company}}, order_by: {created_at: desc}) {
       id
       firebase_id
       firstname
