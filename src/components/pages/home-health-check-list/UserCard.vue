@@ -30,7 +30,7 @@
         let { firstname, middlename, lastname } = this.user
         return `${firstname.charAt(0).toUpperCase() + firstname.slice(1)} 
                 ${middlename ? middlename.split(' ').map(x => x[0].toUpperCase()).join('') + '.' : ''} 
-                ${lastname.charAt(0).toUpperCase() + firstname.slice(1)}`
+                ${lastname.charAt(0).toUpperCase() + lastname.slice(1)}`
       }
     }
   }

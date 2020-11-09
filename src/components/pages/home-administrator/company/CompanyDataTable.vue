@@ -103,7 +103,7 @@
       getFullName (item) {
         return `${item.firstname.charAt(0).toUpperCase() + item.firstname.slice(1)} 
                 ${item.middlename ? item.middlename.split(' ').map(x => x[0].toUpperCase()).join('') + '.' : ''} 
-                ${item.lastname.charAt(0).toUpperCase() + item.firstname.slice(1)}`
+                ${item.lastname.charAt(0).toUpperCase() + item.lastname.slice(1)}`
       },
       gotoUser (item) {
         this.$router.push(`/v/admin/company/user/${item.id}`)
