@@ -65,18 +65,13 @@
           search: '',
           checkList: [],
           headers: [
-            {
-              text: 'DATE & TIME',
-              align: 'start',
-              sortable: false,
-              value: 'created_at',
-            },
-            { text: 'SYMPTOMS', value: 'symptoms' },
-            { text: 'TRAVEL OUTSIDE COUNTRY', value: 'travel_outside_country' },
-            { text: 'TRAVEL LOCAL AREA', value: 'travel_local_country' },,
-            { text: 'FAMILY TESTED', value: 'familyTested' },
-            { text: 'NEIGHBOR TESTED', value: 'neighborTested' },
-            { text: 'PURPOSE(S)', value: 'purpose' },
+            { text: 'DATE & TIME', value: 'created_at', align: 'start' },
+            { text: 'SYMPTOMS', value: 'symptoms', sortable: false },
+            { text: 'TRAVEL OUTSIDE COUNTRY', value: 'travel_outside_country', sortable: false },
+            { text: 'TRAVEL LOCAL AREA', value: 'travel_local_country', sortable: false },,
+            { text: 'FAMILY TESTED', value: 'familyTested', sortable: false },
+            { text: 'NEIGHBOR TESTED', value: 'neighborTested', sortable: false },
+            { text: 'PURPOSE(S)', value: 'purpose', sortable: false },
             { text: 'STATUS', value: 'isAccepted' }
           ]
       }
