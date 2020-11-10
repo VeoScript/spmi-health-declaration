@@ -354,6 +354,7 @@
                               v-model="password"
                               :rules="[required('Confirmation password')]"
                               :loading="loading"
+                              :disabled="loading"
                               clearable>
                 </v-text-field>
               </v-form>
@@ -389,6 +390,7 @@
 </template> 
 
 <script>
+  import gql from 'graphql-tag'
   import moment from 'moment'
   import Swal from 'sweetalert2'
   import { auth } from '@/services'
@@ -419,6 +421,7 @@
         noTravelLocal: '',
         othersTravelledOutsideCoutry: '',
         othersTravelledLocal: '',
+        isAccepted: true,
         checkList: {
           symptoms: [],
           travelOutsideCountry: [],
@@ -447,6 +450,7 @@
         this.noTravelLocal = ''
         this.purpose = ''
         this.error = ''
+        this.isAccepted = true
       },
       // AUTOMATIC UNCHECK SYMPTOMS WHEN CLICKING "NONE OF THE ABOVE"
       onChangeNoSymptoms () {
@@ -522,6 +526,8 @@
               }, `${ travelOutsideCountryString += 
                 this.noTravelOusideCountry ? this.noTravelOusideCountry : '' + ' ' +
                 this.othersTravelledOutsideCoutry ? this.othersTravelledOutsideCoutry + ' ' : '' }`)
+
+
               // Travel Local Area works just fine
               this.checkList.travelLocal.forEach((inside) => {
                 return `${travelLocalString += inside + ' ' }`
@@ -530,8 +536,46 @@
                   this.noTravelLocal ? this.noTravelLocal : '' + ' ' +
                   this.othersTravelledLocal ? this.othersTravelledLocal + ' ' : ''
                 }`)
+
+
+              // LOOPED AND CONDITION IF SYMPTOMS IS EQUAL TO FEVER
+              for (let symp of this.checkList.symptoms) {
+                if (symp === 'Fever') {
+                  this.isAccepted = false
+                  break;
+                }
+              }
+
+
               this.$apollo.mutate({
-                mutation: ADD_HEALTH_DECLARATION_MUTATION,
+                mutation: gql`
+                  mutation addHealtCheckMutation(
+                    $user_id: uuid!, 
+                    $purpose: String!,
+                    $symptoms: String!, 
+                    $travel_outside_country: String!, 
+                    $travel_local_country: String!, 
+                    $familyTested: String!, 
+                    $neighborTested: String!,
+                    $isAccepted: Boolean!) {
+                  insert_checklist_result(objects: {
+                    user_id: $user_id, 
+                    purpose: $purpose, 
+                    symptoms: $symptoms, 
+                    travel_outside_country: $travel_outside_country, 
+                    travel_local_country: $travel_local_country, 
+                    familyTested: $familyTested, 
+                    neighborTested: $neighborTested,
+                    isAccepted: $isAccepted}
+                  ) {
+                      affected_rows
+                      returning {
+                        id
+                        user_id
+                      }
+                    }
+                  }
+                `,
                   variables: {
                     user_id: user_value.id,
                     purpose: this.purpose,
@@ -539,7 +583,8 @@
                     travel_outside_country: travelOutsideCountryString,
                     travel_local_country: travelLocalString,
                     familyTested: this.familyMemberTestedRTPCR,
-                    neighborTested: this.neighborTestedRTPCR
+                    neighborTested: this.neighborTestedRTPCR,
+                    isAccepted: this.isAccepted
                   }
                 })
                 .then(() => {
@@ -547,6 +592,7 @@
                   symptomString = ''
                   travelOutsideCountryString = ''
                   travelLocalString = ''
+                  this.isAccepted = false
                   this.loading = false
                   this.dialog = !this.dialog
                   this.error = ''
@@ -559,6 +605,8 @@
                   this.error = ''
                   toastAlertStatus('error', error)
                 })
+
+
             } else {
               this.error = 'Your password and confirmation password do not match'
               this.loading = false
@@ -568,6 +616,13 @@
         }
       },
       alertMessage () {
+        if (this.isAccepted === true) {
+          this.successAlert()
+        } else {
+          this.errorAlert()
+        }
+      },
+      successAlert () {
         Swal.fire({
           title: `<strong style="color: #4CAF50;">YOU ARE ALLOWED TO ENTER NEW JUBILEE AGRO-INDUSTRIAL ECONOMIC ZONE.</strong>`,
           icon: 'success',
@@ -578,22 +633,18 @@
           focusConfirm: false,
           confirmButtonText: 'Good Day!'
         })
-        // Swal.fire({
-        //   title: `<strong style="color: #FF5252;">YOU ARE NOT ALLOWED TO ENTER SPMI PLANT BUILDING</strong>`,
-        //   icon: 'error',
-        //   width: 900,
-        //   html:
-        //     'We need to follow the health protocols of the company.</b> ' +
-        //     `Today is <b>${this.today}</b>`,
-        //   focusConfirm: false,
-        //   confirmButtonText: 'Be Safe!'
-        // })
-        // this.checkList.symptoms.forEach((symptom) => {
-        //   if (symptom === 'Fever') {
-            
-        //   } else {
-        //   }
-        // })
+      },
+      errorAlert () {
+        Swal.fire({
+          title: `<strong style="color: #FF5252;">YOU ARE NOT ALLOWED TO ENTER SPMI PLANT BUILDING</strong>`,
+          icon: 'error',
+          width: 900,
+          html:
+            'We need to follow the health protocols of the company.</b> ' +
+            `Today is <b>${this.today}</b>`,
+          focusConfirm: false,
+          confirmButtonText: 'Be Safe!'
+        })
       }
     },
     apollo: {
