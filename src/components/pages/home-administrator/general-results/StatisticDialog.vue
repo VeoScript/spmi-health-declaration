@@ -127,6 +127,22 @@
             </statistic-result>
           </v-col>
         </v-row>
+        <small class="text--secondary">
+          <b>Reminded:</b> Please reload the page before you make a Monthly Report in order to update the cache query in your private device.
+          <v-tooltip top>
+            <template v-slot:activator="{ on }">
+              <v-btn class="ml-2" 
+                    fab
+                    color="success"  
+                    small
+                    v-on="on"
+                    @click="onReloadPage">
+                <v-icon>mdi-reload</v-icon>
+              </v-btn>
+            </template>
+            <span>Reload Page</span>
+          </v-tooltip>
+        </small>
       </v-container>
     </v-card>
   </v-dialog> 
@@ -173,6 +189,9 @@
       }
     },
     methods: {
+      onReloadPage () {
+        location.reload()
+      },
       dateEntrySave (date) {
         this.$refs.menu.save(date)
       },
